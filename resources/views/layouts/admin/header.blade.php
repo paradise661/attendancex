@@ -1,0 +1,437 @@
+   <header class="app-header">
+       <nav class="main-header !h-[3.75rem]" aria-label="Global">
+           <div class="main-header-container ps-[0.725rem] pe-[1rem] ">
+
+               <div class="header-content-left">
+                   <!-- Start::header-element -->
+                   <div class="header-element">
+                       <div class="horizontal-logo">
+                           <a class="header-logo" href="index.html">
+                               <img class="desktop-logo" src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}"
+                                   alt="logo">
+                               <img class="toggle-logo" src="{{ asset('assets/images/brand-logos/toggle-logo.png') }}"
+                                   alt="logo">
+                               <img class="desktop-dark" src="{{ asset('assets/images/logo.png') }}" alt="logo">
+                               <img class="toggle-dark" src="{{ asset('assets/images/brand-logos/toggle-dark.png') }}"
+                                   alt="logo">
+                               <img class="desktop-white"
+                                   src="{{ asset('assets/images/brand-logos/desktop-white.png') }}" alt="logo">
+                               <img class="toggle-white" src="{{ asset('assets/images/brand-logos/toggle-white.png') }}"
+                                   alt="logo">
+                           </a>
+                       </div>
+                   </div>
+                   <!-- End::header-element -->
+                   <!-- Start::header-element -->
+                   <div class="header-element md:px-[0.325rem] !items-center">
+                       <!-- Start::header-link -->
+                       <a class="sidemenu-toggle animated-arrow  hor-toggle horizontal-navtoggle inline-flex items-center"
+                           aria-label="Hide Sidebar" href="javascript:void(0);"><span></span></a>
+                       <!-- End::header-link -->
+                   </div>
+                   <!-- End::header-element -->
+               </div>
+
+               <div class="header-content-right">
+                   <!-- light and dark theme -->
+                   <div
+                       class="header-element header-theme-mode hidden !items-center sm:block !py-[1rem] md:!px-[0.65rem] px-2">
+                       <a class="hs-dark-mode-active:hidden flex hs-dark-mode group flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                           data-hs-theme-click-value="dark" aria-label="anchor" href="javascript:void(0);">
+                           <i class="bx bx-moon header-link-icon"></i>
+                       </a>
+                       <a class="hs-dark-mode-active:flex hidden hs-dark-mode group flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium text-defaulttextcolor  transition-all text-xs dark:bg-bodybg dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                           data-hs-theme-click-value="light" aria-label="anchor" href="javascript:void(0);">
+                           <i class="bx bx-sun header-link-icon"></i>
+                       </a>
+                   </div>
+                   <!-- End light and dark theme -->
+
+                   <!--Header Notifictaion -->
+                   <div
+                       class="header-element py-[1rem] md:px-[0.65rem] px-2 notifications-dropdown header-notification hs-dropdown ti-dropdown !hidden md:!block [--placement:bottom-left]">
+                       <button
+                           class="hs-dropdown-toggle relative ti-dropdown-toggle !p-0 !border-0 flex-shrink-0  !rounded-full !shadow-none align-middle text-xs"
+                           id="dropdown-notification" type="button">
+                           <i class="bx bx-bell header-link-icon  text-[1.125rem]"></i>
+                           <span class="flex absolute h-5 w-5 -top-[0.25rem] end-0  -me-[0.6rem]">
+                               <span
+                                   class="animate-slow-ping absolute inline-flex -top-[2px] -start-[2px] h-full w-full rounded-full bg-secondary/40 opacity-75"></span>
+                               <span
+                                   class="relative inline-flex justify-center items-center rounded-full  h-[14.7px] w-[14px] bg-secondary text-[0.625rem] text-white"
+                                   id="notification-icon-badge">5</span>
+                           </span>
+                       </button>
+                       <div class="main-header-dropdown !-mt-3 !p-0 hs-dropdown-menu ti-dropdown-menu bg-white !w-[22rem] border-0 border-defaultborder hidden !m-0"
+                           aria-labelledby="dropdown-notification">
+
+                           <div class="ti-dropdown-header !m-0 !p-4 !bg-transparent flex justify-between items-center">
+                               <p
+                                   class="mb-0 text-[1.0625rem] text-defaulttextcolor font-semibold dark:text-[#8c9097] dark:text-white/50">
+                                   Notifications</p>
+                               <span
+                                   class="text-[0.75em] py-[0.25rem/2] px-[0.45rem] font-[600] rounded-sm bg-secondary/10 text-secondary"
+                                   id="notifiation-data">5 Unread</span>
+                           </div>
+                           <div class="dropdown-divider"></div>
+                           <ul class="list-none !m-0 !p-0 end-0" id="header-notification-scroll">
+                               <li class="ti-dropdown-item dropdown-item !block">
+                                   <div class="flex items-start">
+                                       <div class="pe-2">
+                                           <span
+                                               class="inline-flex text-primary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem] !bg-primary/10 !rounded-[50%]"><i
+                                                   class="ti ti-gift text-[1.125rem]"></i></span>
+                                       </div>
+                                       <div class="grow flex items-center justify-between">
+                                           <div>
+                                               <p
+                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem] font-semibold">
+                                                   <a href="notifications.html">Your Order Has Been Shipped</a>
+                                               </p>
+                                               <span
+                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order
+                                                   No: 123456
+                                                   Has Shipped To Your Delivery Address</span>
+                                           </div>
+                                           <div>
+                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
+                                                   aria-label="anchor" href="javascript:void(0);"><i
+                                                       class="ti ti-x text-[1rem]"></i></a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </li>
+                               <li class="ti-dropdown-item dropdown-item !block">
+                                   <div class="flex items-start">
+                                       <div class="pe-2">
+                                           <span
+                                               class="inline-flex text-secondary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-secondary/10 rounded-[50%]"><i
+                                                   class="ti ti-discount-2 text-[1.125rem]"></i></span>
+                                       </div>
+                                       <div class="grow flex items-center justify-between">
+                                           <div>
+                                               <p
+                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem]  font-semibold">
+                                                   <a href="notifications.html">Discount Available</a>
+                                               </p>
+                                               <span
+                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Discount
+                                                   Available On Selected Products</span>
+                                           </div>
+                                           <div>
+                                               <a class="min-w-fit  text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
+                                                   aria-label="anchor" href="javascript:void(0);"><i
+                                                       class="ti ti-x text-[1rem]"></i></a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </li>
+                               <li class="ti-dropdown-item dropdown-item !block">
+                                   <div class="flex items-start">
+                                       <div class="pe-2">
+                                           <span
+                                               class="inline-flex text-pinkmain justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-pinkmain/10 rounded-[50%]"><i
+                                                   class="ti ti-user-check text-[1.125rem]"></i></span>
+                                       </div>
+                                       <div class="grow flex items-center justify-between">
+                                           <div>
+                                               <p
+                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem]  font-semibold">
+                                                   <a href="notifications.html">Account Has Been Verified</a>
+                                               </p>
+                                               <span
+                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Your
+                                                   Account Has
+                                                   Been Verified Sucessfully</span>
+                                           </div>
+                                           <div>
+                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
+                                                   aria-label="anchor" href="javascript:void(0);"><i
+                                                       class="ti ti-x text-[1rem]"></i></a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </li>
+                               <li class="ti-dropdown-item dropdown-item !block">
+                                   <div class="flex items-start">
+                                       <div class="pe-2">
+                                           <span
+                                               class="inline-flex text-warning justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-warning/10 rounded-[50%]"><i
+                                                   class="ti ti-circle-check text-[1.125rem]"></i></span>
+                                       </div>
+                                       <div class="grow flex items-center justify-between">
+                                           <div>
+                                               <p
+                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem]  font-semibold">
+                                                   <a href="notifications.html">Order Placed <span
+                                                           class="text-warning">ID: #1116773</span></a>
+                                               </p>
+                                               <span
+                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order
+                                                   Placed
+                                                   Successfully</span>
+                                           </div>
+                                           <div>
+                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
+                                                   aria-label="anchor" href="javascript:void(0);"><i
+                                                       class="ti ti-x text-[1rem]"></i></a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </li>
+                               <li class="ti-dropdown-item dropdown-item !block">
+                                   <div class="flex items-start">
+                                       <div class="pe-2">
+                                           <span
+                                               class="inline-flex text-success justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-success/10 rounded-[50%]"><i
+                                                   class="ti ti-clock text-[1.125rem]"></i></span>
+                                       </div>
+                                       <div class="grow flex items-center justify-between">
+                                           <div>
+                                               <p
+                                                   class="mb-0 text-defaulttextcolor dark:text-white  text-[0.8125rem]  font-semibold">
+                                                   <a href="notifications.html">Order Delayed <span
+                                                           class="text-success">ID: 7731116</span></a>
+                                               </p>
+                                               <span
+                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order
+                                                   Delayed
+                                                   Unfortunately</span>
+                                           </div>
+                                           <div>
+                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
+                                                   aria-label="anchor" href="javascript:void(0);"><i
+                                                       class="ti ti-x text-[1rem]"></i></a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </li>
+                           </ul>
+
+                           <div class="p-4 empty-header-item1 border-t mt-2">
+                               <div class="grid">
+                                   <a class="ti-btn ti-btn-primary-full !m-0 w-full p-2"
+                                       href="notifications.html">View All</a>
+                               </div>
+                           </div>
+                           <div class="p-[3rem] empty-item1 hidden">
+                               <div class="text-center">
+                                   <span
+                                       class="!h-[4rem]  !w-[4rem] avatar !leading-[4rem] !rounded-full !bg-secondary/10 !text-secondary">
+                                       <i class="ri-notification-off-line text-[2rem]  "></i>
+                                   </span>
+                                   <h6 class="font-semibold mt-3 text-defaulttextcolor dark:text-white text-[1rem]">
+                                       No New Notifications</h6>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <!--End Header Notifictaion -->
+
+                   <!-- Related Apps -->
+                   <div
+                       class="header-element header-apps dark:text-[#8c9097] dark:text-white/50 py-[1rem] md:px-[0.65rem] px-2 hs-dropdown ti-dropdown md:!block !hidden [--placement:bottom-left]">
+
+                       <button
+                           class="hs-dropdown-toggle ti-dropdown-toggle !p-0 !border-0 flex-shrink-0  !rounded-full !shadow-none text-xs"
+                           id="dropdown-apps" aria-label="button" type="button">
+                           <i class="bx bx-grid-alt header-link-icon text-[1.125rem]"></i>
+                       </button>
+
+                       <div class="main-header-dropdown !-mt-3 hs-dropdown-menu ti-dropdown-menu !w-[22rem] border-0 border-defaultborder   hidden"
+                           aria-labelledby="dropdown-apps">
+
+                           <div class="p-4">
+                               <div class="flex items-center justify-between">
+                                   <p
+                                       class="mb-0 text-defaulttextcolor text-[1.0625rem] dark:text-[#8c9097] dark:text-white/50 font-semibold">
+                                       Related Apps</p>
+                               </div>
+                           </div>
+                           <div class="dropdown-divider mb-0"></div>
+                           <div class="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10 main-header-shortcuts p-2"
+                               id="header-shortcut-scroll">
+                               <div class="grid grid-cols-3 gap-2">
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <div>
+                                               <img class="!h-[1.75rem] !w-[1.75rem] text-2xl avatar text-primary flex justify-center items-center mx-auto"
+                                                   src="{{ asset('assets/images/apps/figma.png') }}" alt="figma">
+                                               <div
+                                                   class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                                   Figma</div>
+                                           </div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-[1.75] text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/microsoft-powerpoint.png') }}"
+                                               alt="miscrosoft">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               Power Point</div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-none
+                       text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/microsoft-word.png') }}"
+                                               alt="miscrodoftword">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               MS Word</div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/calender.png') }}" alt="calander">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               Calendar</div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/sketch.png') }}" alt="apps">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               Sketch</div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/google-docs.png') }}"
+                                               alt="docs">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               Docs</div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/google.png') }}" alt="google">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               Google</div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/translate.png') }}" alt="translate">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               Translate</div>
+                                       </a>
+                                   </div>
+                                   <div class="">
+                                       <a class="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                                           href="javascript:void(0);">
+                                           <img class="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                                               src="{{ asset('assets/images/apps/google-sheets.png') }}"
+                                               alt="sheets">
+                                           <div
+                                               class="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                               Sheets</div>
+                                       </a>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="p-4 first:pt-0 border-t">
+                               <a class="w-full ti-btn ti-btn-primary-full p-2 !m-0" href="javascript:void(0);">
+                                   View All
+                               </a>
+                           </div>
+
+                       </div>
+                   </div>
+                   <!--End Related Apps -->
+
+                   <!-- Fullscreen -->
+                   <div class="header-element header-fullscreen py-[1rem] md:px-[0.65rem] px-2">
+                       <!-- Start::header-link -->
+                       <a class="inline-flex flex-shrink-0 justify-center items-center gap-2  !rounded-full font-medium dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                           aria-label="anchor" onclick="openFullscreen();" href="javascript:void(0);">
+                           <i class="bx bx-fullscreen full-screen-open header-link-icon"></i>
+                           <i class="bx bx-exit-fullscreen full-screen-close header-link-icon hidden"></i>
+                       </a>
+                       <!-- End::header-link -->
+                   </div>
+                   <!-- End Full screen -->
+
+                   <!-- Header Profile -->
+                   <div
+                       class="header-element md:!px-[0.65rem] px-2 hs-dropdown !items-center ti-dropdown [--placement:bottom-left]">
+
+                       <button
+                           class="hs-dropdown-toggle ti-dropdown-toggle !gap-2 !p-0 flex-shrink-0 sm:me-2 me-0 !rounded-full !shadow-none text-xs align-middle !border-0 !shadow-transparent "
+                           id="dropdown-profile" type="button">
+                           <img class="inline-block rounded-full " src="{{ asset('assets/images/faces/9.jpg') }}"
+                               width="32" height="32" alt="Image Description">
+                       </button>
+                       <div class="md:block hidden dropdown-profile">
+                           <p class="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">Paradise Info
+                           </p>
+                           <span class="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">
+                               Admin</span>
+                       </div>
+                       <div class="hs-dropdown-menu ti-dropdown-menu !-mt-3 border-0 w-[11rem] !p-0 border-defaultborder hidden main-header-dropdown  pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
+                           aria-labelledby="dropdown-profile">
+
+                           <ul class="text-defaulttextcolor font-medium dark:text-[#8c9097] dark:text-white/50">
+                               <li>
+                                   <a class="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0  !p-[0.65rem] !inline-flex"
+                                       href="javascript:void(0)">
+                                       <i class="ti ti-user-circle text-[1.125rem] me-2 opacity-[0.7]"></i>Profile
+                                   </a>
+                               </li>
+
+                               <li>
+                                   <a class="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex"
+                                       href="javascript:void(0)"><i
+                                           class="ti ti-headset text-[1.125rem] me-2 opacity-[0.7]"></i>Support</a>
+                               </li>
+                               <li>
+                                   <a class="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex"
+                                       href="{{ route('logout') }}"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                           class="ti ti-logout text-[1.125rem] me-2 opacity-[0.7]"></i>Log
+                                       Out</a>
+                               </li>
+                               <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
+                                   @csrf
+                               </form>
+                           </ul>
+                       </div>
+                   </div>
+                   <!-- End Header Profile -->
+
+                   <!-- Switcher Icon -->
+                   <div class="header-element md:px-[0.48rem]">
+                       <button
+                           class="hs-dropdown-toggle switcher-icon inline-flex flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium  align-middle transition-all text-xs dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                           data-hs-overlay="#hs-overlay-switcher" aria-label="button" type="button">
+                           <i class="bx bx-cog header-link-icon animate-spin-slow"></i>
+                       </button>
+                   </div>
+                   <!-- Switcher Icon -->
+
+                   <!-- End::header-element -->
+               </div>
+           </div>
+       </nav>
+   </header>

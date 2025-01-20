@@ -1,0 +1,23 @@
+<?php
+
+use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Auth\Authcontroller;
+use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+//Authentication
+Route::get('login', [Authcontroller::class, 'showLoginForm'])->name('login');
+Route::post('login', [Authcontroller::class, 'login'])->name('login.submit');
+Route::post('logout', [Authcontroller::class, 'logout'])->name('logout');
+
+//CMS
+Route::middleware(['auth'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('branches', BranchController::class);
+    Route::resource('departments', DepartmentController::class);
+});
