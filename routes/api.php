@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\UserAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -9,3 +10,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('login', [UserAuthController::class, 'login']);
+Route::get('dashboards', [DashboardController::class, 'dashboard']);
+Route::get('upcomingbirthdays', [DashboardController::class, 'upcomingBirthdays']);
