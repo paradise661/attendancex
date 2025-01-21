@@ -15,3 +15,9 @@
         {{ Session::get('error') }}
     </div>
 @endif
+
+@if (Session::has('warning'))
+    <div class="alert alert-danger mt-4" role="alert">
+        {{ Session::get('warning') }}
+    </div>
+@endif

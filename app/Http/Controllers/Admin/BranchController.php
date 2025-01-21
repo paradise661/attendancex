@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BranchRequest;
 use App\Models\Branch;
 use Illuminate\Http\Request;
+use Exception;
 
 class BranchController extends Controller
 {
@@ -31,8 +32,12 @@ class BranchController extends Controller
      */
     public function store(BranchRequest $request)
     {
-        Branch::create($request->all());
-        return redirect()->route('branches.index')->with('message', 'Branch Created Successfully');
+        try {
+            Branch::create($request->all());
+            return redirect()->route('branches.index')->with('message', 'Branch Created Successfully');
+        } catch (Exception $e) {
+            return redirect()->route('branches.index')->with('warning', $e->getMessage())->withInput();
+        }
     }
 
     /**
@@ -56,8 +61,12 @@ class BranchController extends Controller
      */
     public function update(BranchRequest $request, Branch $branch)
     {
-        $branch->update($request->all());
-        return redirect()->route('branches.index')->with('message', 'Update Successfully');
+        try {
+            $branch->update($request->all());
+            return redirect()->route('branches.index')->with('message', 'Update Successfully');
+        } catch (Exception $e) {
+            return redirect()->route('branches.index')->with('warning', $e->getMessage())->withInput();
+        }
     }
 
     /**

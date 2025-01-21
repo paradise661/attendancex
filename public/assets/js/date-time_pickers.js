@@ -35,7 +35,8 @@
         enableTime: true,
         noCalendar: true,
         dateFormat: "H:i",
-        time_24hr: true
+        time_24hr: true,
+         defaultHour: 10,
     });
 
     /* For Time Picker With Limits */

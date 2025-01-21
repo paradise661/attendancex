@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\DepartmentRequest;
 use App\Models\Branch;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Exception;
 
 class DepartmentController extends Controller
 {
@@ -15,7 +16,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::latest()->paginate(perPage: 20);
+        $departments = Department::oldest('order')->paginate(perPage: 20);
         return view('admin.department.index', compact('departments'));
     }
 
@@ -33,8 +34,12 @@ class DepartmentController extends Controller
      */
     public function store(DepartmentRequest $request)
     {
-        Department::create($request->all());
-        return redirect()->route('departments.index')->with('message', 'Department Created Successfully');
+        try {
+            Department::create($request->all());
+            return redirect()->route('departments.index')->with('message', 'Department Created Successfully');
+        } catch (Exception $e) {
+            return redirect()->route('departments.index')->with('warning', $e->getMessage())->withInput();
+        }
     }
 
     /**
@@ -59,8 +64,12 @@ class DepartmentController extends Controller
      */
     public function update(DepartmentRequest $request, Department $department)
     {
-        $department->update($request->all());
-        return redirect()->route('departments.index')->with('message', 'Update Successfully');
+        try {
+            $department->update($request->all());
+            return redirect()->route('departments.index')->with('message', 'Update Successfully');
+        } catch (Exception $e) {
+            return redirect()->route('departments.index')->with('warning', $e->getMessage())->withInput();
+        }
     }
 
     /**

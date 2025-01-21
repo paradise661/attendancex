@@ -6,16 +6,16 @@
             <div class="box custom-box">
                 <div class="box-header justify-between">
                     <div class="box-title">
-                        Branches
-                        @if ($branches->isNotEmpty())
+                        Shifts
+                        @if ($shifts->isNotEmpty())
                             <span
-                                class="badge bg-light text-default rounded-full ms-1 text-[0.75rem] align-middle">{{ $branches->total() }}</span>
+                                class="badge bg-light text-default rounded-full ms-1 text-[0.75rem] align-middle">{{ $shifts->total() }}</span>
                         @endif
                     </div>
                     <div class="prism-toggle">
                         <a class="ti-btn ti-btn-primary-full ti-btn-wave !text-[0.75rem] flex items-center gap-2"
-                            href="{{ route('branches.create') }}">
-                            New Branch <i class="ri-add-line"></i>
+                            href="{{ route('shifts.create') }}">
+                            New Shift <i class="ri-add-line"></i>
                         </a>
                     </div>
 
@@ -26,39 +26,42 @@
                             <thead>
                                 <tr class="border-b border-defaultborder">
                                     <th class="text-start px-4 py-2" scope="col">#</th>
-                                    <th class="text-start px-4 py-2" scope="col">Name</th>
-                                    <th class="text-start px-4 py-2" scope="col">Radius</th>
-                                    <th class="text-start px-4 py-2" scope="col">IP Address</th>
+                                    <th class="text-start px-4 py-2" scope="col">Shift Name</th>
+                                    <th class="text-start px-4 py-2" scope="col">Start Time</th>
+                                    <th class="text-start px-4 py-2" scope="col">Start Grace Time</th>
+                                    <th class="text-start px-4 py-2" scope="col">End Time</th>
+                                    <th class="text-start px-4 py-2" scope="col">End Grace Time</th>
+                                    <th class="text-start px-4 py-2" scope="col">Department</th>
                                     <th class="text-start px-4 py-2" scope="col">Status</th>
-                                    <th class="text-start px-4 py-2" scope="col">Last Updated</th>
                                     <th class="text-start px-4 py-2"scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($branches->isNotEmpty())
-                                    @foreach ($branches as $key => $branch)
+                                @if ($shifts->isNotEmpty())
+                                    @foreach ($shifts as $key => $shift)
                                         <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
-                                            <th class="px-4 py-2" scope="row">{{ $key + $branches->firstItem() }}</th>
-                                            <td class="px-4 py-2">{{ $branch->name ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $branch->radius ?? '' }} M</td>
-                                            <td class="px-4 py-2">{{ $branch->ip_address ?? '-' }}</td>
+                                            <th class="px-4 py-2" scope="row">{{ $key + $shifts->firstItem() }}</th>
+                                            <td class="px-4 py-2">{{ $shift->name ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $shift->start_time ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $shift->start_grace_time ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $shift->end_time ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $shift->end_grace_time ?? '-' }}</td>
                                             <td class="px-4 py-2">
-                                                <span
-                                                    class="badge bg-primary/10 text-primary">{{ $branch->status == 1 ? 'Active' : 'Inactive' }}</span>
+                                                {{ $shift->department->name ?? '-' }}
                                             </td>
                                             <td class="px-4 py-2">
-                                                {{ $branch->updated_at ? $branch->updated_at->format('Y-m-d h:i A') : '' }}
+                                                <span
+                                                    class="badge bg-primary/10 text-primary">{{ $shift->status == 1 ? 'Active' : 'Inactive' }}</span>
                                             </td>
                                             <td class="text-end px-4 py-2">
                                                 <div class="btn-list flex gap-3">
                                                     <a class="ti-btn ti-btn-primary-full !py-1 !px-3 ti-btn-wave"
-                                                        href="{{ route('branches.edit', $branch->id) }}">
+                                                        href="{{ route('shifts.edit', $shift->id) }}">
                                                         <i class="ri-pencil-line"></i> Edit
                                                     </a>
 
                                                     <form class="delete-form"
-                                                        action="{{ route('branches.destroy', $branch->id) }}"
-                                                        method="POST">
+                                                        action="{{ route('shifts.destroy', $shift->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button
@@ -73,7 +76,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="7"
+                                        <td colspan="9"
                                             style="text-align: center; height: 100px; vertical-align: middle; color: #6b7280; display: table-cell;">
                                             <div
                                                 style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
@@ -89,7 +92,7 @@
                     </div>
                 </div>
 
-                {{ $branches->links('vendor.pagination.custom') }}
+                {{ $shifts->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>

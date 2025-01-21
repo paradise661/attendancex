@@ -19,7 +19,7 @@
                     @csrf
                     @method('PUT')
                     <div class="md:col-span-12 col-span-12">
-                        <label class="form-label">Department Name</label>
+                        <label class="form-label">Department Name<span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <input
                                 class="form-control @error('name') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Branch</label>
+                        <label class="form-label">Branch<span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <select
                                 class="ti-form-select rounded-sm !py-2 !px-3 @error('branch_id') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"

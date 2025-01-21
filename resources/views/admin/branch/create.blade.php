@@ -17,7 +17,7 @@
                 <form class="grid grid-cols-12 gap-4 mt-0" action="{{ route('branches.store') }}" method="POST">
                     @csrf
                     <div class="md:col-span-12 col-span-12">
-                        <label class="form-label">Branch Name</label>
+                        <label class="form-label">Branch Name <span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <input
                                 class="form-control @error('name') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Radius (M)</label>
+                        <label class="form-label">Radius (M) <span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <input
                                 class="form-control @error('radius') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label" for="inputEmail4">IP Address</label>
+                        <label class="form-label" for="inputEmail4">IP Address <span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <input
                                 class="form-control @error('ip_address') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"

@@ -35,30 +35,39 @@
 
                     <li class="slide__category"><span class="category-name">Web Apps</span></li>
 
-                    <li class="slide has-sub @if (Request::segment(index: 1) == 'branches' || Request::segment(index: 1) == 'departments') {{ 'active open' }} @endif">
-                        <a class="side-menu__item @if (Request::segment(index: 1) == 'branches' || Request::segment(index: 1) == 'departments') {{ 'active' }} @endif"
+                    <li class="slide has-sub @if (Request::segment(index: 1) == 'branches' ||
+                            Request::segment(index: 1) == 'departments' ||
+                            Request::segment(index: 1) == 'shifts') {{ 'active open' }} @endif">
+                        <a class="side-menu__item @if (Request::segment(index: 1) == 'branches' ||
+                                Request::segment(index: 1) == 'departments' ||
+                                Request::segment(index: 1) == 'shifts') {{ 'active' }} @endif"
                             href="javascript:void(0);">
                             <i class="bx bx-fingerprint side-menu__icon"></i>
                             <span class="side-menu__label">Configuration</span>
                             <i class="fe fe-chevron-right side-menu__angle"></i>
                         </a>
                         <ul class="slide-menu child1">
-                            <li class="slide"><a
-                                    class="side-menu__item {{ Request::segment(1) == 'branches' ? 'active' : '' }}"
-                                    href="{{ route('branches.index') }}">Branches</a></li>
-                            <li class="slide"><a
-                                    class="side-menu__item {{ Request::segment(1) == 'departments' ? 'active' : '' }}"
-                                    href="{{ route('departments.index') }}">Departments</a></li>
-                            <li class="slide"><a class="side-menu__item"
-                                    href="{{ route('branches.index') }}">Shifts</a></li>
+                            <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'branches' ? 'active' : '' }}"
+                                    href="{{ route('branches.index') }}">Branches</a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'departments' ? 'active' : '' }}"
+                                    href="{{ route('departments.index') }}">Departments</a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'shifts' ? 'active' : '' }}"
+                                    href="{{ route('shifts.index') }}">Shifts</a>
+                            </li>
                         </ul>
                     </li>
 
                     <li class="slide">
-                        <a class="side-menu__item" href="javascript:void(0)">
+                        <a class="side-menu__item {{ Request::segment(1) == 'employees' ? 'active' : '' }}"
+                            href="{{ route('employees.index') }}">
                             <i class="bx bxs-user-account side-menu__icon"></i>
                             <span class="side-menu__label">Employees <span
-                                    class="text-danger text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-danger/10 ms-2">Hot</span></span>
+                                    class="text-danger text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-danger/10 ms-2">New</span></span>
                         </a>
                     </li>
                 </ul>

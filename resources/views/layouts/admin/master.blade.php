@@ -7,9 +7,9 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title> AttendanceX </title>
      <meta name="description"
-         content="A Tailwind CSS admin template is a pre-designed web page for an admin dashboard. Optimizing it for SEO includes using meta descriptions and ensuring it's responsive and fast-loading.">
+         content="Paradise Infotech AttendanceX system is a cutting-edge solution for managing employee attendance efficiently. Designed for accuracy, scalability, and ease of use.">
      <meta name="keywords"
-         content="html dashboard,tailwind css,tailwind admin dashboard,template dashboard,html and css template,tailwind dashboard,tailwind css templates,admin dashboard html template,tailwind admin,html panel,template tailwind,html admin template,admin panel html">
+         content="Paradise Infotech, AttendanceX system, attendance management, employee attendance software, time tracking, admin dashboard, responsive system, attendance solutions, Paradise attendance system, AttendanceX">
 
      <!-- Favicon -->
      <link rel="shortcut icon" href="{{ asset('assets/images/brand-logos/fav.jpg') }}">
@@ -25,7 +25,9 @@
 
      <!-- Color Picker Css -->
      <link rel="stylesheet" href="{{ asset('assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
-
+     <!-- FlatPickr CSS -->
+     <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('assets/css/fancybox.min.css') }}">
  </head>
 
  <body>
@@ -702,6 +704,9 @@
      <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
 
      <script src="{{ asset('assets/js/sweetalert.js') }}"></script>
+     <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+     <script src="{{ asset('assets/js/date-time_pickers.js') }}"></script>
+     <script src="{{ asset('assets/js/fancybox.min.js') }}"></script>
 
      <script>
          $('.delete_button').click(function(e) {
@@ -720,7 +725,24 @@
                  });
 
          });
+
+         $(function() {
+             $(".image").on("change", function() {
+                 var nthis = $(this);
+                 if (nthis.siblings('.old-image').length) {
+                     nthis.siblings('.old-image').hide();
+                 }
+                 if (this.files && this.files[0]) {
+                     var reader = new FileReader();
+                     reader.onload = function(e) {
+                         nthis.siblings('.view-image').attr('src', e.target.result);
+                     };
+                     reader.readAsDataURL(this.files[0]);
+                 }
+             });
+         });
      </script>
+
      @yield('scripts')
 
  </body>

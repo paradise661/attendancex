@@ -39,9 +39,9 @@
                                     @foreach ($departments as $key => $department)
                                         <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
                                             <th class="px-4 py-2" scope="row">{{ $key + $departments->firstItem() }}</th>
-                                            <td class="px-4 py-2">{{ $department->name ?? '' }}</td>
-                                            <td class="px-4 py-2">{{ $department->branch->name ?? '' }}</td>
-                                            <td class="px-4 py-2">{{ $department->order ?? '' }}</td>
+                                            <td class="px-4 py-2">{{ $department->name ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $department->branch->name ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $department->order ?? '-' }}</td>
                                             <td class="px-4 py-2">
                                                 <span
                                                     class="badge bg-primary/10 text-primary">{{ $department->status == 1 ? 'Active' : 'Inactive' }}</span>
