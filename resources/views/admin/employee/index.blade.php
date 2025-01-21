@@ -46,9 +46,8 @@
                                                 <div class="flex items-center"> <span
                                                         class="avatar avatar-xs me-2 online avatar-rounded">
                                                         <a class="fancybox" data-fancybox="demo"
-                                                            href="{{ $employee->image ? asset('uploads/employee/' . $employee->image) : asset('assets/images/profile.jpg') }}">
-                                                            <img src="{{ $employee->image ? asset('uploads/employee/' . $employee->image) : asset('assets/images/profile.jpg') }}"
-                                                                alt="profile">
+                                                            href="{{ $employee->image ?? '' }}">
+                                                            <img src="{{ $employee->image ?? '' }}" alt="profile">
                                                         </a>
                                                     </span>{{ ($employee->first_name ?? '') . ' ' . ($employee->last_name ?? '-') }}
                                                 </div>

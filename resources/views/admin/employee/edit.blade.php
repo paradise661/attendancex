@@ -326,8 +326,7 @@
                                 id="file-input" type="file" name="image">
                             <img class="view-image mt-2" src="" style="max-height: 80px">
                             @if ($employee->image)
-                                <img class="mt-2 old-image" src="{{ asset('uploads/employee/' . $employee->image) }}"
-                                    width="80">
+                                <img class="mt-2 old-image" src="{{ $employee->image ?? '' }}" width="80">
                             @endif
                         </div>
                         @error('image')
