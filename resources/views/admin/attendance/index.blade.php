@@ -52,10 +52,18 @@
                                                 </div>
                                             </td>
                                             <td class="px-4 py-2">{{ $attendance->date ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $attendance->checkin ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $attendance->checkout ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $attendance->break_start ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $attendance->break_end ?? '-' }}</td>
+                                            <td class="px-4 py-2">
+                                                {{ $attendance->checkin ? \Carbon\Carbon::parse($attendance->checkin)->format('h:i A') : '-' }}
+                                            </td>
+                                            <td class="px-4 py-2">
+                                                {{ $attendance->checkout ? \Carbon\Carbon::parse($attendance->checkout)->format('h:i A') : '-' }}
+                                            </td>
+                                            <td class="px-4 py-2">
+                                                {{ $attendance->break_start ? \Carbon\Carbon::parse($attendance->break_start)->format('h:i A') : '-' }}
+                                            </td>
+                                            <td class="px-4 py-2">
+                                                {{ $attendance->break_end ? \Carbon\Carbon::parse($attendance->break_end)->format('h:i A') : '-' }}
+                                            </td>
                                             <td class="px-4 py-2">
                                                 {{ $attendance->worked_hours ?? '-' }} Hr
                                             </td>

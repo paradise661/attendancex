@@ -21,7 +21,7 @@ class DashboardController extends Controller
             $today = Carbon::today();
             $currentYear = $today->year;
 
-            $users = User::select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
+            $users = User::with('department', 'branch')->select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
                 ->whereNotNull('date_of_birth')
                 ->get()
                 ->map(function ($user) use ($today, $currentYear) {
