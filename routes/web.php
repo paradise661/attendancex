@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\DashboardController;
@@ -24,4 +25,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('departments', DepartmentController::class);
     Route::resource('shifts', ShiftController::class);
     Route::resource('employees', EmployeeController::class);
+    Route::resource('notices', NoticeController::class);
 });

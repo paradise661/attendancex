@@ -18,4 +18,8 @@ class Department extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+    public function notices()
+    {
+        return $this->belongsToMany(Notice::class, 'department_notices')->withTimestamps();
+    }
 }
