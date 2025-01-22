@@ -106,6 +106,10 @@ class DashboardController extends Controller
 
     private function formatBirthdayMessage($daysLeft)
     {
+        if ($daysLeft == 0) {
+            return 'Today';
+        }
+
         if ($daysLeft == 1) {
             return '1 day left';
         }
