@@ -10,5 +10,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('login', [UserAuthController::class, 'login']);
-Route::get('dashboards', [DashboardController::class, 'dashboard']);
-Route::get('upcomingbirthdays', [DashboardController::class, 'upcomingBirthdays']);
+
+// Sanctum-protected routes
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('dashboards', [DashboardController::class, 'dashboard']);
+    Route::get('upcomingbirthdays', [DashboardController::class, 'getUpcomingBirthdays']);
+    Route::get('notices', [DashboardController::class, 'getNotices']);
+    Route::get('myteam', [DashboardController::class, 'getMyTeam']);
+});

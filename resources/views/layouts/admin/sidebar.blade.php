@@ -79,6 +79,14 @@
                                     class="text-danger text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-danger/10 ms-2">New</span></span>
                         </a>
                     </li>
+
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(1) == 'attendances' ? 'active' : '' }}"
+                            href="{{ route('attendance.index') }}">
+                            <i class="bx bx-qr-scan side-menu__icon"></i>
+                            <span class="side-menu__label">Attendances </span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                         width="24" height="24" viewBox="0 0 24 24">

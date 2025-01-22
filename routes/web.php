@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
@@ -26,4 +27,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('shifts', ShiftController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('notices', NoticeController::class);
+    Route::get('attendances', [AttendanceController::class, 'index'])->name('attendance.index');
 });
