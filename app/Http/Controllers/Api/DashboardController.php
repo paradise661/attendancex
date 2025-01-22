@@ -10,9 +10,60 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        return 'dashboard data';
+        try {
+            // Fetch the latest upcoming birthday
+            $today = Carbon::today();
+            $currentYear = $today->year;
+
+            $upcomingBirthday = User::select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
+                ->whereNotNull('date_of_birth')
+                ->get()
+                ->map(function ($user) use ($today, $currentYear) {
+                    $birthDate = Carbon::parse($user->date_of_birth);
+                    $birthDate->year = ($birthDate->month < $today->month ||
+                        ($birthDate->month == $today->month && $birthDate->day < $today->day))
+                        ? $currentYear + 1 : $currentYear;
+
+                    $daysLeft = $today->diffInDays($birthDate, false);
+
+                    $user->upcoming_birthday_message = $this->formatBirthdayMessage($daysLeft);
+                    $user->remaining_days = $daysLeft;
+                    $user->full_name = "{$user->first_name} {$user->last_name}";
+                    return $user;
+                })
+                ->sortBy('remaining_days')->first();
+
+            // Fetch the latest notice for the user's department
+            $departmentId = $request->user()->department_id;
+
+            $latestNotice = null;
+            if ($departmentId) {
+                $latestNotice = Notice::where('status', 1)
+                    ->whereHas('departments', function ($query) use ($departmentId) {
+                        $query->where('departments.id', $departmentId);
+                    })
+                    ->latest()
+                    ->first();
+            }
+
+            // Prepare the dashboard data
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Dashboard data retrieved successfully.',
+                'data' => [
+                    'upcoming_birthday' => $upcomingBirthday,
+                    'latest_notice' => $latestNotice,
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve dashboard data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function getUpcomingBirthdays()
@@ -21,7 +72,7 @@ class DashboardController extends Controller
             $today = Carbon::today();
             $currentYear = $today->year;
 
-            $users = User::with('department', 'branch')->select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
+            $users = User::select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
                 ->whereNotNull('date_of_birth')
                 ->get()
                 ->map(function ($user) use ($today, $currentYear) {

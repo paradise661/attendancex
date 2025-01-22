@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('longitude')->nullable();
             $table->string('device')->nullable();
             $table->string('attendance_by')->nullable();
+            $table->longText('request_reason')->nullable();
             $table->timestamps();
         });
     }

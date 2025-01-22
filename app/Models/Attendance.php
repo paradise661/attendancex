@@ -21,7 +21,8 @@ class Attendance extends Model
         'latitude',
         'longitude',
         'device',
-        'attendance_by'
+        'attendance_by',
+        'request_reason'
     ];
 
     public function employee()
