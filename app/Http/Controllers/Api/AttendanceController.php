@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AttendanceController extends Controller
 {
+    public function checkIn(Request $request) {}
+    public function checkOut(Request $request) {}
+    public function breakStart(Request $request) {}
+    public function breakEnd(Request $request) {}
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

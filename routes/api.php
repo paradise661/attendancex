@@ -18,5 +18,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('upcomingbirthdays', [DashboardController::class, 'getUpcomingBirthdays']);
     Route::get('notices', [DashboardController::class, 'getNotices']);
     Route::get('myteam', [DashboardController::class, 'getMyTeam']);
-    Route::post('attendance', [AttendanceController::class, 'store']);
+    Route::post('attendance/checkin', [AttendanceController::class, 'checkIn']);
+    Route::post('attendance/checkout', [AttendanceController::class, 'checkOut']);
+    Route::post('attendance/breakstart', [AttendanceController::class, 'breakStart']);
+    Route::post('attendance/breakend', [AttendanceController::class, 'breakEnd']);
 });
