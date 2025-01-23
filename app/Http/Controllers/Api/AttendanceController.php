@@ -32,33 +32,36 @@ class AttendanceController extends Controller
             // Get the current date
             $currentDate = now()->format('Y-m-d');
 
-            // Use updateOrCreate to handle attendance
-            $attendance = Attendance::updateOrCreate(
-                [
-                    'user_id' => $request->user()->id,
-                    'date' => $currentDate,
-                ],
-                [
-                    'type' => $request->type ?? NULL,
-                    'checkin' => now()->format('H:i:s'),
-                    'ip_address' => $request->ip(),
-                    'latitude' => $request->latitude ?? NULL,
-                    'longitude' => $request->longitude ?? NULL,
-                    'device' => $request->device ?? 'Andriod',
-                    'attendance_by' => 'Self',
-                ]
-            );
+            // Check if the user has already checked in today
+            $existingAttendance = Attendance::where('user_id', $request->user()->id)
+                ->where('date', $currentDate)
+                ->first();
 
-            // Return a success response
+            if ($existingAttendance) {
+                return response()->json([
+                    'message' => 'You have already checked in today.',
+                ], 400);
+            }
+
+            $attendance = Attendance::create([
+                'user_id' => $request->user()->id,
+                'date' => $currentDate,
+                'type' => $request->type ?? NULL,
+                'checkin' => now()->format('H:i:s'),
+                'ip_address' => $request->ip(),
+                'latitude' => $request->latitude ?? NULL,
+                'longitude' => $request->longitude ?? NULL,
+                'device' => $request->device ?? 'Andriod',
+                'attendance_by' => 'Self',
+            ]);
+
             return response()->json([
-                'message' => $attendance->wasRecentlyCreated
-                    ? 'Attendance created successfully.'
-                    : 'Attendance updated successfully.',
+                'message' => 'Your attendance has been successfully recorded. Thank you for checking in!.',
             ]);
         } catch (Exception $e) {
             Log::error('Attendance Save Error: ' . $e->getMessage());
             return response()->json([
-                'message' => 'Failed to save attendance. Please try again.',
+                'message' => 'Something went wrong while recording your attendance. Please try again later.',
                 'error' => $e->getMessage(),
             ], 500);
         }
