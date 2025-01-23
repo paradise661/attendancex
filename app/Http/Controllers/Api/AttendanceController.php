@@ -243,8 +243,8 @@ class AttendanceController extends Controller
 
             // If no start_date and end_date are provided, default to the current week
             if (!$startDate || !$endDate) {
-                $startDate = now()->startOfWeek()->format('Y-m-d');
-                $endDate = now()->endOfWeek()->format('Y-m-d');
+                $startDate = now()->subDays(7)->format('Y-m-d');
+                $endDate = now()->format('Y-m-d');
             }
 
             $attendances = Attendance::where('user_id', $request->user()->id)
