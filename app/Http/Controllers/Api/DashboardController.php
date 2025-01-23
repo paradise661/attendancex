@@ -49,6 +49,12 @@ class DashboardController extends Controller
 
             $todayAttendance = Attendance::where('user_id', $request->user()->id)->whereDate('date', $today)->first();
 
+            // Check if today's attendance exists and format checkin/checkout times
+            if ($todayAttendance) {
+                $todayAttendance->checkin = $todayAttendance->checkin ? Carbon::parse($todayAttendance->checkin)->format('g:i A') : null;
+                $todayAttendance->checkout = $todayAttendance->checkout ? Carbon::parse($todayAttendance->checkout)->format('g:i A') : null;
+            }
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Dashboard data retrieved successfully.',
