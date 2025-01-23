@@ -127,7 +127,7 @@ class AttendanceController extends Controller
     {
         try {
             $attendances = Attendance::where('user_id', $request->user()->id)
-                ->latest()
+                ->oldest('date')
                 ->get()
                 ->map(function ($attendance) {
                     if ($attendance->checkin) {
