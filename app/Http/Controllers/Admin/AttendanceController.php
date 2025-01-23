@@ -10,7 +10,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        $attendances = Attendance::latest()->paginate(20);
+        $attendances = Attendance::where('date', today())->latest()->paginate(20);
         return view('admin.attendance.index', compact('attendances'));
     }
 }

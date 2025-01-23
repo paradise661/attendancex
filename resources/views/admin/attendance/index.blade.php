@@ -3,6 +3,7 @@
     @include('admin.includes.message')
     <div class="grid grid-cols-12 gap-6 mt-4">
         <div class="xl:col-span-12 col-span-12">
+
             <div class="box custom-box">
                 <div class="box-header justify-between">
                     <div class="box-title">
@@ -12,13 +13,32 @@
                                 class="badge bg-light text-default rounded-full ms-1 text-[0.75rem] align-middle">{{ $attendances->total() }}</span>
                         @endif
                     </div>
+                    <div class="grid grid-cols-12 gap-6 items-center">
+                        <div class="lg:col-span-12 col-span-12">
+                            <div class="inline-flex !w-full companies-search-input gap-2">
+                                <div class="input-group">
+                                    <div class="input-group-text text-[#8c9097] dark:text-white/50"> <i
+                                            class="ri-calendar-line"></i> </div>
+                                    <input class="form-control" id="daterange" type="text"
+                                        placeholder="Date range picker">
+                                </div>
+
+                                <select class="form-control !rounded-none" id="choices-single-default" data-trigger
+                                    name="choices-single-default">
+                                    <option value="">All Employee</option>
+                                    <option value="Choice 1">Durgesh Upadhyaya</option>
+                                    <option value="Choice 1">Rudra Rajbanshi</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
                     <div class="prism-toggle">
                         {{-- <a class="ti-btn ti-btn-primary-full ti-btn-wave !text-[0.75rem] flex items-center gap-2"
                             href="{{ route('employees.create') }}">
                             New Attendance <i class="ri-add-line"></i>
                         </a> --}}
                     </div>
-
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
