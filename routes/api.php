@@ -19,6 +19,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('notices', [DashboardController::class, 'getNotices']);
     Route::get('myteam', [DashboardController::class, 'getMyTeam']);
 
+    Route::get('attendance', [AttendanceController::class, 'getAttendance']);
     Route::post('attendance/checkin', [AttendanceController::class, 'checkIn']);
     Route::post('attendance/checkout', [AttendanceController::class, 'checkOut']);
     Route::post('attendance/breakstart', [AttendanceController::class, 'breakStart']);

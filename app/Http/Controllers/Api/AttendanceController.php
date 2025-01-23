@@ -122,4 +122,36 @@ class AttendanceController extends Controller
 
     // Break End Method
     public function breakEnd(Request $request) {}
+
+    public function getAttendance(Request $request)
+    {
+        try {
+            $attendances = Attendance::where('user_id', $request->user()->id)
+                ->latest()
+                ->get()
+                ->map(function ($attendance) {
+                    if ($attendance->checkin) {
+                        $attendance->checkin = Carbon::parse($attendance->checkin)->format('g:i A');
+                    }
+                    if ($attendance->checkout) {
+                        $attendance->checkout = Carbon::parse($attendance->checkout)->format('g:i A');
+                    }
+
+                    $attendance->worked_hours = formatWorkedHours($attendance->worked_hours);
+                    return $attendance;
+                });
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Attendance retrieved successfully.',
+                'data' => $attendances,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve attendance.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
