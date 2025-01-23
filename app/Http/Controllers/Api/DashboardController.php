@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
 use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,6 @@ class DashboardController extends Controller
     public function dashboard(Request $request)
     {
         try {
-            // Fetch the latest upcoming birthday
             $today = Carbon::today();
             $currentYear = $today->year;
 
@@ -35,7 +35,6 @@ class DashboardController extends Controller
                 })
                 ->sortBy('remaining_days')->first();
 
-            // Fetch the latest notice for the user's department
             $departmentId = $request->user()->department_id;
 
             $latestNotice = null;
@@ -48,11 +47,13 @@ class DashboardController extends Controller
                     ->first();
             }
 
-            // Prepare the dashboard data
+            $todayAttendance = Attendance::where('user_id', $request->user()->id)->whereDate('date', $today)->first();
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Dashboard data retrieved successfully.',
                 'data' => [
+                    'today_attendance' => $todayAttendance,
                     'upcoming_birthday' => $upcomingBirthday,
                     'latest_notice' => $latestNotice,
                 ],
