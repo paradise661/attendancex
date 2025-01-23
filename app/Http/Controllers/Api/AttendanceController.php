@@ -66,8 +66,6 @@ class AttendanceController extends Controller
         }
     }
 
-
-
     // Break Start Method
     public function breakStart(Request $request)
     {
@@ -240,7 +238,17 @@ class AttendanceController extends Controller
     public function getAttendance(Request $request)
     {
         try {
+            $startDate = $request->query('start_date');
+            $endDate = $request->query('end_date');
+
+            // If no start_date and end_date are provided, default to the current week
+            if (!$startDate || !$endDate) {
+                $startDate = now()->startOfWeek()->format('Y-m-d');
+                $endDate = now()->endOfWeek()->format('Y-m-d');
+            }
+
             $attendances = Attendance::where('user_id', $request->user()->id)
+                ->whereBetween('date', [$startDate, $endDate])
                 ->oldest('date')
                 ->get()
                 ->map(function ($attendance) {
