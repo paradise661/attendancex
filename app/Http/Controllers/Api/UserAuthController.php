@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use File;
 
 class UserAuthController extends Controller
 {
@@ -60,5 +61,93 @@ class UserAuthController extends Controller
             'access_token' => $token,
             'user' => $user,
         ]);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError('Validation failed', $validator->errors(), 422);
+        }
+
+        $user = $request->user(); // Assuming you are using Sanctum or similar for authentication
+
+        if (!$user || !Hash::check($request->current_password, $user->password)) {
+            return $this->respondWithError('Current password is incorrect.', [
+                'current_password' => ['The current password is incorrect.']
+            ], 401);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return $this->respondWithSuccess('Password changed successfully');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = $request->user();
+
+        if ($request->hasFile('image')) {
+            if ($user->image) {
+                $this->removeFile($user->image);
+            }
+
+            $user->image = $this->fileUpload($request, 'image');
+        }
+
+        $user->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Profile updated successfully',
+            'user' => $user,
+        ]);
+    }
+
+    public function fileUpload(Request $request, $name)
+    {
+        $imageName = '';
+        if ($image = $request->file($name)) {
+            $destinationPath = public_path() . '/uploads/employee';
+            $imageName = date('YmdHis') . $name . "-" . $image->getClientOriginalName();
+            $image->move($destinationPath, $imageName);
+            $image = $imageName;
+        }
+        return $imageName;
+    }
+
+
+    public function removeFile($file)
+    {
+        if ($file) {
+            $filePath = str_replace(asset(''), '', $file);
+
+            if ($filePath === 'assets/images/profile.jpg') {
+                return;
+            }
+
+            $path = public_path($filePath);
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
     }
 }

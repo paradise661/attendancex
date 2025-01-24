@@ -8,9 +8,9 @@ if (!function_exists('calculateWorkedHours')) {
         $checkin = Carbon::parse($checkinTime);
         $checkout = Carbon::parse($checkoutTime);
 
-        $workedMinutes = $checkout->diffInMinutes($checkin);
+        $workedMinutes = $checkin->diffInMinutes($checkout);
 
-        return abs($workedMinutes) / 60;
+        return $workedMinutes / 60;
     }
 }
 

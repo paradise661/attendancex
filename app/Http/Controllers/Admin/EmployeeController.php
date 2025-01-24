@@ -116,11 +116,17 @@ class EmployeeController extends Controller
         return $imageName;
     }
 
-
     public function removeFile($file)
     {
         if ($file) {
-            $path = public_path() . '/uploads/employee/' . $file;
+            $filePath = str_replace(asset(''), '', $file);
+
+            if ($filePath === 'assets/images/profile.jpg') {
+                return;
+            }
+
+            $path = public_path($filePath);
+
             if (File::exists($path)) {
                 File::delete($path);
             }

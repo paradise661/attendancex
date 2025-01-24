@@ -17,12 +17,18 @@ class Authcontroller extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->user_type !== 'Admin') {
+                Auth::logout();
+                return redirect("login")->withError('You are not authorized to access this system.');
+            }
+
             return redirect()->intended('dashboard')
                 ->withSuccess('You have Successfully logged In');
         }

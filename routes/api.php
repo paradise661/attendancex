@@ -14,6 +14,8 @@ Route::post('login', [UserAuthController::class, 'login']);
 
 // Sanctum-protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('change-password', [UserAuthController::class, 'changePassword']);
+    Route::post('update-profile', [UserAuthController::class, 'updateProfile']);
     Route::get('dashboard', [DashboardController::class, 'dashboard']);
     Route::get('upcomingbirthdays', [DashboardController::class, 'getUpcomingBirthdays']);
     Route::get('notices', [DashboardController::class, 'getNotices']);

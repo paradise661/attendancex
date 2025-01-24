@@ -250,18 +250,7 @@ class AttendanceController extends Controller
             $attendances = Attendance::where('user_id', $request->user()->id)
                 ->whereBetween('date', [$startDate, $endDate])
                 ->oldest('date')
-                ->get()
-                ->map(function ($attendance) {
-                    if ($attendance->checkin) {
-                        $attendance->checkin = Carbon::parse($attendance->checkin)->format('g:i A');
-                    }
-                    if ($attendance->checkout) {
-                        $attendance->checkout = Carbon::parse($attendance->checkout)->format('g:i A');
-                    }
-
-                    $attendance->worked_hours = formatWorkedHours($attendance->worked_hours);
-                    return $attendance;
-                });
+                ->get();
 
             return response()->json([
                 'status' => 'success',

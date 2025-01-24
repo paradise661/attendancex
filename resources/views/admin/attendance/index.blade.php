@@ -68,24 +68,24 @@
                                                             <img src="{{ $attendance->employee->image ?? '' }}"
                                                                 alt="profile">
                                                         </a>
-                                                    </span>{{ ($attendance->employee->first_name ?? '') . ' ' . ($attendance->employee->last_name ?? '-') }}
+                                                    </span>{{ $attendance->employee->full_name ?? '' }}
                                                 </div>
                                             </td>
                                             <td class="px-4 py-2">{{ $attendance->date ?? '-' }}</td>
                                             <td class="px-4 py-2">
-                                                {{ $attendance->checkin ? \Carbon\Carbon::parse($attendance->checkin)->format('h:i A') : '-' }}
+                                                {{ $attendance->checkin ?? '-' }}
                                             </td>
                                             <td class="px-4 py-2">
-                                                {{ $attendance->checkout ? \Carbon\Carbon::parse($attendance->checkout)->format('h:i A') : '-' }}
+                                                {{ $attendance->checkout ?? '-' }}
                                             </td>
                                             <td class="px-4 py-2">
-                                                {{ $attendance->break_start ? \Carbon\Carbon::parse($attendance->break_start)->format('h:i A') : '-' }}
+                                                {{ $attendance->break_start ?? '-' }}
                                             </td>
                                             <td class="px-4 py-2">
-                                                {{ $attendance->break_end ? \Carbon\Carbon::parse($attendance->break_end)->format('h:i A') : '-' }}
+                                                {{ $attendance->break_end ?? '-' }}
                                             </td>
                                             <td class="px-4 py-2">
-                                                {{ formatWorkedHours($attendance->worked_hours) }}
+                                                {{ $attendance->worked_hours ?? '' }}
                                             </td>
                                             {{-- <td class="text-end px-4 py-2">
                                                 <div class="btn-list flex gap-3">

@@ -49,7 +49,7 @@
                                                             href="{{ $employee->image ?? '' }}">
                                                             <img src="{{ $employee->image ?? '' }}" alt="profile">
                                                         </a>
-                                                    </span>{{ ($employee->first_name ?? '') . ' ' . ($employee->last_name ?? '-') }}
+                                                    </span>{{ $employee->full_name ?? '' }}
                                                 </div>
                                             </td>
                                             <td class="px-4 py-2">{{ $employee->email ?? '-' }}</td>
