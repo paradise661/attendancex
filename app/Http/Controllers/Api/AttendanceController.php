@@ -279,7 +279,6 @@ class AttendanceController extends Controller
             $startDate = $request->query('start_date');
             $endDate = $request->query('end_date');
 
-            // If no start_date and end_date are provided, default to the current week
             if (!$startDate || !$endDate) {
                 $startDate = now()->subDays(7)->format('Y-m-d');
                 $endDate = now()->format('Y-m-d');
@@ -289,6 +288,26 @@ class AttendanceController extends Controller
                 ->whereBetween('date', [$startDate, $endDate])
                 ->oldest('date')
                 ->get();
+
+            // Check if any dates are missing from the range
+            $dateRange = Carbon::parse($startDate)->toPeriod($endDate);
+
+            $absentDates = $dateRange->filter(function ($date) use ($attendances) {
+                return !$attendances->contains('date', $date->format('Y-m-d'));
+            });
+
+            // Append absent dates to $attendances array
+            foreach ($absentDates as $absentDate) {
+                $attendances->push([
+                    'user_id' => $request->user()->id,
+                    'date' => $absentDate->format('Y-m-d'),
+                    'checkin' => null,
+                    'checkout' => null,
+                    'worked_hours' => null
+                ]);
+            }
+
+            $attendances = $attendances->sortBy('date')->values();
 
             return response()->json([
                 'status' => 'success',
