@@ -279,34 +279,40 @@ class AttendanceController extends Controller
             $startDate = $request->query('start_date');
             $endDate = $request->query('end_date');
 
+            $joinDate = $request->user()->join_date;
+
             if (!$startDate || !$endDate) {
                 $startDate = now()->subDays(7)->format('Y-m-d');
                 $endDate = now()->format('Y-m-d');
             }
 
+            // Adjust startDate if join_date is set and is later than the requested startDate
+            if ($joinDate && Carbon::parse($joinDate)->gt(Carbon::parse($startDate))) {
+                $startDate = Carbon::parse($joinDate)->format('Y-m-d');
+            }
+
             $attendances = Attendance::where('user_id', $request->user()->id)
                 ->whereBetween('date', [$startDate, $endDate])
-                ->oldest('date')
                 ->get();
 
-            // Check if any dates are missing from the range
             $dateRange = Carbon::parse($startDate)->toPeriod($endDate);
 
             $absentDates = $dateRange->filter(function ($date) use ($attendances) {
                 return !$attendances->contains('date', $date->format('Y-m-d'));
             });
 
-            // Append absent dates to $attendances array
+            // Append absent dates to $attendances
             foreach ($absentDates as $absentDate) {
                 $attendances->push([
                     'user_id' => $request->user()->id,
                     'date' => $absentDate->format('Y-m-d'),
                     'checkin' => null,
                     'checkout' => null,
-                    'worked_hours' => null
+                    'worked_hours' => null,
                 ]);
             }
 
+            // Sort by date
             $attendances = $attendances->sortBy('date')->values();
 
             return response()->json([
