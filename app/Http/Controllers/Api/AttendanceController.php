@@ -36,6 +36,15 @@ class AttendanceController extends Controller
                 ->where('date', $currentDate)
                 ->first();
 
+            $distance = getDistance($request->user()->branch->latitude, $request->user()->branch->longitude, $request->latitude, $request->longitude);
+            $area = $request->user()->branch->radius / 1000;
+
+            if ($distance > $area) {
+                return response()->json([
+                    'message' => 'You are not in office area.',
+                ], 400);
+            }
+
             if ($existingAttendance) {
                 return response()->json([
                     'message' => 'You have already checked in today.',
@@ -87,6 +96,15 @@ class AttendanceController extends Controller
 
             $attendance = Attendance::where('user_id', $userId)
                 ->where('date', $currentDate)->first();
+
+            $distance = getDistance($request->user()->branch->latitude, $request->user()->branch->longitude, $request->latitude, $request->longitude);
+            $area = $request->user()->branch->radius / 1000;
+
+            if ($distance > $area) {
+                return response()->json([
+                    'message' => 'You are not in office area.',
+                ], 400);
+            }
 
             // Check if the attendance record exists and whether the user has checked in
             if (!$attendance || !$attendance->checkin) {
@@ -142,6 +160,15 @@ class AttendanceController extends Controller
             $attendance = Attendance::where('user_id', $userId)
                 ->where('date', $currentDate)->first();
 
+            $distance = getDistance($request->user()->branch->latitude, $request->user()->branch->longitude, $request->latitude, $request->longitude);
+            $area = $request->user()->branch->radius / 1000;
+
+            if ($distance > $area) {
+                return response()->json([
+                    'message' => 'You are not in office area.',
+                ], 400);
+            }
+
             if (!$attendance || !$attendance->checkin) {
                 return response()->json([
                     'message' => 'You must check in first before ending your break.',
@@ -196,6 +223,15 @@ class AttendanceController extends Controller
             $currentDate = now()->format('Y-m-d');
 
             $attendance = Attendance::where('user_id', $request->user()->id)->where('date', $currentDate)->first();
+
+            $distance = getDistance($request->user()->branch->latitude, $request->user()->branch->longitude, $request->latitude, $request->longitude);
+            $area = $request->user()->branch->radius / 1000;
+
+            if ($distance > $area) {
+                return response()->json([
+                    'message' => 'You are not in office area.',
+                ], 400);
+            }
 
             if (!$attendance || !$attendance->checkin) {
                 return response()->json([
