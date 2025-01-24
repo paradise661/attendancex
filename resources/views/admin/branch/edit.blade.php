@@ -47,7 +47,7 @@
                         <div class="relative">
                             <input
                                 class="form-control @error('latitude') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="number" aria-label="latitude" name="latitude"
+                                type="text" aria-label="latitude" name="latitude"
                                 value="{{ old('latitude', $branch->latitude) }}">
                             @error('latitude')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
