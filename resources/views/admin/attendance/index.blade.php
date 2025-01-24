@@ -50,8 +50,8 @@
                                     <th class="text-start px-4 py-2" scope="col">Date</th>
                                     <th class="text-start px-4 py-2" scope="col">Check In</th>
                                     <th class="text-start px-4 py-2" scope="col">Check Out</th>
-                                    <th class="text-start px-4 py-2" scope="col">Break Out</th>
-                                    <th class="text-start px-4 py-2" scope="col">Break In</th>
+                                    <th class="text-start px-4 py-2" scope="col">Break Start</th>
+                                    <th class="text-start px-4 py-2" scope="col">Break End</th>
                                     <th class="text-start px-4 py-2" scope="col">Worked Hours</th>
                                 </tr>
                             </thead>
