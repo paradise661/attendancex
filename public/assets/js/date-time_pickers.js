@@ -28,6 +28,7 @@
         enableTime: true,
         noCalendar: true,
         dateFormat: "H:i",
+        defaultHour: 9,
     });
 
     /* For Time Picker With 24hr Format */

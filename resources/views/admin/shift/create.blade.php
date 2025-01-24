@@ -49,8 +49,8 @@
                                             class="ri-time-line"></i> </div>
                                     <input
                                         class="form-control @error('start_time') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                        id="timepickr1" type="text" name="start_time"
-                                        placeholder="Choose time in 24hr format" value="{{ old('start_time') }}">
+                                        id="timepikcr" type="text" name="start_time" placeholder="Choose time"
+                                        value="{{ old('start_time') }}" autocomplete="off">
                                     @error('start_time')
                                         <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                             <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
@@ -79,8 +79,8 @@
                                             class="ri-time-line"></i> </div>
                                     <input
                                         class="form-control @error('start_grace_time') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                        id="timepickr1" type="text" name="start_grace_time"
-                                        placeholder="Choose time in 24hr format" value="{{ old('start_grace_time') }}">
+                                        id="timepikcr" type="text" name="start_grace_time" placeholder="Choose time"
+                                        value="{{ old('start_grace_time') }}" autocomplete="off">
                                     @error('start_grace_time')
                                         <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                             <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
@@ -101,17 +101,17 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">End Time<span class="text-red-500"> *</span></label>
+                        <label class="form-label" for="inputEmail4">End Grace Time</label>
                         <div class="relative">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-text text-[#8c9097] dark:text-white/50"> <i
                                             class="ri-time-line"></i> </div>
                                     <input
-                                        class="form-control @error('end_time') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                        id="timepickr1" type="text" name="end_time"
-                                        placeholder="Choose time in 24hr format" value="{{ old('end_time') }}">
-                                    @error('end_time')
+                                        class="form-control @error('end_grace_time') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                        id="timepikcr" type="text" name="end_grace_time" placeholder="Choose time"
+                                        value="{{ old('end_grace_time') }}" autocomplete="off">
+                                    @error('end_grace_time')
                                         <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                             <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
                                                 viewBox="0 0 16 16" aria-hidden="true">
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        @error('end_time')
+                        @error('end_grace_time')
                             <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                 <i>*{{ $message }}</i>
                             </p>
@@ -131,17 +131,17 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label" for="inputEmail4">End Grace Time</label>
+                        <label class="form-label">End Time<span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-text text-[#8c9097] dark:text-white/50"> <i
                                             class="ri-time-line"></i> </div>
                                     <input
-                                        class="form-control @error('end_grace_time') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                        id="timepickr1" type="text" name="end_grace_time"
-                                        placeholder="Choose time in 24hr format" value="{{ old('end_grace_time') }}">
-                                    @error('end_grace_time')
+                                        class="form-control @error('end_time') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                        id="timepikcr" type="text" name="end_time" placeholder="Choose time"
+                                        value="{{ old('end_time') }}" autocomplete="off">
+                                    @error('end_time')
                                         <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                             <svg class="h-5 w-5 text-danger" width="16" height="16"
                                                 fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
@@ -153,7 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                        @error('end_grace_time')
+                        @error('end_time')
                             <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                 <i>*{{ $message }}</i>
                             </p>

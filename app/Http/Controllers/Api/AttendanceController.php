@@ -182,7 +182,9 @@ class AttendanceController extends Controller
             }
 
             // Calculate total break time in minutes
-            $breakStart = Carbon::createFromFormat('H:i:s', $attendance->break_start);
+            // $breakStart = Carbon::createFromFormat('H:i:s', $attendance->break_start);
+            $breakStart = Carbon::createFromFormat('g:i A', $attendance->break_start);
+
             $breakEnd = now();
             $totalBreakMinutes = $breakStart->diffInMinutes($breakEnd);
 
