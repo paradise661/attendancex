@@ -23,8 +23,10 @@ class BranchRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'radius' => 'required|string|max:100',
-            'ip_address' => 'required|ip',
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+            'radius' => 'required|numeric',
+            'ip_address' => 'nullable|ip',
         ];
     }
 }

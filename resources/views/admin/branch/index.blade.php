@@ -27,7 +27,7 @@
                                 <tr class="border-b border-defaultborder">
                                     <th class="text-start px-4 py-2" scope="col">#</th>
                                     <th class="text-start px-4 py-2" scope="col">Name</th>
-                                    <th class="text-start px-4 py-2" scope="col">Radius</th>
+                                    <th class="text-start px-4 py-2" scope="col">Area</th>
                                     <th class="text-start px-4 py-2" scope="col">IP Address</th>
                                     <th class="text-start px-4 py-2" scope="col">Status</th>
                                     <th class="text-start px-4 py-2" scope="col">Last Updated</th>
@@ -40,7 +40,7 @@
                                         <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
                                             <th class="px-4 py-2" scope="row">{{ $key + $branches->firstItem() }}</th>
                                             <td class="px-4 py-2">{{ $branch->name ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $branch->radius ?? '' }} M</td>
+                                            <td class="px-4 py-2">{{ $branch->radius ?? '' }}m</td>
                                             <td class="px-4 py-2">{{ $branch->ip_address ?? '-' }}</td>
                                             <td class="px-4 py-2">
                                                 <span

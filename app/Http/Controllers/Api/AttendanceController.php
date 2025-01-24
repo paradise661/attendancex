@@ -18,8 +18,8 @@ class AttendanceController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'latitude' => 'nullable|string',
-                'longitude' => 'nullable|string',
+                'latitude' => 'required',
+                'longitude' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -80,8 +80,8 @@ class AttendanceController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'latitude' => 'nullable|string',
-                'longitude' => 'nullable|string',
+                'latitude' => 'required',
+                'longitude' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -143,8 +143,8 @@ class AttendanceController extends Controller
         try {
             // Validate the request
             $validator = Validator::make($request->all(), [
-                'latitude' => 'nullable|string',
-                'longitude' => 'nullable|string',
+                'latitude' => 'required',
+                'longitude' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -209,8 +209,8 @@ class AttendanceController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'latitude' => 'nullable|string',
-                'longitude' => 'nullable|string',
+                'latitude' => 'required',
+                'longitude' => 'required',
             ]);
 
             if ($validator->fails()) {
