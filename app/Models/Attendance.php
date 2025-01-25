@@ -58,10 +58,9 @@ class Attendance extends Model
 
     public function getWorkedHoursAttribute($value)
     {
-        if ($this->checkin && $this->checkout) {
-            return calculateWorkedHours($this->checkin, $this->checkout);
+        if ($value) {
+            return formatWorkedHours($value);
         }
-        return null;
     }
 
     public function getTotalBreakAttribute($value)

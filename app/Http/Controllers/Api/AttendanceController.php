@@ -252,10 +252,9 @@ class AttendanceController extends Controller
             $checkoutTime = now();
 
             $workedHours = calculateWorkedHours($checkinTime, $checkoutTime);
-
             $attendance->update([
                 'checkout' => $checkoutTime->format('H:i:s'),
-                'worked_hours' => number_format($workedHours, 2),
+                'worked_hours' => $workedHours,
                 'latitude' => $request->latitude ?? $attendance->latitude,
                 'longitude' => $request->longitude ?? $attendance->longitude,
             ]);

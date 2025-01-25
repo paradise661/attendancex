@@ -5,14 +5,21 @@ use Carbon\Carbon;
 if (!function_exists('calculateWorkedHours')) {
     function calculateWorkedHours($checkinTime, $checkoutTime)
     {
-        $checkin = Carbon::parse($checkinTime);
-        $checkout = Carbon::parse($checkoutTime);
+        try {
+            $checkin = Carbon::parse($checkinTime);
+            $checkout = Carbon::parse($checkoutTime);
 
-        $workedMinutes = $checkin->diffInMinutes($checkout);
+            $workedMinutes = $checkin->diffInMinutes($checkout);
 
-        return $workedMinutes / 60;
+            $workedHours = $workedMinutes / 60;
+
+            return number_format($workedHours, 2);
+        } catch (Exception $e) {
+            return 0;
+        }
     }
 }
+
 
 if (!function_exists('formatWorkedHours')) {
     function formatWorkedHours($workedHours)
