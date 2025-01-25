@@ -4,7 +4,7 @@
 
     <div class="grid grid-cols-12 gap-6 mt-4">
         <div class="xl:col-span-12 col-span-12">
-            <livewire:attendance.filterallemployee />
+            <livewire:attendance.filter-individual-employee />
         </div>
     </div>
 @endsection

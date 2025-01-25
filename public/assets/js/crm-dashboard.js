@@ -37,7 +37,7 @@ var options = {
     },
     labels: ["Status"]
 };
-document.querySelector("#crm-main").innerHTML = ""
+document.querySelector("#crm-main").innerHTML = "";
 var chart = new ApexCharts(document.querySelector("#crm-main"), options);
 chart.render();
 /* Target Incomplete Chart */

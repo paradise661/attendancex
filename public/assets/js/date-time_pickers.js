@@ -2,7 +2,9 @@
     "use strict";
 
     /* To choose date */
-    flatpickr("#date", {});
+    flatpickr("#date", {
+         maxDate: "today"
+    });
 
     /* To choose date and time */
     flatpickr("#datetime", {
@@ -21,6 +23,7 @@
     flatpickr("#daterange", {
         mode: "range",
         dateFormat: "Y-m-d",
+         maxDate: "today"
     });
 
     /* For Time Picker */

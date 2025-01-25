@@ -28,4 +28,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('notices', NoticeController::class);
     Route::get('attendances', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::get('attendance/individual', [AttendanceController::class, 'individualAttendance'])->name('attendance.individual');
 });

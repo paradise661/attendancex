@@ -80,12 +80,24 @@
                         </a>
                     </li>
 
-                    <li class="slide">
-                        <a class="side-menu__item {{ Request::segment(1) == 'attendances' ? 'active' : '' }}"
-                            href="{{ route('attendance.index') }}">
+                    <li class="slide has-sub @if (Request::segment(1) == 'attendances' || Request::segment(1) == 'attendance') {{ 'active open' }} @endif">
+                        <a class="side-menu__item @if (Request::segment(1) == 'attendances' || Request::segment(1) == 'attendance') {{ 'active' }} @endif"
+                            href="javascript:void(0);">
                             <i class="bx bx-qr-scan side-menu__icon"></i>
-                            <span class="side-menu__label">Attendances </span>
+                            <span class="side-menu__label">Attendance</span>
+                            <i class="fe fe-chevron-right side-menu__angle"></i>
                         </a>
+                        <ul class="slide-menu child1">
+                            <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'attendances' ? 'active' : '' }}"
+                                    href="{{ route('attendance.index') }}">All Employees</a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'attendance' ? 'active' : '' }}"
+                                    href="{{ route('attendance.individual') }}">Individual</a>
+                            </li>
+
+                        </ul>
                     </li>
                 </ul>
                 <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
