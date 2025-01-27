@@ -67,7 +67,7 @@ if (!function_exists('sendPushNotification')) {
             'Content-Type' => 'application/json',
             'Accept-encoding' => 'gzip, deflate',
         ])->post('https://exp.host/--/api/v2/push/send', [
-            'to' => 'ExponentPushToken[_YP-yFAkcEa4lmtCSYjGXV]',
+            'to' => $to,
             'title' => $title,
             'body' => $body,
         ]);
