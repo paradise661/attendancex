@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
+
 
 if (!function_exists('calculateWorkedHours')) {
     function calculateWorkedHours($checkinTime, $checkoutTime)
@@ -54,5 +56,26 @@ if (!function_exists('getDistance')) {
         $d = $earth_radius * $c;
 
         return $d;
+    }
+}
+
+if (!function_exists('sendPushNotification')) {
+    function sendPushNotification($to, $title, $body)
+    {
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Accept-encoding' => 'gzip, deflate',
+        ])->post('https://exp.host/--/api/v2/push/send', [
+            'to' => 'ExponentPushToken[_YP-yFAkcEa4lmtCSYjGXV]',
+            'title' => $title,
+            'body' => $body,
+        ]);
+
+        if ($response->successful()) {
+            return 1;
+        }
+
+        return 0;
     }
 }

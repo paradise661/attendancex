@@ -30,7 +30,7 @@ return new class extends Migration
             $table->bigInteger('department_id')->nullable();
             $table->bigInteger('shift_id')->nullable();
             $table->string('user_type')->default('Employee');
-
+            $table->text('expo_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

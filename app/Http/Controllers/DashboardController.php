@@ -8,6 +8,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        return sendPushNotification('', 'Hello from Laravel', 'This is a test notification');
+
         return view('admin.dashboard');
     }
 }

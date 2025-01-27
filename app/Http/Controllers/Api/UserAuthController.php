@@ -41,6 +41,7 @@ class UserAuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
+            'expo_token' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -53,6 +54,12 @@ class UserAuthController extends Controller
             return $this->respondWithError('The provided credentials are incorrect.', [
                 'email' => ['The provided credentials are incorrect.']
             ], 401);
+        }
+
+        // Update expo_token only if provided and different
+        if ($request->has('expo_token') && $request->expo_token !== $user->expo_token) {
+            $user->expo_token = $request->expo_token;
+            $user->save();
         }
 
         $token = $user->createToken('MyAppToken')->plainTextToken;
