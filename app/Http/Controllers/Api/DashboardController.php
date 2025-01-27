@@ -32,6 +32,7 @@ class DashboardController extends Controller
                     $user->upcoming_birthday_message = $this->formatBirthdayMessage($daysLeft);
                     $user->remaining_days = $daysLeft;
                     $user->full_name = "{$user->first_name} {$user->last_name}";
+                    $user->profile_name = strtoupper(ucfirst($user->first_name)) . strtoupper(ucfirst($user->last_name));
                     return $user;
                 })
                 ->sortBy('remaining_days')->first();
