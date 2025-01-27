@@ -21,9 +21,15 @@
                     </div>
 
                     <div class="md:col-span-12 col-span-12">
-                        <label class="form-label" for="support">Support</label>
-                        <input class="form-control mt-1 p-2 border border-gray-300 rounded-md w-full" id="support"
-                            type="text" name="support" value="{{ $setting['support'] ?? '' }}" required>
+                        <label class="form-label" for="phone">Contact (Support)</label>
+                        <input class="form-control mt-1 p-2 border border-gray-300 rounded-md w-full" id="phone"
+                            type="text" name="phone" value="{{ $setting['phone'] ?? '' }}" required>
+                    </div>
+
+                    <div class="md:col-span-12 col-span-12">
+                        <label class="form-label" for="email">Email (Support)</label>
+                        <input class="form-control mt-1 p-2 border border-gray-300 rounded-md w-full" id="email"
+                            type="text" name="email" value="{{ $setting['email'] ?? '' }}" required>
                     </div>
 
                     <div class="md:col-span-12 col-span-12">

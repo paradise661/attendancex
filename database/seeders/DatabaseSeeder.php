@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             ['company_logo', Null],
             ['app_logo', Null],
             ['company_information', 'We always wanted to be recognized as a global brand so, we based our headquarter at Germany'],
-            ['support', '9800000000']
+            ['phone', '9800000000'],
+            ['email', 'info@attendancex.com']
         ];
 
         if (count($items)) {
