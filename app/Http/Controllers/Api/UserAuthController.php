@@ -63,6 +63,7 @@ class UserAuthController extends Controller
         }
 
         $token = $user->createToken('MyAppToken')->plainTextToken;
+        $user->profile_name = strtoupper(string: ucfirst($user->first_name[0] ?? '')) . strtoupper(ucfirst($user->last_name[0] ?? ''));
 
         return $this->respondWithSuccess('Login successful', [
             'access_token' => $token,
