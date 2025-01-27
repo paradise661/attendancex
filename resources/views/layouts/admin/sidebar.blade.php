@@ -37,9 +37,11 @@
 
                     <li class="slide has-sub @if (Request::segment(index: 1) == 'branches' ||
                             Request::segment(index: 1) == 'departments' ||
+                            Request::segment(index: 1) == 'site-setting' ||
                             Request::segment(index: 1) == 'shifts') {{ 'active open' }} @endif">
                         <a class="side-menu__item @if (Request::segment(index: 1) == 'branches' ||
                                 Request::segment(index: 1) == 'departments' ||
+                                Request::segment(index: 1) == 'site-setting' ||
                                 Request::segment(index: 1) == 'shifts') {{ 'active' }} @endif"
                             href="javascript:void(0);">
                             <i class="bx bx-fingerprint side-menu__icon"></i>
@@ -58,6 +60,10 @@
                             <li class="slide">
                                 <a class="side-menu__item {{ Request::segment(1) == 'shifts' ? 'active' : '' }}"
                                     href="{{ route('shifts.index') }}">Shifts</a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'site-setting' ? 'active' : '' }}"
+                                    href="{{ route('site.setting') }}">Settings</a>
                             </li>
                         </ul>
                     </li>

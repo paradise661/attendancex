@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Notice;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -181,6 +182,30 @@ class DashboardController extends Controller
                 'message' => 'Failed to retrieve team.',
                 'error' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function settings()
+    {
+        try {
+            $settings = Setting::pluck('value', 'key');
+
+            if ($settings['company_logo']) {
+                $settings['company_logo'] = asset('uploads/site/' . $settings['company_logo']);
+            }
+
+            if ($settings['app_logo']) {
+                $settings['app_logo'] = asset('uploads/site/' . $settings['app_logo']);
+            }
+
+            return response()->json([
+                "statusCode" => 200,
+                "error" => false,
+                "data" => $settings,
+                'message' => 'Retrieved successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['statusCode' => 401, 'error' => true, 'message' => $e->getMessage()]);
         }
     }
 }

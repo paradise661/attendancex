@@ -36,7 +36,6 @@ class NoticeController extends Controller
     public function store(NoticeRequest $request)
     {
         try {
-
             $notice =  Notice::create($request->all());
             $notice->departments()->attach($request->departments);
 

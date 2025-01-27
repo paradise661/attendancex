@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\ShiftController;
+use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('notices', NoticeController::class);
     Route::get('attendances', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('attendance/individual', [AttendanceController::class, 'individualAttendance'])->name('attendance.individual');
+
+    Route::get('site-setting', [SiteSettingController::class, 'siteSettings'])
+        ->name('site.setting');
+    Route::post('site-setting/update', [SiteSettingController::class, 'updateSiteSettings'])
+        ->name('site.setting.update');
+    Route::get('site-setting/removefile/{filename}/{type}', [SiteSettingController::class, 'removefileFromSite'])
+        ->name('site.setting.remove.file');
 });

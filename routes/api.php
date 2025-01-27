@@ -11,6 +11,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('login', [UserAuthController::class, 'login']);
+Route::get('settings', [DashboardController::class, 'settings']);
 
 // Sanctum-protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
