@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NoticeRequest;
 use App\Models\Department;
 use App\Models\Notice;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -38,6 +39,9 @@ class NoticeController extends Controller
 
             $notice =  Notice::create($request->all());
             $notice->departments()->attach($request->departments);
+
+            $expoTokens = User::whereNotNull('expo_token')->pluck('expo_token')->toArray();
+            sendPushNotification($expoTokens, $request->title, $request->description);
 
             return redirect()->route('notices.index')->with('message', 'Notice Created Successfully');
         } catch (Exception $e) {
