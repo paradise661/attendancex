@@ -4,7 +4,7 @@
             <a class="header-logo" href="{{ url('/dashboard') }}">
                 <img class="desktop-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 40px">
                 <img class="toggle-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 40px">
-                <img class="desktop-dark" src="{{ asset('assets/images/logo.png') }}" alt="logo"
+                <img class="desktop-dark" src="{{ asset('assets/images/white-logo.png') }}" alt="logo"
                     style="height: 40px">
                 <img class="toggle-dark" src="{{ asset('assets/images/logo.png') }}" alt="logo"
                     style="height: 40px">

@@ -40,7 +40,8 @@
                                         <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
                                             <th class="px-4 py-2" scope="row">{{ $key + $notices->firstItem() }}</th>
                                             <td class="px-4 py-2">{{ $notice->title ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $notice->description ?? '-' }}</td>
+                                            <td class="px-4 py-2" style="white-space: normal">
+                                                {{ $notice->description ?? '-' }}</td>
                                             <td class="px-4 py-2">{{ $notice->location ?? '-' }}</td>
                                             <td class="px-4 py-2">
                                                 {{ $notice->date ?? '' }}</td>
@@ -62,10 +63,10 @@
 
                                             <td class="text-end px-4 py-2">
                                                 <div class="btn-list flex gap-3">
-                                                    <a class="ti-btn ti-btn-primary-full !py-1 !px-3 ti-btn-wave"
+                                                    {{-- <a class="ti-btn ti-btn-primary-full !py-1 !px-3 ti-btn-wave"
                                                         href="{{ route('notices.edit', $notice->id) }}">
                                                         <i class="ri-pencil-line"></i> Edit
-                                                    </a>
+                                                    </a> --}}
 
                                                     <form class="delete-form"
                                                         action="{{ route('notices.destroy', $notice->id) }}"

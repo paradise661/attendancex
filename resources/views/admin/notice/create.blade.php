@@ -100,7 +100,7 @@
                                             class="ri-calendar-line"></i> </div> <input
                                         class="form-control flatpickr-input active @error('date') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
                                         id="date" type="text" name="date" placeholder="Choose date"
-                                        readonly="readonly" value="{{ old('date') }}">
+                                        readonly="readonly" value="{{ old('date', date('Y-m-d')) }}">
                                     @error('date')
                                         <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                             <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
