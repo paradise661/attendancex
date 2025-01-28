@@ -54,7 +54,7 @@ class AttendanceController extends Controller
             $attendance = Attendance::create([
                 'user_id' => $request->user()->id,
                 'date' => $currentDate,
-                'type' => $request->type ?? NULL,
+                'type' => 'Present',
                 'checkin' => now()->format('H:i:s'),
                 'ip_address' => $request->ip(),
                 'latitude' => $request->latitude ?? NULL,
@@ -304,6 +304,7 @@ class AttendanceController extends Controller
             foreach ($absentDates as $absentDate) {
                 $attendances->push([
                     'user_id' => $request->user()->id,
+                    'type' => 'Absent',
                     'date' => $absentDate->format('Y-m-d'),
                     'checkin' => null,
                     'checkout' => null,
