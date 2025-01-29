@@ -48,7 +48,7 @@ class Filterallemployee extends Component
 
     public function render()
     {
-        $employees = User::where('user_type', 'Employee')->where('join_date', '>=', $this->searchTerms)->when($this->branch, function ($query) {
+        $employees = User::where('user_type', 'Employee')->where('join_date', '<=', $this->searchTerms)->when($this->branch, function ($query) {
             return $query->where('branch_id', $this->branch);
         })->orderBy('first_name', 'ASC')->get();
 
