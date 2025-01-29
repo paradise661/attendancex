@@ -35,7 +35,8 @@ class User extends Authenticatable
         'department_id',
         'shift_id',
         'user_type',
-        'expo_token'
+        'expo_token',
+        'order'
     ];
 
     /**

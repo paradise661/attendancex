@@ -31,6 +31,7 @@ return new class extends Migration
             $table->bigInteger('shift_id')->nullable();
             $table->string('user_type')->default('Employee');
             $table->text('expo_token')->nullable();
+            $table->integer('order')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
