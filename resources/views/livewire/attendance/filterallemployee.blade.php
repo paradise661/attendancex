@@ -25,6 +25,7 @@
             @endif
         </div>
     </div>
+    {{ $searchTerms }}
 
     <div class="box custom-box">
         <div class="box-header justify-between">
@@ -32,7 +33,7 @@
                 Attendances
                 @if ($attendances->isNotEmpty())
                     <span
-                        class="badge bg-light text-default rounded-full ms-1 text-[0.75rem] align-middle">{{ $attendances->total() }}</span>
+                        class="badge bg-light text-default rounded-full ms-1 text-[0.75rem] align-middle">{{ $attendances->count() }}</span>
                 @endif
             </div>
         </div>
@@ -51,23 +52,24 @@
                             <th class="text-start px-4 py-2" scope="col">Break Start</th>
                             <th class="text-start px-4 py-2" scope="col">Break End</th>
                             <th class="text-start px-4 py-2" scope="col">Total Worked</th>
+                            <th class="text-start px-4 py-2" scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if ($attendances->isNotEmpty())
                             @foreach ($attendances as $key => $attendance)
                                 <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
-                                    <th class="px-4 py-2" scope="row">{{ $key + $attendances->firstItem() }}</th>
+                                    <th class="px-4 py-2" scope="row">{{ $key  }}</th>
                                     <td>
                                         <div class="flex items-center">
                                             <span class="avatar avatar-xs me-2 online avatar-rounded">
                                                 <a class="fancybox" data-fancybox="demo"
-                                                    href="{{ $attendance->employee->image ?? '' }}">
-                                                    <img src="{{ $attendance->employee->image ?? '' }}" alt="profile">
+                                                    href="{{ $attendance->image ?? '' }}">
+                                                    <img src="{{ $attendance->image ?? '' }}" alt="profile">
                                                 </a>
                                             </span>
-                                            {{ $attendance->employee->full_name ?? '' }}
-                                            ({{ $attendance->employee->branch->name ?? '' }})
+                                            {{ $attendance->full_name ?? '' }}
+                                            ({{ $attendance->branch ?? '' }})
                                         </div>
                                     </td>
                                     <td class="px-4 py-2">{{ $attendance->date ?? '-' }}</td>
@@ -75,7 +77,15 @@
                                     <td class="px-4 py-2">{{ $attendance->checkout ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $attendance->break_start ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $attendance->break_end ?? '-' }}</td>
-                                    <td class="px-4 py-2">{{ $attendance->worked_hours ?? '' }}</td>
+                                    <td class="px-4 py-2">{{ $attendance->worked_hours ?? '-' }}</td>
+                                    <td class="px-4 py-2">
+                                        @if ($attendance->type === 'Absent')
+                                            <span class="bg-red-500 px-2 py-1 text-white" >Absent</span>
+                                        @endif
+                                        @if ($attendance->type === 'Present')
+                                            <span class="bg-green-500 px-2 py-1 text-white" >Present</span>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
@@ -97,6 +107,6 @@
             </div>
         </div>
 
-        {{ $attendances->links('vendor.pagination.custom') }}
+        {{-- {{ $attendances->links('vendor.pagination.custom') }} --}}
     </div>
 </div>
