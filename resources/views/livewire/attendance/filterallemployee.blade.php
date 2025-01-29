@@ -25,8 +25,7 @@
             @endif
         </div>
     </div>
-    {{ $searchTerms }}
-
+    
     <div class="box custom-box">
         <div class="box-header justify-between">
             <div class="box-title">
