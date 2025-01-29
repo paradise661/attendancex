@@ -44,7 +44,7 @@
                                 Request::segment(index: 1) == 'site-setting' ||
                                 Request::segment(index: 1) == 'shifts') {{ 'active' }} @endif"
                             href="javascript:void(0);">
-                            <i class="bx bx-fingerprint side-menu__icon"></i>
+                            <i class="bx bx-cog side-menu__icon"></i>
                             <span class="side-menu__label">Configuration</span>
                             <i class="fe fe-chevron-right side-menu__angle"></i>
                         </a>
@@ -81,15 +81,14 @@
                         <a class="side-menu__item {{ Request::segment(1) == 'notices' ? 'active' : '' }}"
                             href="{{ route('notices.index') }}">
                             <i class="bx bx-bell side-menu__icon"></i>
-                            <span class="side-menu__label">Notices <span
-                                    class="text-danger text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-danger/10 ms-2">New</span></span>
+                            <span class="side-menu__label">Notices </span>
                         </a>
                     </li>
 
                     <li class="slide has-sub @if (Request::segment(1) == 'attendances' || Request::segment(1) == 'attendance') {{ 'active open' }} @endif">
                         <a class="side-menu__item @if (Request::segment(1) == 'attendances' || Request::segment(1) == 'attendance') {{ 'active' }} @endif"
                             href="javascript:void(0);">
-                            <i class="bx bx-qr-scan side-menu__icon"></i>
+                            <i class="bx bx-fingerprint side-menu__icon"></i>
                             <span class="side-menu__label">Attendance</span>
                             <i class="fe fe-chevron-right side-menu__angle"></i>
                         </a>

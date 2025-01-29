@@ -169,7 +169,7 @@ class DashboardController extends Controller
                 ], 400);
             }
 
-            $myteam = User::with('department')->where('user_type', 'Employee')->where('branch_id', $branchId)->latest()->get();
+            $myteam = User::with('department')->where('user_type', 'Employee')->where('branch_id', $branchId)->oldest('order')->get();
 
             return response()->json([
                 'status' => 'success',

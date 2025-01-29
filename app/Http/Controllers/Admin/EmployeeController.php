@@ -20,8 +20,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::where('user_type', 'Employee')->latest()->paginate(perPage: 20);
-        return view('admin.employee.index', compact('employees'));
+        return view('admin.employee.index');
     }
 
     /**
