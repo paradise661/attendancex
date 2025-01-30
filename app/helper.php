@@ -79,3 +79,18 @@ if (!function_exists('sendPushNotification')) {
         return 0;
     }
 }
+
+if (!function_exists('formatMinutesToHours')) {
+    function formatMinutesToHours($totalMmin)
+    {
+        // Ensure the input is a valid number and fallback to 0 if it's not.
+        $totalMmin = $totalMmin ?? 0;
+
+        // Calculate hours and remaining minutes
+        $hours = floor($totalMmin / 60);
+        $minutes = $totalMmin % 60;
+
+        // Return the formatted string
+        return "{$hours}h" . ($minutes > 0 ? " {$minutes}m" : "");
+    }
+}

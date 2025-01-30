@@ -58,7 +58,7 @@
                         @if ($attendances->isNotEmpty())
                             @foreach ($attendances as $key => $attendance)
                                 <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
-                                    <th class="px-4 py-2" scope="row">{{ $key  }}</th>
+                                    <th class="px-4 py-2" scope="row">{{ $loop->iteration  }}</th>
                                     <td>
                                         <div class="flex items-center">
                                             <span class="avatar avatar-xs me-2 online avatar-rounded">
