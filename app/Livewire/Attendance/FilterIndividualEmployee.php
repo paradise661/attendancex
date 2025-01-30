@@ -20,7 +20,7 @@ class FilterIndividualEmployee extends Component
 
     public function mount()
     {
-        $this->employees = User::where('user_type', 'Employee')->latest()->get();
+        $this->employees = User::where('user_type', 'Employee')->orderBy('first_name')->get();
         $this->dateRange = Carbon::now()->subWeek()->format('Y-m-d') . ' to ' . Carbon::now()->format('Y-m-d');
     }
 

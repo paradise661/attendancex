@@ -70,7 +70,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                          
                         @else
                             <tr>
                                 <td colspan="8"
@@ -89,15 +88,19 @@
                 </table>
             </div>
         </div>
-        
+
     </div>
-    <div class="">
-        <div class="">
-            Total Worked: {{ formatWorkedHours($totalWorkedHours) }}
+    <div class="mt-6 p-6 bg-white rounded-lg shadow-sm">
+        <div class="flex justify-between gap-6">
+            <!-- Total Break Taken (Left Side) -->
+            <div class="text-sm font-medium text-gray-800">
+                Total Break Taken: <span class="font-semibold">{{ formatMinutesToHours($totalBreak) }}</span>
+            </div>
+
+            <!-- Total Worked (Right Side) -->
+            <div class="text-sm font-medium text-gray-800">
+                Total Worked: <span class="font-semibold">{{ formatWorkedHours($totalWorkedHours) }}</span>
+            </div>
         </div>
-        <div class="">
-            Total Break Taken: {{ formatMinutesToHours($totalBreak) }}
-        </div>
-    
     </div>
 </div>

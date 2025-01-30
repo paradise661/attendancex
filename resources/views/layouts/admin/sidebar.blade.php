@@ -71,7 +71,7 @@
                     <li class="slide">
                         <a class="side-menu__item {{ Request::segment(1) == 'employees' ? 'active' : '' }}"
                             href="{{ route('employees.index') }}">
-                            <i class="bx bxs-user-account side-menu__icon"></i>
+                            <i class="bx bxs-group side-menu__icon"></i>
                             <span class="side-menu__label">Employees <span
                                     class="text-danger text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-danger/10 ms-2">New</span></span>
                         </a>
@@ -82,6 +82,22 @@
                             href="{{ route('notices.index') }}">
                             <i class="bx bx-bell side-menu__icon"></i>
                             <span class="side-menu__label">Notices </span>
+                        </a>
+                    </li>
+
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(1) == 'notices' ? 'active' : '' }}"
+                            href="{{ route('notices.index') }}">
+                            <i class="bx bx-time side-menu__icon"></i>
+                            <span class="side-menu__label">Attendance Request</span>
+                        </a>
+                    </li>
+
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(1) == 'notices' ? 'active' : '' }}"
+                            href="{{ route('notices.index') }}">
+                            <i class="bx bx-calendar-minus side-menu__icon"></i>
+                            <span class="side-menu__label">Leave Request</span>
                         </a>
                     </li>
 

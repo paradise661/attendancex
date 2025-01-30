@@ -39,7 +39,7 @@ class Employee extends Component
                     ->orWhere('email', 'like', $searchTerms)
                     ->orWhere('phone', 'like', $searchTerms);
             })
-            ->latest()
+            ->orderBy('first_name')
             ->paginate($this->limit);
 
         return view('livewire.employee', compact('employees'));
