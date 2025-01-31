@@ -85,7 +85,7 @@
                         </a>
                     </li>
 
-                    <li class="slide">
+                    {{-- <li class="slide">
                         <a class="side-menu__item {{ Request::segment(1) == 'notices' ? 'active' : '' }}"
                             href="{{ route('notices.index') }}">
                             <i class="bx bx-time side-menu__icon"></i>
@@ -99,7 +99,7 @@
                             <i class="bx bx-calendar-minus side-menu__icon"></i>
                             <span class="side-menu__label">Leave Request</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li class="slide has-sub @if (Request::segment(1) == 'attendances' || Request::segment(1) == 'attendance') {{ 'active open' }} @endif">
                         <a class="side-menu__item @if (Request::segment(1) == 'attendances' || Request::segment(1) == 'attendance') {{ 'active' }} @endif"
