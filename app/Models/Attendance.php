@@ -37,12 +37,14 @@ class Attendance extends Model
             return Carbon::parse($value)->format('g:i A');
         }
     }
+
     public function getCheckoutAttribute($value)
     {
         if ($value) {
             return Carbon::parse($value)->format('g:i A');
         }
     }
+
     public function getBreakStartAttribute($value)
     {
         if ($value) {

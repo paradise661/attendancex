@@ -90,6 +90,7 @@
         </div>
 
     </div>
+
     <div class="mt-6 p-6 bg-white rounded-lg shadow-sm">
         <div class="flex justify-between gap-6">
             <!-- Total Break Taken (Left Side) -->

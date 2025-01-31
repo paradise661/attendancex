@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\AttendanceRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -324,6 +325,51 @@ class AttendanceController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to retrieve attendance.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function attendanceRequest(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'date' => 'required',
+                'checkin' => 'required',
+                'checkout' => 'required',
+                'reason' => 'required'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Validation failed.',
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
+            $alreadyExist = AttendanceRequest::where('user_id', $request->user()->id)->where('date', $request->date)->first();
+            if ($alreadyExist) {
+                return response()->json([
+                    'message' => 'You have already submitted an attendance request for this date.',
+                ], 400);
+            }
+
+            AttendanceRequest::create([
+                'user_id' => $request->user()->id ?? NULL,
+                'date' => $request->date ?? NULL,
+                'checkin' => $request->checkin ?? NULL,
+                'checkout' => $request->checkout ?? NULL,
+                'reason' => $request->reason ?? NULL,
+                'status' => 'Pending'
+            ]);
+
+            return response()->json([
+                'message' => 'Your request has been submitted successfully. Please wait for admin approval.',
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to submit request.',
                 'error' => $e->getMessage(),
             ], 500);
         }

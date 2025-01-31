@@ -2,16 +2,16 @@
 
         <div class="main-sidebar-header">
             <a class="header-logo" href="{{ url('/dashboard') }}">
-                <img class="desktop-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 40px">
-                <img class="toggle-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 40px">
+                <img class="desktop-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 80px">
+                <img class="toggle-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 80px">
                 <img class="desktop-dark" src="{{ asset('assets/images/white-logo.png') }}" alt="logo"
-                    style="height: 40px">
+                    style="height: 80px">
                 <img class="toggle-dark" src="{{ asset('assets/images/logo.png') }}" alt="logo"
-                    style="height: 40px">
+                    style="height: 80px">
                 <img class="desktop-white" src="{{ asset('assets/images/logo.png') }}" alt="logo"
-                    style="height: 40px">
+                    style="height: 80px">
                 <img class="toggle-white" src="{{ asset('assets/images/logo.png') }}" alt="logo"
-                    style="height: 40px">
+                    style="height: 80px">
             </a>
         </div>
 
@@ -86,8 +86,8 @@
                     </li>
 
                     {{-- <li class="slide">
-                        <a class="side-menu__item {{ Request::segment(1) == 'notices' ? 'active' : '' }}"
-                            href="{{ route('notices.index') }}">
+                        <a class="side-menu__item {{ Request::segment(1) == 'request' ? 'active' : '' }}"
+                            href="{{ route('attendance.request') }}">
                             <i class="bx bx-time side-menu__icon"></i>
                             <span class="side-menu__label">Attendance Request</span>
                         </a>

@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('attendance_requests', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
+            $table->date('date')->nullable();
+            $table->time('checkin')->nullable();
+            $table->time('checkout')->nullable();
+            $table->longText('reason')->nullable();
+            $table->longText('action_reason')->nullable();
+            $table->bigInteger('action_by')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

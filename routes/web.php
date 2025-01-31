@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\AttendanceRequestController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
@@ -30,6 +31,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('notices', NoticeController::class);
     Route::get('attendances', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('attendance/individual', [AttendanceController::class, 'individualAttendance'])->name('attendance.individual');
+
+    Route::get('request/attendance', [AttendanceRequestController::class, 'index'])
+        ->name('attendance.request');
+
+    Route::get('request/attendance/{attendancerequest}', [AttendanceRequestController::class, 'edit'])
+        ->name('attendance.request.edit');
+    Route::put('request/attendance/{attendancerequest}', [AttendanceRequestController::class, 'update'])
+        ->name('attendance.request.update');
 
     Route::get('site-setting', [SiteSettingController::class, 'siteSettings'])
         ->name('site.setting');

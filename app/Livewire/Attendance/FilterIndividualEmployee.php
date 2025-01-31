@@ -103,7 +103,6 @@ class FilterIndividualEmployee extends Component
                 ]);
             }
 
-
             $attendances = $attendances->sortBy('date')->values();
         } else {
             $attendances = collect([]);
