@@ -330,6 +330,25 @@ class AttendanceController extends Controller
         }
     }
 
+    public function getSpecificDateAttendanceRecord(Request $request)
+    {
+        try {
+            $attendance = Attendance::where('user_id', $request->user()->id)->where('date', $request->date)->first();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Attendance retrieved successfully.',
+                'data' => $attendance,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to attendance request.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function getMyAttendanceRequest(Request $request)
     {
         try {

@@ -28,9 +28,9 @@
                                     <th class="text-start px-4 py-2" scope="col">#</th>
                                     <th class="text-start px-4 py-2" scope="col">Name</th>
                                     <th class="text-start px-4 py-2" scope="col">Short Name</th>
-                                    <th class="text-start px-4 py-2" scope="col">Order</th>
-                                    <th class="text-start px-4 py-2" scope="col">Status</th>
-                                    <th class="text-start px-4 py-2" scope="col">Last Updated</th>
+                                    <th class="text-start px-4 py-2" scope="col">Duration</th>
+                                    <th class="text-start px-4 py-2" scope="col">Is Paid</th>
+                                    <th class="text-start px-4 py-2" scope="col">Gender</th>
                                     <th class="text-start px-4 py-2"scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -41,13 +41,13 @@
                                             <th class="px-4 py-2" scope="row">{{ $key + $leavetypes->firstItem() }}</th>
                                             <td class="px-4 py-2">{{ $leavetype->name ?? '-' }}</td>
                                             <td class="px-4 py-2">{{ $leavetype->short_name ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $leavetype->order ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $leavetype->duration ?? '-' }} Days</td>
                                             <td class="px-4 py-2">
                                                 <span
-                                                    class="badge bg-primary/10 text-primary">{{ $leavetype->status == 1 ? 'Active' : 'Inactive' }}</span>
+                                                    class="badge bg-primary/10 text-primary">{{ $leavetype->is_paid == 1 ? 'Paid' : 'Unpaid' }}</span>
                                             </td>
                                             <td class="px-4 py-2">
-                                                {{ $leavetype->updated_at ? $leavetype->updated_at->format('Y-m-d h:i A') : '' }}
+                                                {{ $leavetype->gender ?? '' }}
                                             </td>
                                             <td class="text-end px-4 py-2">
                                                 <div class="btn-list flex gap-3">

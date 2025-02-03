@@ -63,7 +63,7 @@ class LeavetypeController extends Controller
     {
         try {
             $leavetype->update($request->all());
-            return redirect()->route('leavetypes.index')->with('message', 'Update Successfully');
+            return redirect()->route('leavetypes.index')->with('message', 'Leavetype Update Successfully');
         } catch (Exception $e) {
             return redirect()->route('leavetypes.index')->with('warning', $e->getMessage())->withInput();
         }
