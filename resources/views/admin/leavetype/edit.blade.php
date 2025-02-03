@@ -46,7 +46,8 @@
                         <div class="relative">
                             <input
                                 class="form-control @error('short_name') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="text" aria-label="Short Name" name="short_name" value="{{ old('short_name') }}">
+                                type="text" aria-label="Short Name" name="short_name"
+                                value="{{ old('short_name', $leavetype->short_name) }}">
 
                             @error('short_name')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
@@ -71,8 +72,8 @@
                         <div class="relative">
                             <input
                                 class="form-control @error('duration') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="number" aria-label="Duration" name="duration" value="{{ old('duration') }}"
-                                min="1" autocomplete="off">
+                                type="number" aria-label="Duration" name="duration"
+                                value="{{ old('duration', $leavetype->duration) }}" min="1" autocomplete="off">
 
                             @error('duration')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
@@ -97,7 +98,8 @@
                         <div class="relative">
                             <input
                                 class="form-control @error('order') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                id="inputEmail4" type="number" name="order" value="{{ old('order') }}" min="1">
+                                id="inputEmail4" type="number" name="order" value="{{ old('order', $leavetype->order) }}"
+                                min="1">
                             @error('order')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                     <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
@@ -119,7 +121,8 @@
                         <label class="form-label mt-2">Is Paid?<span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <div class="form-check form-check-md flex item-center">
-                                <input class="form-check-input" type="checkbox" value="1" name="is_paid" checked>
+                                <input class="form-check-input" type="checkbox" value="1" name="is_paid"
+                                    {{ $leavetype->is_paid == 1 ? 'checked' : '' }}>
                             </div>
                             @error('is_paid')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
@@ -144,18 +147,19 @@
                         <div class="relative">
                             <div class="flex items-center space-x-4">
                                 <div class="form-check flex form-check-md items-center">
-                                    <input class="form-check-input" id="male" type="radio" value="Male"
+                                    <input class="form-check-input" id="male" type="radio"
+                                        {{ $leavetype->gender == 'Male' ? 'checked' : '' }} value="Male"
                                         name="gender">
                                     <label class="form-check-label ml-2" for="male">Male</label>
                                 </div>
                                 <div class="form-check form-check-md flex items-center">
                                     <input class="form-check-input" id="female" type="radio" value="Female"
-                                        name="gender">
+                                        name="gender" {{ $leavetype->gender == 'Female' ? 'checked' : '' }}>
                                     <label class="form-check-label ml-2" for="female">Female</label>
                                 </div>
                                 <div class="form-check form-check-md flex items-center">
                                     <input class="form-check-input" id="both" type="radio" value="Both"
-                                        name="gender" checked>
+                                        name="gender" {{ $leavetype->gender == 'Both' ? 'checked' : '' }}>
                                     <label class="form-check-label ml-2" for="both">Both</label>
                                 </div>
                             </div>

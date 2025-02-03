@@ -62,7 +62,9 @@ class LeavetypeController extends Controller
     public function update(LeavetypeRequest $request, LeaveType $leavetype)
     {
         try {
-            $leavetype->update($request->all());
+            $input = $request->all();
+            $input['is_paid'] = $request->is_paid ? 1 : 0;
+            $leavetype->update($input);
             return redirect()->route('leavetypes.index')->with('message', 'Leavetype Update Successfully');
         } catch (Exception $e) {
             return redirect()->route('leavetypes.index')->with('warning', $e->getMessage())->withInput();

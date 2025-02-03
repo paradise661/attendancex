@@ -373,8 +373,6 @@ class AttendanceController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'date' => 'required',
-                'checkin' => 'required',
-                'checkout' => 'required',
                 'reason' => 'required'
             ]);
 
