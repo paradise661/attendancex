@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AttendanceRequestController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\LeavetypeController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Admin\SiteSettingController;
@@ -29,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('shifts', ShiftController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('notices', NoticeController::class);
+    Route::resource('leavetypes', LeavetypeController::class);
     Route::get('attendances', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('attendance/individual', [AttendanceController::class, 'individualAttendance'])->name('attendance.individual');
 

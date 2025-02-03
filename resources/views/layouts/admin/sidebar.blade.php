@@ -62,6 +62,10 @@
                                     href="{{ route('shifts.index') }}">Shifts</a>
                             </li>
                             <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'leavetypes' ? 'active' : '' }}"
+                                    href="{{ route('leavetypes.index') }}">Leave Types</a>
+                            </li>
+                            <li class="slide">
                                 <a class="side-menu__item {{ Request::segment(1) == 'site-setting' ? 'active' : '' }}"
                                     href="{{ route('site.setting') }}">Settings</a>
                             </li>
