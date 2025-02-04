@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
-
 class AttendanceController extends Controller
 {
     // Check-In Method
