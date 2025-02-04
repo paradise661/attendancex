@@ -63,10 +63,8 @@ class AttendanceRequestController extends Controller
                         'request_reason' => $attendancerequest->reason ?? null,
                     ]);
                 }
-
-                $attendancerequest->update($input);
             }
-
+            $attendancerequest->update($input);
             return redirect()->route('attendance.request')->with('message', 'Update Successful');
         } catch (Exception $e) {
             return redirect()->route('attendance.request')->with('warning', $e->getMessage())->withInput();
