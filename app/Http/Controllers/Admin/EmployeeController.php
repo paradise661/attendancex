@@ -74,9 +74,19 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeRequest $request, User $employee)
     {
+        $validated = $request->validate([
+            'password' => 'nullable|min:8',  // Ensure password is at least 8 characters if provided
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  // Validate image if provided
+        ]);
+
         try {
+
             $old_image = $employee->image;
-            $input = $request->all();
+            $input = $request->except('password');
+            if ($request->password) {
+                $input['password'] = Hash::make($request->password);
+            }
+
             $image = $this->fileUpload($request, 'image');
 
             if ($image) {
