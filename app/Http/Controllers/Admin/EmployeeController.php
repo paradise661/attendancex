@@ -109,6 +109,7 @@ class EmployeeController extends Controller
      */
     public function destroy(User $employee)
     {
+        $this->removeFile($employee->image);
         $employee->delete();
         return redirect()->route('employees.index')->with('message', 'Delete Successfully');
     }
