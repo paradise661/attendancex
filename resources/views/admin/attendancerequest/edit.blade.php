@@ -59,9 +59,8 @@
                 <!-- Admin Response Form -->
                 @if ($attendancerequest->status == 'Approved')
                     <div class="md:col-span-12 col-span-12">
-                        <label class="form-label">Note</label>
-                        <div class="text-red-600 dark:text-red-400 font-semibold">
-                            <i>⚠ You cannot process this request once it has been approved.</i>
+                        <div class="text-red-500 dark:text-red-400 font-semibold inline-flex items-center">
+                            <i class="mr-1">Note: ⚠ You cannot process this request once it has been approved.</i>
                         </div>
                     </div>
                 @else
