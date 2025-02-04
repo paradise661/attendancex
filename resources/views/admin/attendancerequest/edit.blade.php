@@ -55,46 +55,56 @@
                             {{ $attendancerequest->reason ?? '' }}
                         </div>
                     </div>
-
                 </div>
-                <hr>
                 <!-- Admin Response Form -->
-                <form class="grid grid-cols-12 gap-4 mt-4"
-                    action="{{ route('attendance.request.update', $attendancerequest->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-
-                    <!-- Status (Admin Input) -->
-                    <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Status</label>
-                        <div class="relative">
-                            <select class="ti-form-select rounded-sm !py-2 !px-3" id="status-select" name="status">
-                                <option {{ $attendancerequest->status == 'Pending' ? 'selected' : '' }} value="Pending">
-                                    Pending
-                                </option>
-                                <option {{ $attendancerequest->status == 'Approved' ? 'selected' : '' }} value="Approved">
-                                    Approve
-                                </option>
-                                <option {{ $attendancerequest->status == 'Rejected' ? 'selected' : '' }} value="Rejected">
-                                    Reject
-                                </option>
-                            </select>
+                @if ($attendancerequest->status == 'Approved')
+                    <div class="md:col-span-12 col-span-12">
+                        <label class="form-label">Note</label>
+                        <div class="text-red-600 dark:text-red-400 font-semibold">
+                            <i>⚠ You cannot process this request once it has been approved.</i>
                         </div>
                     </div>
+                @else
+                    <hr>
+                    <form class="grid grid-cols-12 gap-4 mt-4"
+                        action="{{ route('attendance.request.update', $attendancerequest->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-                    <!-- Rejection Reason (Admin Input, Conditionally Displayed) -->
-                    <div class="md:col-span-12 col-span-12" id="rejection-reason">
-                        <label class="form-label">Rejection Reason</label>
-                        <div class="relative">
-                            <textarea class="sm:p-5 py-3 px-4 ti-form-input" rows="2" name="action_reason">{{ old('action_reason', $attendancerequest->action_reason) }}</textarea>
+                        <!-- Status (Admin Input) -->
+                        <div class="md:col-span-6 col-span-12">
+                            <label class="form-label">Status</label>
+                            <div class="relative">
+                                <select class="ti-form-select rounded-sm !py-2 !px-3" id="status-select" name="status">
+                                    <option {{ $attendancerequest->status == 'Pending' ? 'selected' : '' }} value="Pending">
+                                        Pending
+                                    </option>
+                                    <option {{ $attendancerequest->status == 'Approved' ? 'selected' : '' }}
+                                        value="Approved">
+                                        Approve
+                                    </option>
+                                    <option {{ $attendancerequest->status == 'Rejected' ? 'selected' : '' }}
+                                        value="Rejected">
+                                        Reject
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Submit Button -->
-                    <div class="col-span-12">
-                        <button class="ti-btn ti-btn-primary-full" type="submit">Submit</button>
-                    </div>
-                </form>
+                        <!-- Rejection Reason (Admin Input, Conditionally Displayed) -->
+                        <div class="md:col-span-12 col-span-12" id="rejection-reason">
+                            <label class="form-label">Rejection Reason</label>
+                            <div class="relative">
+                                <textarea class="sm:p-5 py-3 px-4 ti-form-input" rows="2" name="action_reason">{{ old('action_reason', $attendancerequest->action_reason) }}</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-span-12">
+                            <button class="ti-btn ti-btn-primary-full" type="submit">Submit</button>
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

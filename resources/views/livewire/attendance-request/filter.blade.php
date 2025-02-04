@@ -66,7 +66,7 @@
                                     </td>
                                     <td class="px-4 py-2">
                                         <span
-                                            class="bg-red-500 px-2 py-1 text-white">{{ $attendance->status ?? '-' }}</span>
+                                            class="{{ $attendance->status == 'Approved' ? 'bg-green-500' : 'bg-red-500' }} px-2 py-1 text-white">{{ $attendance->status ?? '-' }}</span>
                                     </td>
                                     <td class="text-end px-4 py-2">
                                         <div class="btn-list flex gap-3">
