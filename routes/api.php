@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\LeaveController;
 use App\Http\Controllers\Api\UserAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('attendance/record', [AttendanceController::class, 'getSpecificDateAttendanceRecord']);
     Route::get('attendance/request', [AttendanceController::class, 'getMyAttendanceRequest']);
     Route::post('attendance/request', [AttendanceController::class, 'attendanceRequest']);
+
+    Route::get('leavetypes', [LeaveController::class, 'getLeaveTypes']);
 });

@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Duration<span class="text-red-500"> *</span></label>
+                        <label class="form-label">Duration (Days)<span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <input
                                 class="form-control @error('duration') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
