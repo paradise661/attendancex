@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Short Name<span class="text-red-500"> *</span></label>
+                        <label class="form-label">Short Name</label>
                         <div class="relative">
                             <input
                                 class="form-control @error('short_name') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
@@ -83,7 +83,7 @@
                             @enderror
                         </div>
 
-                        @error('short_name')
+                        @error('duration')
                             <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                 <i>*{{ $message }}</i>
                             </p>
