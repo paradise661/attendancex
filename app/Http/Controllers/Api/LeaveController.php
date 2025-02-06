@@ -95,7 +95,7 @@ class LeaveController extends Controller
             $noOfDays = $fromDate->diffInDays($toDate) + 1;
 
             // Check if a leave already exists for this user within the same date range
-            $existingLeave = Leave::where('user_id', $request->user()->id)
+            $alreadyLeave = Leave::where('user_id', $request->user()->id)
                 ->where(function ($query) use ($fromDate, $toDate) {
                     $query->whereBetween('from_date', [$fromDate, $toDate])
                         ->orWhereBetween('to_date', [$fromDate, $toDate])
@@ -106,7 +106,7 @@ class LeaveController extends Controller
                 })
                 ->first();
 
-            if ($existingLeave) {
+            if ($alreadyLeave) {
                 return response()->json(['error' => 'You already have a leave applied for this date range.'], 422);
             }
 
