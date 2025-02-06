@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AttendanceRequestController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\LeavetypeController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\ShiftController;
@@ -36,11 +37,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('request/attendance', [AttendanceRequestController::class, 'index'])
         ->name('attendance.request');
-
     Route::get('request/attendance/{attendancerequest}', [AttendanceRequestController::class, 'edit'])
         ->name('attendance.request.edit');
     Route::put('request/attendance/{attendancerequest}', [AttendanceRequestController::class, 'update'])
         ->name('attendance.request.update');
+
+    Route::get('leaves', [LeaveController::class, 'index'])
+        ->name('leaves');
+    Route::get('leaves/{leave}', [LeaveController::class, 'edit'])
+        ->name('leaves.edit');
+    Route::put('leaves/{leave}', [LeaveController::class, 'update'])
+        ->name('leaves.update');
+
 
     Route::get('site-setting', [SiteSettingController::class, 'siteSettings'])
         ->name('site.setting');

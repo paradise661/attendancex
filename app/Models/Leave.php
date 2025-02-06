@@ -20,6 +20,12 @@ class Leave extends Model
         'status',
     ];
 
+    public function employee()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+
     public function leavetype()
     {
         return $this->belongsTo(LeaveType::class, 'leavetype_id');
