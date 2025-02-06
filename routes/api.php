@@ -33,4 +33,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('attendance/request', [AttendanceController::class, 'attendanceRequest']);
 
     Route::get('leavetypes', [LeaveController::class, 'getLeaveTypes']);
+    Route::get('leaves', [LeaveController::class, 'getLeaves']);
+    Route::post('leave/request', [LeaveController::class, 'leaveRequest']);
 });
