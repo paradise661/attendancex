@@ -13,128 +13,105 @@
                     </a>
                 </div>
             </div>
+
             <div class="box-body">
                 <form class="grid grid-cols-12 gap-4 mt-0" action="{{ route('departments.store') }}" method="POST">
                     @csrf
-                    <div class="md:col-span-12 col-span-12">
-                        <label class="form-label">Department Name<span class="text-red-500"> *</span></label>
-                        <div class="relative">
-                            <input
-                                class="form-control @error('name') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="text" aria-label="Department Name" name="name" value="{{ old('name') }}">
-                            @error('name')
-                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
-                                        viewBox="0 0 16 16" aria-hidden="true">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                    </svg>
-                                </div>
+
+                    <!-- Main form fields (9 Columns) -->
+                    <div class="md:col-span-10 col-span-12 grid grid-cols-12 gap-4">
+                        <div class="md:col-span-12 col-span-12">
+                            <label class="form-label">Department Name<span class="text-red-500"> *</span></label>
+                            <div class="relative">
+                                <input
+                                    class="form-control @error('name') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                    type="text" aria-label="Department Name" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                    <p class="text-sm text-red-600 mt-2"><i>*{{ $message }}</i></p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-6 col-span-12">
+                            <label class="form-label">Branch<span class="text-red-500"> *</span></label>
+                            <div class="relative">
+                                <select
+                                    class="ti-form-select rounded-sm @error('branch_id') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                    name="branch_id">
+                                    <option value="">Select Branch</option>
+                                    @foreach ($branches as $branch)
+                                        <option value="{{ $branch->id ?? '' }}">{{ $branch->name ?? '' }}</option>
+                                    @endforeach
+                                </select>
+                                @error('branch_id')
+                                    <p class="text-sm text-red-600 mt-2"><i>*{{ $message }}</i></p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-6 col-span-12">
+                            <label class="form-label">Order</label>
+                            <div class="relative">
+                                <input
+                                    class="form-control @error('order') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                    type="number" name="order" value="{{ old('order') }}" min="1">
+                                @error('order')
+                                    <p class="text-sm text-red-600 mt-2"><i>*{{ $message }}</i></p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-12 col-span-12">
+                            <label class="form-label">Description</label>
+                            <div class="relative">
+                                <textarea class="sm:p-5 py-3 px-4 ti-form-input" rows="2" name="description">{{ old('description') }}</textarea>
+                            </div>
+                            @error('description')
+                                <p class="text-sm text-red-600 mt-2"><i>*{{ $message }}</i></p>
                             @enderror
                         </div>
-                        @error('name')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                <i>*{{ $message }}</i>
-                            </p>
-                        @enderror
+
+                        <div class="md:col-span-6 col-span-12">
+                            <label class="form-label">Status</label>
+                            <div class="relative">
+                                <select
+                                    class="ti-form-select rounded-sm @error('status') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                    name="status">
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                                @error('status')
+                                    <p class="text-sm text-red-600 mt-2"><i>*{{ $message }}</i></p>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Branch<span class="text-red-500"> *</span></label>
-                        <div class="relative">
-                            <select
-                                class="ti-form-select rounded-sm !py-2 !px-3 @error('branch_id') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                name="branch_id">
-                                <option value="">Select Branch</option>
-                                @foreach ($branches as $branch)
-                                    <option value="{{ $branch->id ?? '' }}">{{ $branch->name ?? '' }}</option>
-                                @endforeach
-                            </select>
-
-                            @error('branch_id')
-                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
-                                        viewBox="0 0 16 16" aria-hidden="true">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                    </svg>
+                    <!-- Exceptional Days Checkboxes (3 Columns) -->
+                    <div class="md:col-span-2 col-span-12">
+                        <label class="form-label">Holidays</label>
+                        <div class="grid grid-cols-1 gap-2">
+                            @php
+                                $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                            @endphp
+                            @foreach ($days as $day)
+                                <div class="flex items-center space-x-2">
+                                    <input class="form-checkbox ti-form-checkbox text-primary" type="checkbox"
+                                        name="holidays[]" value="{{ $day }}"
+                                        {{ $day == 'Saturday' ? 'checked' : '' }}>
+                                    <label>{{ $day }}</label>
                                 </div>
-                            @enderror
+                            @endforeach
                         </div>
-
-                        @error('branch_id')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                <i>*{{ $message }}</i>
-                            </p>
-                        @enderror
                     </div>
 
-                    <div class="md:col-span-6 col-span-12">
-                        <label class="form-label" for="inputEmail4">Order</label>
-                        <div class="relative">
-                            <input
-                                class="form-control @error('order') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                id="inputEmail4" type="number" name="order" value="{{ old('order') }}" min="1">
-                            @error('order')
-                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
-                                        viewBox="0 0 16 16" aria-hidden="true">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                    </svg>
-                                </div>
-                            @enderror
-                        </div>
-                        @error('order')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                <i>*{{ $message }}</i>
-                            </p>
-                        @enderror
-                    </div>
-
-                    <div class="md:col-span-12 col-span-12">
-                        <label class="form-label" for="inputPassword4">Description</label>
-                        <div class="relative">
-                            <textarea class="sm:p-5 py-3 px-4 ti-form-input" rows="2" name="description">{{ old('description') }}</textarea>
-                        </div>
-                        @error('description')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                <i>*{{ $message }}</i>
-                            </p>
-                        @enderror
-                    </div>
-
-                    <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Status</label>
-                        <div class="relative">
-                            <select
-                                class="ti-form-select rounded-sm !py-2 !px-3 @error('status') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                name="status">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
-                            @error('status')
-                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
-                                        viewBox="0 0 16 16" aria-hidden="true">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                    </svg>
-                                </div>
-                            @enderror
-                        </div>
-                        @error('status')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                <i>*{{ $message }}</i>
-                            </p>
-                        @enderror
-                    </div>
-
+                    <!-- Submit Button (12 Columns) -->
                     <div class="col-span-12">
                         <button class="ti-btn ti-btn-primary-full" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 @endsection

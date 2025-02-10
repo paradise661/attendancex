@@ -28,7 +28,7 @@
                                     <th class="text-start px-4 py-2" scope="col">#</th>
                                     <th class="text-start px-4 py-2" scope="col">Department Name</th>
                                     <th class="text-start px-4 py-2" scope="col">Branch</th>
-                                    <th class="text-start px-4 py-2" scope="col">Order</th>
+                                    <th class="text-start px-4 py-2" scope="col">Holidays</th>
                                     <th class="text-start px-4 py-2" scope="col">Status</th>
                                     <th class="text-start px-4 py-2" scope="col">Last Updated</th>
                                     <th class="text-start px-4 py-2"scope="col">Action</th>
@@ -41,7 +41,16 @@
                                             <th class="px-4 py-2" scope="row">{{ $key + $departments->firstItem() }}</th>
                                             <td class="px-4 py-2">{{ $department->name ?? '-' }}</td>
                                             <td class="px-4 py-2">{{ $department->branch->name ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $department->order ?? '-' }}</td>
+                                            <td class="px-4 py-2">
+                                                @php
+                                                    $holidays = json_decode($department->holidays, true);
+                                                @endphp
+                                                @if ($holidays && count($holidays) > 0)
+                                                    {{ implode(', ', $holidays) }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                             <td class="px-4 py-2">
                                                 <span
                                                     class="badge bg-primary/10 text-primary">{{ $department->status == 1 ? 'Active' : 'Inactive' }}</span>

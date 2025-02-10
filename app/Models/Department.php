@@ -11,7 +11,8 @@ class Department extends Model
         'description',
         'order',
         'status',
-        'branch_id'
+        'branch_id',
+        'holidays'
     ];
 
     public function branch()

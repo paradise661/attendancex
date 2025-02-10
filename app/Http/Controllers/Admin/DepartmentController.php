@@ -35,7 +35,9 @@ class DepartmentController extends Controller
     public function store(DepartmentRequest $request)
     {
         try {
-            Department::create($request->all());
+            $input = $request->all();
+            $input['holidays'] = json_encode($request->holidays ?? []);
+            Department::create($input);
             return redirect()->route('departments.index')->with('message', 'Department Created Successfully');
         } catch (Exception $e) {
             return redirect()->route('departments.index')->with('warning', $e->getMessage())->withInput();
@@ -65,7 +67,9 @@ class DepartmentController extends Controller
     public function update(DepartmentRequest $request, Department $department)
     {
         try {
-            $department->update($request->all());
+            $input = $request->all();
+            $input['holidays'] = $request->holidays ? json_encode($request->holidays) : json_encode([]);
+            $department->update($input);
             return redirect()->route('departments.index')->with('message', 'Update Successfully');
         } catch (Exception $e) {
             return redirect()->route('departments.index')->with('warning', $e->getMessage())->withInput();
