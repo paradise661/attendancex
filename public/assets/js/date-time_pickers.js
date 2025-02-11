@@ -26,6 +26,12 @@
          maxDate: "today"
     });
 
+
+    flatpickr("#daterangeCalendar", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+    });
+
     /* For Time Picker */
     flatpickr("#timepikcr", {
         enableTime: true,
