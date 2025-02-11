@@ -152,17 +152,18 @@ class LeaveController extends Controller
 
             // Ensure leave record exists
             if (!$leave) {
-                return response()->json(['message' => 'The leave request does not exist. Please check your leave ID.'], 404);
+                return response()->json([
+                    'message' => 'The leave request does not exist. Please check your leave ID.',
+                ], 404);
             }
 
-            // Check if leave is already cancelled
-            if ($leave->status === 'Cancelled') {
+            // Allow cancellation only if the leave status is 'Pending'
+            if ($leave->status !== 'Pending') {
                 return response()->json([
-                    'message' => 'This leave request has already been cancelled. No further action is needed.',
+                    'message' => 'Only pending leave requests can be canceled. Your leave is already processed.',
                 ], 422);
             }
 
-            // Update leave status
             $leave->update([
                 'status' => 'Cancelled',
                 'action_by' => $request->user()->id ?? null
