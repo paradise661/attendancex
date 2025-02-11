@@ -1,9 +1,17 @@
 <div>
     <!-- Filter Section -->
     <div class="flex items-center justify-end mb-4">
-        <div class="flex items-center w-full max-w-md gap-2">
+        <div class="flex items-center w-full max-w-xl gap-4">
+            <select class="form-control w-80 !px-3 !py-2 !text-sm !rounded-md" aria-label="Filter by status"
+                wire:model.live="status">
+                <option value="">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Rejected">Rejected</option>
+            </select>
 
-            <input class="form-control w-full !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="daterangeCalendar"
+            <input class="form-control w-80 !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="daterangeCalendar"
                 type="text" wire:model.live="dateRange" aria-label="Search by date" autocomplete="off"
                 placeholder="Search by date">
 
@@ -83,7 +91,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7"
+                                <td colspan="8"
                                     style="text-align: center; height: 100px; vertical-align: middle; color: #6b7280; display: table-cell;">
                                     <div
                                         style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">

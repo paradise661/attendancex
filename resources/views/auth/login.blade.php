@@ -6,11 +6,11 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> attendanceX | Login </title>
+    <title> Sajilo Attendance | Login </title>
     <meta name="description"
-        content="Paradise Infotech AttendanceX system is a cutting-edge solution for managing employee attendance efficiently. Designed for accuracy, scalability, and ease of use.">
+        content="Paradise Infotech Sajilo Attendance system is a cutting-edge solution for managing employee attendance efficiently. Designed for accuracy, scalability, and ease of use.">
     <meta name="keywords"
-        content="Paradise Infotech, AttendanceX system, attendance management, employee attendance software, time tracking, admin dashboard, responsive system, attendance solutions, Paradise attendance system, AttendanceX">
+        content="Paradise Infotech, Sajilo Attendance system, attendance management, employee attendance software, time tracking, admin dashboard, responsive system, attendance solutions, Paradise attendance system, AttendanceX">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/brand-logos/fav.jpg') }}">

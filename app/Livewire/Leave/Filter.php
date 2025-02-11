@@ -12,6 +12,7 @@ class Filter extends Component
     use WithPagination;
     public $dateRange = '';
     public $limit = 10;
+    public $status = '';
 
     public function mount()
     {
@@ -31,6 +32,7 @@ class Filter extends Component
     public function clearFilters()
     {
         $this->dateRange = '';
+        $this->status = '';
         $this->limit = 10;
         $this->resetPage();
     }
@@ -50,7 +52,10 @@ class Filter extends Component
                     Carbon::parse($dates[1])->endOfDay()
                 ]);
             })
-        )->latest()->paginate($this->limit);
+        )
+            ->when($this->status, fn($q) => $q->where('status', $this->status)) // Filter by status
+            ->latest()
+            ->paginate($this->limit);
         return view('livewire.leave.filter', compact('leaves'));
     }
 }

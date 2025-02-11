@@ -55,6 +55,13 @@
                             {{ $attendancerequest->reason ?? '' }}
                         </div>
                     </div>
+
+                    <div class="md:col-span-12 col-span-12">
+                        <label class="form-label">Attendance Status</label>
+                        <div class="text-gray-700 dark:text-gray-300">
+                            {{ $attendancerequest->status ?? '' }}
+                        </div>
+                    </div>
                 </div>
                 <!-- Admin Response Form -->
                 @if ($attendancerequest->status == 'Approved')
