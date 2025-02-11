@@ -55,12 +55,20 @@
                             {{ $leave->reason ?? '' }}
                         </div>
                     </div>
+
+                    <div class="md:col-span-12 col-span-12">
+                        <label class="form-label">Leave Status</label>
+                        <div class="text-gray-700 dark:text-gray-300">
+                            {{ $leave->status ?? '' }}
+                        </div>
+                    </div>
                 </div>
                 <!-- Admin Response Form -->
-                @if ($leave->status == 'Approved')
+                @if ($leave->status == 'Approved' || $leave->status == 'Cancelled' || $leave->status == 'Rejected')
                     <div class="md:col-span-12 col-span-12">
                         <div class="text-red-500 dark:text-red-400 font-semibold inline-flex items-center">
-                            <i class="mr-1">Note: ⚠ You cannot process this request once it has been approved.</i>
+                            <i class="mr-1">Note: You cannot process this request once it has been approved or
+                                cancelled or rejected.</i>
                         </div>
                     </div>
                 @else

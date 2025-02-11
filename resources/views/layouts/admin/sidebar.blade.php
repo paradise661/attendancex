@@ -2,7 +2,7 @@
 
         <div class="main-sidebar-header">
             <a class="header-logo" href="{{ url('/dashboard') }}">
-                <img class="desktop-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 80px">
+                {{-- <img class="desktop-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 80px">
                 <img class="toggle-logo" src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: 80px">
                 <img class="desktop-dark" src="{{ asset('assets/images/white-logo.png') }}" alt="logo"
                     style="height: 80px">
@@ -11,7 +11,8 @@
                 <img class="desktop-white" src="{{ asset('assets/images/logo.png') }}" alt="logo"
                     style="height: 80px">
                 <img class="toggle-white" src="{{ asset('assets/images/logo.png') }}" alt="logo"
-                    style="height: 80px">
+                    style="height: 80px"> --}}
+                <span class="fw-bold text-white" style="font-size: 17px;">SAJILO ATTENDANCE</span>
             </a>
         </div>
 

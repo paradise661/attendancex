@@ -153,14 +153,14 @@ class LeaveController extends Controller
             // Ensure leave record exists
             if (!$leave) {
                 return response()->json([
-                    'message' => 'The leave request does not exist. Please check your leave ID.',
+                    'message' => 'The leave request does not exist.',
                 ], 404);
             }
 
             // Allow cancellation only if the leave status is 'Pending'
             if ($leave->status !== 'Pending') {
                 return response()->json([
-                    'message' => 'Only pending leave requests can be canceled. Your leave is already processed.',
+                    'message' => 'Only pending leave requests can be canceled.',
                 ], 422);
             }
 
@@ -170,7 +170,7 @@ class LeaveController extends Controller
             ]);
 
             return response()->json([
-                'message' => 'Your leave cancellation request has been successfully processed.',
+                'message' => 'Your leave request has been successfully canceled',
             ], 200);
         } catch (Exception $e) {
             Log::error('Leave Cancellation Error: ' . $e->getMessage());

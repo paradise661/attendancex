@@ -68,7 +68,7 @@
                                     </td>
                                     <td class="px-4 py-2">
                                         <span
-                                            class="{{ $leave->status == 'Approved' ? 'bg-green-500' : 'bg-red-500' }} px-2 py-1 text-white">{{ $leave->status ?? '-' }}</span>
+                                            class="{{ ($leave->status == 'Approved' ? 'bg-green-500' : $leave->status == 'Pending') ? 'bg-yellow-500' : 'bg-red-500' }} px-2 py-1 text-white">{{ $leave->status ?? '-' }}</span>
                                     </td>
                                     <td class="text-end px-4 py-2">
                                         <div class="btn-list flex gap-3">

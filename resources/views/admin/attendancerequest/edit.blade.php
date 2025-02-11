@@ -60,7 +60,7 @@
                 @if ($attendancerequest->status == 'Approved')
                     <div class="md:col-span-12 col-span-12">
                         <div class="text-red-500 dark:text-red-400 font-semibold inline-flex items-center">
-                            <i class="mr-1">Note: ⚠ You cannot process this request once it has been approved.</i>
+                            <i class="mr-1">Note: You cannot process this request once it has been approved.</i>
                         </div>
                     </div>
                 @else
