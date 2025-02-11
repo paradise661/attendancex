@@ -35,4 +35,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('leavetypes', [LeaveController::class, 'getLeaveTypes']);
     Route::get('leaves', [LeaveController::class, 'getLeaves']);
     Route::post('leave/request', [LeaveController::class, 'leaveRequest']);
+    Route::post('leave/cancel', [LeaveController::class, 'leaveCancelRequest']);
 });

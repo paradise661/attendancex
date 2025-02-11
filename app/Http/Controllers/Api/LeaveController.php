@@ -131,4 +131,51 @@ class LeaveController extends Controller
             ], 500);
         }
     }
+
+    public function leaveCancelRequest(Request $request)
+    {
+        try {
+            // Validate request
+            $validator = Validator::make($request->all(), [
+                'leave_id' => 'required|exists:leaves,id',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Invalid request. Please provide a valid leave ID.',
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
+            // Fetch leave record
+            $leave = Leave::find($request->leave_id);
+
+            // Ensure leave record exists
+            if (!$leave) {
+                return response()->json(['message' => 'The leave request does not exist. Please check your leave ID.'], 404);
+            }
+
+            // Check if leave is already cancelled
+            if ($leave->status === 'Cancelled') {
+                return response()->json([
+                    'message' => 'This leave request has already been cancelled. No further action is needed.',
+                ], 422);
+            }
+
+            // Update leave status
+            $leave->update([
+                'status' => 'Cancelled',
+                'action_by' => $request->user()->id ?? null
+            ]);
+
+            return response()->json([
+                'message' => 'Your leave cancellation request has been successfully processed.',
+            ], 200);
+        } catch (Exception $e) {
+            Log::error('Leave Cancellation Error: ' . $e->getMessage());
+            return response()->json([
+                'message' => 'An error occurred while processing your request. Please try again later.',
+            ], 500);
+        }
+    }
 }
