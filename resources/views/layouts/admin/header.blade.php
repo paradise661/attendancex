@@ -232,10 +232,10 @@
                                width="32" height="32" alt="Image Description">
                        </button>
                        <div class="md:block hidden dropdown-profile">
-                           <p class="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">Paradise Info
+                           <p class="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">Super Admin
                            </p>
-                           <span class="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">
-                               Admin</span>
+                           {{-- <span class="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">
+                               Admin</span> --}}
                        </div>
                        <div class="hs-dropdown-menu ti-dropdown-menu !-mt-3 border-0 w-[11rem] !p-0 border-defaultborder hidden main-header-dropdown  pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
                            aria-labelledby="dropdown-profile">
