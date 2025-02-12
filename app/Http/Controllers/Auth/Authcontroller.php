@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Illuminate\Support\Facades\Hash;
 
 class Authcontroller extends Controller
 {
@@ -42,5 +43,31 @@ class Authcontroller extends Controller
         Auth::logout();
 
         return Redirect('login');
+    }
+
+    public function changePassword()
+    {
+        return view('auth.profile');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'string'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        // Check if the current password matches the authenticated user's password
+        if (!Hash::check($request->current_password, Auth::user()->password)) {
+            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+
+        // Update the password
+        Auth::user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+
+        // Redirect with a success message
+        return redirect()->back()->with('message', 'Password changed successfully.');
     }
 }

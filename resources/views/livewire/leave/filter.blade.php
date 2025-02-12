@@ -83,7 +83,7 @@
                                         <div class="btn-list flex gap-3">
                                             <a class="ti-btn ti-btn-primary-full !py-1 !px-3 ti-btn-wave"
                                                 href="{{ route('leaves.edit', $leave->id) }}">
-                                                <i class="ri-pencil-line"></i> Edit
+                                                <i class="ri-loop-right-line"></i> Manage Request
                                             </a>
                                         </div>
                                     </td>

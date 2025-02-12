@@ -1,12 +1,10 @@
    <header class="app-header">
        <nav class="main-header !h-[3.75rem]" aria-label="Global">
            <div class="main-header-container ps-[0.725rem] pe-[1rem] ">
-
                <div class="header-content-left">
-                   <!-- Start::header-element -->
                    <div class="header-element">
                        <div class="horizontal-logo">
-                           <a class="header-logo" href="index.html">
+                           <a class="header-logo" href="{{ route('dashboard') }}">
                                <img class="desktop-logo" src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}"
                                    alt="logo">
                                <img class="toggle-logo" src="{{ asset('assets/images/brand-logos/toggle-logo.png') }}"
@@ -21,15 +19,10 @@
                            </a>
                        </div>
                    </div>
-                   <!-- End::header-element -->
-                   <!-- Start::header-element -->
                    <div class="header-element md:px-[0.325rem] !items-center">
-                       <!-- Start::header-link -->
                        <a class="sidemenu-toggle animated-arrow  hor-toggle horizontal-navtoggle inline-flex items-center"
                            aria-label="Hide Sidebar" href="javascript:void(0);"><span></span></a>
-                       <!-- End::header-link -->
                    </div>
-                   <!-- End::header-element -->
                </div>
 
                <div class="header-content-right">
@@ -228,18 +221,6 @@
                    </div>
                    <!--End Header Notifictaion -->
 
-                   <!-- Fullscreen -->
-                   <div class="header-element header-fullscreen py-[1rem] md:px-[0.65rem] px-2">
-                       <!-- Start::header-link -->
-                       <a class="inline-flex flex-shrink-0 justify-center items-center gap-2  !rounded-full font-medium dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
-                           aria-label="anchor" onclick="openFullscreen();" href="javascript:void(0);">
-                           <i class="bx bx-fullscreen full-screen-open header-link-icon"></i>
-                           <i class="bx bx-exit-fullscreen full-screen-close header-link-icon hidden"></i>
-                       </a>
-                       <!-- End::header-link -->
-                   </div>
-                   <!-- End Full screen -->
-
                    <!-- Header Profile -->
                    <div
                        class="header-element md:!px-[0.65rem] px-2 hs-dropdown !items-center ti-dropdown [--placement:bottom-left]">
@@ -262,8 +243,9 @@
                            <ul class="text-defaulttextcolor font-medium dark:text-[#8c9097] dark:text-white/50">
                                <li>
                                    <a class="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0  !p-[0.65rem] !inline-flex"
-                                       href="javascript:void(0)">
-                                       <i class="ti ti-user-circle text-[1.125rem] me-2 opacity-[0.7]"></i>Profile
+                                       href="{{ route('change.password') }}">
+                                       <i class="ti ti-lock text-[1.125rem] me-2 opacity-[0.7]"></i>Change
+                                       Password
                                    </a>
                                </li>
 

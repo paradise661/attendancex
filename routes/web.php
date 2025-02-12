@@ -25,6 +25,9 @@ Route::post('logout', [Authcontroller::class, 'logout'])->name('logout');
 
 //CMS
 Route::middleware(['auth'])->group(function () {
+    Route::get('change-password', [Authcontroller::class, 'changePassword'])->name('change.password');
+    Route::post('change-password', [Authcontroller::class, 'updatePassword'])->name('update.password');
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('branches', BranchController::class);
     Route::resource('departments', DepartmentController::class);
