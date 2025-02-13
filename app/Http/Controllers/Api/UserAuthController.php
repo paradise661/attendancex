@@ -56,6 +56,12 @@ class UserAuthController extends Controller
             ], 401);
         }
 
+        // Check if user status is active
+        if ($user->status !== 'Active') {
+            $message = 'Your account is ' . strtolower($user->status) . '. Please contact the administrator for further assistance.';
+            return $this->respondWithError($message, [], 403);
+        }
+
         // Update expo_token only if provided and different
         if ($request->has('expo_token') && $request->expo_token !== $user->expo_token) {
             $user->expo_token = $request->expo_token;

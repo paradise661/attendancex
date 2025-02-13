@@ -45,6 +45,8 @@ class EmployeeController extends Controller
             $input = $request->all();
             $input['image'] = $this->fileUpload($request, 'image');
             $input['password'] = Hash::make('password');
+            $input['status'] = 'Active';
+
             User::create($input);
             return redirect()->route('employees.index')->with('message', 'Employee Created Successfully.');
         } catch (Exception $e) {
@@ -145,5 +147,17 @@ class EmployeeController extends Controller
                 File::delete($path);
             }
         }
+    }
+
+    public function getDepartments($branch_id)
+    {
+        $departments = Department::where('branch_id', $branch_id)->get();
+        return response()->json($departments);
+    }
+
+    public function getShifts($department_id)
+    {
+        $shifts = Shift::where('department_id', $department_id)->get();
+        return response()->json($shifts);
     }
 }
