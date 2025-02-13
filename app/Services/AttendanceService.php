@@ -29,7 +29,7 @@ class AttendanceService
             $leaves = LeaveApproval::whereBetween('date', [$startDate, $endDate])->where('user_id', $userId)->get();
             $leavesTakenDates = $leaves->pluck('date')->toArray();
 
-            $weekends = json_decode($user->department->holidays ?? '');
+            $weekends = json_decode($user->department->holidays ?? '') ?? [];
 
             // Append absent dates to $attendances
             foreach ($absentDates as $absentDate) {
