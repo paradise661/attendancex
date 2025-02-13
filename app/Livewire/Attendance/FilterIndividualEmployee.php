@@ -7,6 +7,7 @@ use Livewire\Component;
 use Carbon\Carbon;
 use Livewire\WithPagination;
 use App\Models\Attendance;
+use App\Services\AttendanceService;
 
 class FilterIndividualEmployee extends Component
 {
@@ -64,51 +65,21 @@ class FilterIndividualEmployee extends Component
         $startDate = $dates[0] ?? '';
         $endDate = $dates[1] ?? '';
 
+        $totalWorkedHour = 0;
+        $totalBreakTaken = 0;
         if ($startDate && $endDate) {
             if ($startDate <= $joinDate) {
                 $startDate = $joinDate;
             }
 
-            $attendances = Attendance::when($this->employee, function ($query) {
-                return $query->where('user_id', $this->employee);
-            })
-                ->when(count($dates) === 2, function ($query) use ($startDate, $endDate) {
-                    return $query->whereBetween('date', [
-                        \Carbon\Carbon::parse($startDate)->startOfDay(),
-                        \Carbon\Carbon::parse($endDate)->endOfDay()
-                    ]);
-                });
-            $this->totalWorkedHours = $attendances->sum('worked_hours');
-            $this->totalBreak = $attendances->sum('total_break');
-
-            $attendances = $attendances->get();
-
-            $dateRange = Carbon::parse($startDate)->toPeriod($endDate);
-
-            $absentDates = $dateRange->filter(function ($date) use ($attendances) {
-                return !$attendances->contains('date', $date->format('Y-m-d'));
-            });
-
-            // Append absent dates to $attendances
-            foreach ($absentDates as $absentDate) {
-                $attendances->push((object) [
-                    'date' => $absentDate->format('Y-m-d'),
-                    'checkin' => '-',
-                    'checkout' => '-',
-                    'break_start' => '-',
-                    'break_end' => '-',
-                    'worked_hours' => 0,
-                    'total_break' => '-',
-                    'type' => 'Absent'
-                ]);
-            }
-
-            $attendances = $attendances->sortBy('date')->values();
+            $attendancesRecords = AttendanceService::getAttendance($startDate, $endDate, $this->employee);
+            $attendances = $attendancesRecords['attendances'];
+            $totalWorkedHour = $attendancesRecords['totalWorkedHour'];
+            $totalBreakTaken = $attendancesRecords['totalBreakTaken'];
         } else {
             $attendances = collect([]);
         }
 
-
-        return view('livewire.attendance.filter-individual-employee', compact('attendances'));
+        return view('livewire.attendance.filter-individual-employee', compact('attendances', 'totalWorkedHour', 'totalBreakTaken'));
     }
 }

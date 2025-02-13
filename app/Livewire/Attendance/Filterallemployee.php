@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Attendance;
 use App\Models\Branch;
+use App\Models\LeaveApproval;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -63,10 +64,20 @@ class Filterallemployee extends Component
             })
             ->get();
 
+        $leaveTaken = LeaveApproval::where('date', $this->searchTerms)->pluck('user_id')->toArray();
+
         $attendances = [];
         foreach ($employees as $employee) {
             $attendance = $attendanceList->firstWhere('user_id', $employee->id);
-            // dd($employee);
+            $weekends = json_decode($employee->department->holidays ?? '');
+            $type = 'Absent';
+            if (in_array($employee->id, $leaveTaken)) {
+                $type = 'Leave';
+            }
+            if (in_array(date('l', strtotime($this->searchTerms)), $weekends)) {
+                $type = 'Holiday';
+            }
+
             if ($attendance) {
                 $attendances[$employee->id] = (object) [
                     'user_id' => $employee->id,
@@ -93,7 +104,7 @@ class Filterallemployee extends Component
                     'break_start' => '-',
                     'break_end' => '-',
                     'worked_hours' => '-',
-                    'type' => 'Absent'
+                    'type' => $type
                 ];
             }
         }

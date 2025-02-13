@@ -79,10 +79,16 @@
                                     <td class="px-4 py-2">{{ $attendance->worked_hours ?? '-' }}</td>
                                     <td class="px-4 py-2">
                                         @if ($attendance->type === 'Absent')
-                                            <span class="bg-red-500 px-2 py-1 text-white" >Absent</span>
+                                            <span class="bg-red-500 px-2 py-1 text-white">Absent</span>
+                                        @endif
+                                        @if ($attendance->type === 'Leave')
+                                            <span class="bg-yellow-500 px-2 py-1 text-white">Leave</span>
+                                        @endif
+                                        @if ($attendance->type === 'Holiday')
+                                            <span class="bg-gray-500 px-2 py-1 text-white">Holiday</span>
                                         @endif
                                         @if ($attendance->type === 'Present')
-                                            <span class="bg-green-500 px-2 py-1 text-white" >Present</span>
+                                            <span class="bg-green-500 px-2 py-1 text-white">Present</span>
                                         @endif
                                     </td>
                                 </tr>

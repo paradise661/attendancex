@@ -53,7 +53,8 @@
                         @if ($attendances->isNotEmpty())
                             @foreach ($attendances as $key => $attendance)
                                 <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
-                                    <td class="px-4 py-2">{{ $attendance->date ?? '-' }}</td>
+                                    <td class="px-4 py-2">{{ $attendance->date ?? '-' }}
+                                        ({{ date('l', strtotime($attendance->date)) }})</td>
                                     <td class="px-4 py-2">{{ $attendance->checkin ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $attendance->checkout ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $attendance->break_start ?? '-' }}</td>
@@ -63,6 +64,12 @@
                                     <td class="px-4 py-2">
                                         @if ($attendance->type === 'Absent')
                                             <span class="bg-red-500 px-2 py-1 text-white">Absent</span>
+                                        @endif
+                                        @if ($attendance->type === 'Leave')
+                                            <span class="bg-yellow-500 px-2 py-1 text-white">Leave</span>
+                                        @endif
+                                        @if ($attendance->type === 'Holiday')
+                                            <span class="bg-gray-500 px-2 py-1 text-white">Holiday</span>
                                         @endif
                                         @if ($attendance->type === 'Present')
                                             <span class="bg-green-500 px-2 py-1 text-white">Present</span>
@@ -91,16 +98,16 @@
 
     </div>
 
-    <div class="mt-6 p-6 bg-white rounded-lg shadow-sm">
+    <div class="mt-6 mb-6 p-6 bg-white rounded-lg shadow-sm">
         <div class="flex justify-between gap-6">
             <!-- Total Break Taken (Left Side) -->
             <div class="text-sm font-medium text-gray-800">
-                Total Break Taken: <span class="font-semibold">{{ formatMinutesToHours($totalBreak) }}</span>
+                Total Break Taken: <span class="font-semibold">{{ formatMinutesToHours($totalBreakTaken) }}</span>
             </div>
 
             <!-- Total Worked (Right Side) -->
             <div class="text-sm font-medium text-gray-800">
-                Total Worked: <span class="font-semibold">{{ formatWorkedHours($totalWorkedHours) }}</span>
+                Total Worked: <span class="font-semibold">{{ formatWorkedHours($totalWorkedHour) }}</span>
             </div>
         </div>
     </div>

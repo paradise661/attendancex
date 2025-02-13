@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\AttendanceRequest;
+use App\Services\AttendanceService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -290,35 +291,12 @@ class AttendanceController extends Controller
                 $startDate = Carbon::parse($joinDate)->format('Y-m-d');
             }
 
-            $attendances = Attendance::where('user_id', $request->user()->id)
-                ->whereBetween('date', [$startDate, $endDate])
-                ->get();
-
-            $dateRange = Carbon::parse($startDate)->toPeriod($endDate);
-
-            $absentDates = $dateRange->filter(function ($date) use ($attendances) {
-                return !$attendances->contains('date', $date->format('Y-m-d'));
-            });
-
-            // Append absent dates to $attendances
-            foreach ($absentDates as $absentDate) {
-                $attendances->push([
-                    'user_id' => $request->user()->id,
-                    'type' => 'Absent',
-                    'date' => $absentDate->format('Y-m-d'),
-                    'checkin' => null,
-                    'checkout' => null,
-                    'worked_hours' => null,
-                ]);
-            }
-
-            // Sort by date
-            $attendances = $attendances->sortBy('date')->values();
+            $attendances = AttendanceService::getAttendance($startDate, $endDate, $request->user()->id);
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Attendance retrieved successfully.',
-                'data' => $attendances,
+                'data' => $attendances['attendances'] ?? null,
             ]);
         } catch (Exception $e) {
             return response()->json([
