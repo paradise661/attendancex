@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\AttendanceRequestController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\LeavetypeController;
@@ -30,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('branches', BranchController::class);
+    Route::resource('designations', DesignationController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('shifts', ShiftController::class);
     Route::resource('employees', EmployeeController::class);

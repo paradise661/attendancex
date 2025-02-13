@@ -40,11 +40,13 @@
                             Request::segment(index: 1) == 'departments' ||
                             Request::segment(index: 1) == 'site-setting' ||
                             Request::segment(index: 1) == 'leavetypes' ||
+                            Request::segment(index: 1) == 'designations' ||
                             Request::segment(index: 1) == 'shifts') {{ 'active open' }} @endif">
                         <a class="side-menu__item @if (Request::segment(index: 1) == 'branches' ||
                                 Request::segment(index: 1) == 'departments' ||
                                 Request::segment(index: 1) == 'site-setting' ||
                                 Request::segment(index: 1) == 'leavetypes' ||
+                                Request::segment(index: 1) == 'designations' ||
                                 Request::segment(index: 1) == 'shifts') {{ 'active' }} @endif"
                             href="javascript:void(0);">
                             <i class="bx bx-cog side-menu__icon"></i>
@@ -67,6 +69,10 @@
                             <li class="slide">
                                 <a class="side-menu__item {{ Request::segment(1) == 'leavetypes' ? 'active' : '' }}"
                                     href="{{ route('leavetypes.index') }}">Leave Types</a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item {{ Request::segment(1) == 'designations' ? 'active' : '' }}"
+                                    href="{{ route('designations.index') }}">Designations</a>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item {{ Request::segment(1) == 'site-setting' ? 'active' : '' }}"

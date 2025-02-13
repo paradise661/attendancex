@@ -166,12 +166,19 @@
                     </div>
 
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Designation <span class="text-red-500"> *</span></label>
+                        <label class="form-label">Designation<span class="text-red-500"> *</span></label>
                         <div class="relative">
-                            <input
-                                class="form-control @error('designation') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="text" aria-label="designation" name="designation"
-                                value="{{ old('designation', $employee->designation) }}">
+                            <select
+                                class="ti-form-select rounded-sm !py-2 !px-3 @error('designation') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                name="designation">
+                                <option value="">Please Select</option>
+                                @foreach ($designations as $designation)
+                                    <option {{ $employee->designation == $designation->name ? 'selected' : '' }}
+                                        value="{{ $designation->name ?? '' }}">
+                                        {{ $designation->name ?? '' }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('designation')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                     <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"

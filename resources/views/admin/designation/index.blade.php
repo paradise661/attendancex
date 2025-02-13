@@ -6,16 +6,16 @@
             <div class="box custom-box">
                 <div class="box-header justify-between">
                     <div class="box-title">
-                        Branches
-                        @if ($branches->isNotEmpty())
+                        Designations
+                        @if ($designations->isNotEmpty())
                             <span
-                                class="badge bg-light text-default rounded-full ms-1 text-[0.75rem] align-middle">{{ $branches->total() }}</span>
+                                class="badge bg-light text-default rounded-full ms-1 text-[0.75rem] align-middle">{{ $designations->total() }}</span>
                         @endif
                     </div>
                     <div class="prism-toggle">
                         <a class="ti-btn ti-btn-primary-full ti-btn-wave !text-[0.75rem] flex items-center gap-2"
-                            href="{{ route('branches.create') }}">
-                            New Branch <i class="ri-add-line"></i>
+                            href="{{ route('designations.create') }}">
+                            New Designation <i class="ri-add-line"></i>
                         </a>
                     </div>
 
@@ -26,36 +26,39 @@
                             <thead>
                                 <tr class="border-b border-defaultborder">
                                     <th class="text-start px-4 py-2" scope="col">#</th>
-                                    <th class="text-start px-4 py-2" scope="col">Name</th>
-                                    <th class="text-start px-4 py-2" scope="col">Area</th>
+                                    <th class="text-start px-4 py-2" scope="col">Designation Name</th>
+                                    <th class="text-start px-4 py-2" scope="col">Description</th>
+                                    <th class="text-start px-4 py-2" scope="col">Order</th>
                                     <th class="text-start px-4 py-2" scope="col">Status</th>
                                     <th class="text-start px-4 py-2" scope="col">Last Updated</th>
                                     <th class="text-start px-4 py-2"scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($branches->isNotEmpty())
-                                    @foreach ($branches as $key => $branch)
+                                @if ($designations->isNotEmpty())
+                                    @foreach ($designations as $key => $designation)
                                         <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
-                                            <th class="px-4 py-2" scope="row">{{ $key + $branches->firstItem() }}</th>
-                                            <td class="px-4 py-2">{{ $branch->name ?? '-' }}</td>
-                                            <td class="px-4 py-2">{{ $branch->radius ?? '' }}m</td>
+                                            <th class="px-4 py-2" scope="row">{{ $key + $designations->firstItem() }}
+                                            </th>
+                                            <td class="px-4 py-2">{{ $designation->name ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $designation->description ?? '-' }}</td>
+                                            <td class="px-4 py-2">{{ $designation->order ?? '-' }}</td>
                                             <td class="px-4 py-2">
                                                 <span
-                                                    class="badge bg-primary/10 text-primary">{{ $branch->status == 1 ? 'Active' : 'Inactive' }}</span>
+                                                    class="badge bg-primary/10 text-primary">{{ $designation->status == 1 ? 'Active' : 'Inactive' }}</span>
                                             </td>
                                             <td class="px-4 py-2">
-                                                {{ $branch->updated_at ? $branch->updated_at->format('Y-m-d h:i A') : '' }}
+                                                {{ $designation->updated_at ? $designation->updated_at->format('Y-m-d h:i A') : '' }}
                                             </td>
                                             <td class="text-end px-4 py-2">
                                                 <div class="btn-list flex gap-3">
                                                     <a class="ti-btn ti-btn-primary-full !py-1 !px-3 ti-btn-wave"
-                                                        href="{{ route('branches.edit', $branch->id) }}">
+                                                        href="{{ route('designations.edit', $designation->id) }}">
                                                         <i class="ri-pencil-line"></i> Edit
                                                     </a>
 
                                                     <form class="delete-form"
-                                                        action="{{ route('branches.destroy', $branch->id) }}"
+                                                        action="{{ route('designations.destroy', $designation->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -87,7 +90,7 @@
                     </div>
                 </div>
 
-                {{ $branches->links('vendor.pagination.custom') }}
+                {{ $designations->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>

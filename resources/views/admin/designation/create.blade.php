@@ -4,24 +4,24 @@
         <div class="box">
             <div class="box-header justify-between">
                 <div class="box-title">
-                    New Branch
+                    New Designation
                 </div>
                 <div class="prism-toggle">
                     <a class="ti-btn ti-btn-primary-full ti-btn-wave !text-[0.75rem] flex items-center gap-2"
-                        href="{{ route('branches.index') }}">
+                        href="{{ route('designations.index') }}">
                         <i class="ri-arrow-left-line"></i> Back
                     </a>
                 </div>
             </div>
             <div class="box-body">
-                <form class="grid grid-cols-12 gap-4 mt-0" action="{{ route('branches.store') }}" method="POST">
+                <form class="grid grid-cols-12 gap-4 mt-0" action="{{ route('designations.store') }}" method="POST">
                     @csrf
                     <div class="md:col-span-12 col-span-12">
-                        <label class="form-label">Branch Name <span class="text-red-500"> *</span></label>
+                        <label class="form-label">Designation Name <span class="text-red-500"> *</span></label>
                         <div class="relative">
                             <input
                                 class="form-control @error('name') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="text" aria-label="Branch Name" name="name" value="{{ old('name') }}">
+                                type="text" aria-label="Designation Name" name="name" value="{{ old('name') }}">
                             @error('name')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                     <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
@@ -39,70 +39,12 @@
                         @enderror
                     </div>
 
-                    <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Latitude <span class="text-red-500"> *</span></label>
+                    <div class="md:col-span-12 col-span-12">
+                        <label class="form-label" for="inputPassword4">Description</label>
                         <div class="relative">
-                            <input
-                                class="form-control @error('latitude') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="text" aria-label="latitude" name="latitude" value="{{ old('latitude') }}">
-                            @error('latitude')
-                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
-                                        viewBox="0 0 16 16" aria-hidden="true">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                    </svg>
-                                </div>
-                            @enderror
+                            <textarea class="sm:p-5 py-3 px-4 ti-form-input" rows="2" name="description">{{ old('description') }}</textarea>
                         </div>
-                        @error('latitude')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                <i>*{{ $message }}</i>
-                            </p>
-                        @enderror
-                    </div>
-
-                    <div class="md:col-span-6 col-span-12">
-                        <label class="form-label" for="inputEmail4">Longitude <span class="text-red-500"> *</span></label>
-                        <div class="relative">
-                            <input
-                                class="form-control @error('longitude') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                id="inputEmail4" type="text" name="longitude" value="{{ old('longitude') }}">
-                            @error('longitude')
-                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
-                                        viewBox="0 0 16 16" aria-hidden="true">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                    </svg>
-                                </div>
-                            @enderror
-                        </div>
-                        @error('longitude')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                <i>*{{ $message }}</i>
-                            </p>
-                        @enderror
-                    </div>
-
-                    <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Area (m) <span class="text-red-500"> *</span></label>
-                        <div class="relative">
-                            <input
-                                class="form-control @error('radius') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="number" aria-label="Radius" name="radius" value="{{ old('radius', '100') }}"
-                                min="1">
-                            @error('radius')
-                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
-                                        viewBox="0 0 16 16" aria-hidden="true">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                    </svg>
-                                </div>
-                            @enderror
-                        </div>
-                        @error('radius')
+                        @error('description')
                             <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                 <i>*{{ $message }}</i>
                             </p>
@@ -129,6 +71,29 @@
                             @enderror
                         </div>
                         @error('status')
+                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                <i>*{{ $message }}</i>
+                            </p>
+                        @enderror
+                    </div>
+
+                    <div class="md:col-span-6 col-span-12">
+                        <label class="form-label" for="inputEmail4">Order</label>
+                        <div class="relative">
+                            <input
+                                class="form-control @error('order') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
+                                id="inputEmail4" type="number" name="order" value="{{ old('order') }}" min="1">
+                            @error('order')
+                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                                    <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
+                                        viewBox="0 0 16 16" aria-hidden="true">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                    </svg>
+                                </div>
+                            @enderror
+                        </div>
+                        @error('order')
                             <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                 <i>*{{ $message }}</i>
                             </p>

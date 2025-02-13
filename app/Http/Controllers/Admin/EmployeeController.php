@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EmployeeRequest;
 use App\Models\Branch;
 use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class EmployeeController extends Controller
         $branches = Branch::where('status', 1)->oldest('order')->get();
         $departments = Department::where('status', 1)->oldest('order')->get();
         $shifts = Shift::where('status', 1)->oldest('order')->get();
-        return view('admin.employee.create', compact('branches', 'departments', 'shifts'));
+        $designations = Designation::where('status', 1)->oldest('order')->get();
+        return view('admin.employee.create', compact('branches', 'departments', 'shifts', 'designations'));
     }
 
     /**
@@ -66,7 +68,9 @@ class EmployeeController extends Controller
         $branches = Branch::where('status', 1)->oldest('order')->get();
         $departments = Department::where('status', 1)->oldest('order')->get();
         $shifts = Shift::where('status', 1)->oldest('order')->get();
-        return view('admin.employee.edit', compact('employee', 'branches', 'departments', 'shifts'));
+        $designations = Designation::where('status', 1)->oldest('order')->get();
+
+        return view('admin.employee.edit', compact('employee', 'branches', 'departments', 'shifts', 'designations'));
     }
 
     /**
