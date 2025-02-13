@@ -35,4 +35,13 @@ class EmployeeRequest extends FormRequest
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'branch_id.required' => 'Please select the branch.',
+            'department_id.required' => 'Please select the department.',
+            'shift_id.required' => 'Please select the shift.',
+        ];
+    }
 }

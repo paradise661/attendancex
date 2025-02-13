@@ -62,3 +62,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('site-setting/removefile/{filename}/{type}', [SiteSettingController::class, 'removefileFromSite'])
         ->name('site.setting.remove.file');
 });
+
+Route::get('get-departments/{branch_id}', [EmployeeController::class, 'getDepartments']);
+Route::get('get-shifts/{department_id}', [EmployeeController::class, 'getShifts']);

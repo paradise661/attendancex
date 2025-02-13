@@ -142,7 +142,6 @@
                             <select
                                 class="ti-form-select rounded-sm !py-2 !px-3 @error('designation') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
                                 name="designation">
-                                <option value="">Please Select</option>
                                 @foreach ($designations as $designation)
                                     <option value="{{ $designation->name ?? '' }}">{{ $designation->name ?? '' }}
                                     </option>
@@ -228,7 +227,7 @@
                         <div class="relative">
                             <select
                                 class="ti-form-select rounded-sm !py-2 !px-3 @error('branch_id') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                name="branch_id">
+                                id="branch" name="branch_id">
                                 <option value="">Please Select</option>
                                 @foreach ($branches as $branch)
                                     <option value="{{ $branch->id }}"
@@ -259,14 +258,8 @@
                         <div class="relative">
                             <select
                                 class="ti-form-select rounded-sm !py-2 !px-3 @error('department_id') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                name="department_id">
-                                <option value="">Please Select</option>
-                                @foreach ($departments as $department)
-                                    <option value="{{ $department->id }}"
-                                        {{ old('department_id') == $department->id ? 'selected' : '' }}>
-                                        {{ $department->name ?? '' }}
-                                    </option>
-                                @endforeach
+                                id="department" name="department_id">
+                                <option value="">Select Department</option>
                             </select>
                             @error('department_id')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
@@ -290,14 +283,8 @@
                         <div class="relative">
                             <select
                                 class="ti-form-select rounded-sm !py-2 !px-3 @error('shift_id') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                name="shift_id">
-                                <option value="">Please Select</option>
-                                @foreach ($shifts as $shift)
-                                    <option value="{{ $shift->id }}"
-                                        {{ old('shift_id') == $shift->id ? 'selected' : '' }}>
-                                        {{ $shift->name ?? '' }}
-                                    </option>
-                                @endforeach
+                                id="shift" name="shift_id">
+                                <option value="">Select Shift</option>
                             </select>
                             @error('shift_id')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
@@ -363,4 +350,36 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#branch').on('change', function() {
+                let branch_id = $(this).val();
+                $('#department').html('<option value="">Loading...</option>');
+
+                $.get("{{ url('get-departments') }}/" + branch_id, function(data) {
+                    $('#department').html('<option value="">Select Department</option>');
+                    $.each(data, function(key, value) {
+                        $('#department').append('<option value="' + value.id + '">' + value
+                            .name + '</option>');
+                    });
+                });
+            });
+
+            $('#department').on('change', function() {
+                let department_id = $(this).val();
+                $('#shift').html('<option value="">Loading...</option>');
+
+                $.get("{{ url('get-shifts') }}/" + department_id, function(data) {
+                    $('#shift').html('<option value="">Select Shift</option>');
+                    $.each(data, function(key, value) {
+                        $('#shift').append('<option value="' + value.id + '">' + value
+                            .name + '</option>');
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

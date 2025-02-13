@@ -42,8 +42,8 @@
                             <th class="text-start px-4 py-2" scope="col">Email</th>
                             <th class="text-start px-4 py-2" scope="col">Phone</th>
                             <th class="text-start px-4 py-2" scope="col">Designation</th>
-                            <th class="text-start px-4 py-2" scope="col">Date of Birth</th>
                             <th class="text-start px-4 py-2" scope="col">Department</th>
+                            <th class="text-start px-4 py-2" scope="col">Status</th>
                             <th class="text-start px-4 py-2"scope="col">Action</th>
                         </tr>
                     </thead>
@@ -66,11 +66,10 @@
                                     <td class="px-4 py-2">{{ $employee->email ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $employee->phone ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $employee->designation ?? '-' }}</td>
-                                    <td class="px-4 py-2">{{ $employee->date_of_birth ?? '-' }}</td>
-
                                     <td class="px-4 py-2">
                                         {{ $employee->department->name ?? '-' }}
                                     </td>
+                                    <td class="px-4 py-2">{{ $employee->status ?? '-' }}</td>
 
                                     <td class="text-end px-4 py-2">
                                         <div class="btn-list flex gap-3">
