@@ -164,4 +164,71 @@ class UserAuthController extends Controller
             }
         }
     }
+
+    public function forgotPasswordOtp(Request $request)
+    {
+        $user = User::where('email', $request->email)->where('user_type', 'Employee')->first();
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Email Not Found',
+            ], 422);
+        }
+
+        $otp = rand(10000, 99999);
+        $user->update(['otp' => $otp]);
+        //send otp in mail
+
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'OTP has been sent to your mail',
+        ]);
+    }
+
+    public function forgotPasswordCheckOtp(Request $request)
+    {
+        $user = User::where('email', $request->email)->where('otp', $request->otp)->where('user_type', 'Employee')->first();
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Invalid OTP',
+            ], 422);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'OTP Matched',
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'otp' => 'required',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError('Validation failed', $validator->errors(), 422);
+        }
+
+        $user = User::where('email', $request->email)->where('otp', $request->otp)->where('user_type', 'Employee')->first();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Invalid Data',
+            ], 422);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->otp = null;
+        $user->save();
+
+        return $this->respondWithSuccess('Password reset successfully');
+    }
 }

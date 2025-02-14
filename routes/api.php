@@ -13,6 +13,9 @@ Route::get('/user', function (Request $request) {
 
 Route::post('login', [UserAuthController::class, 'login']);
 Route::get('settings', [DashboardController::class, 'settings']);
+Route::post('forgotpassword/sendotp', [UserAuthController::class, 'forgotPasswordOtp']);
+Route::post('forgotpassword/checkotp', [UserAuthController::class, 'forgotPasswordCheckOtp']);
+Route::post('resetpassword', [UserAuthController::class, 'resetPassword']);
 
 // Sanctum-protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
