@@ -41,19 +41,22 @@
                    <!-- End light and dark theme -->
 
                    <!--Header Notifictaion -->
+                   @php $notifications = getNotification() @endphp
                    <div
                        class="header-element py-[1rem] md:px-[0.65rem] px-2 notifications-dropdown header-notification hs-dropdown ti-dropdown !hidden md:!block [--placement:bottom-left]">
                        <button
                            class="hs-dropdown-toggle relative ti-dropdown-toggle !p-0 !border-0 flex-shrink-0  !rounded-full !shadow-none align-middle text-xs"
                            id="dropdown-notification" type="button">
                            <i class="bx bx-bell header-link-icon  text-[1.125rem]"></i>
-                           <span class="flex absolute h-5 w-5 -top-[0.25rem] end-0  -me-[0.6rem]">
-                               <span
-                                   class="animate-slow-ping absolute inline-flex -top-[2px] -start-[2px] h-full w-full rounded-full bg-secondary/40 opacity-75"></span>
-                               <span
-                                   class="relative inline-flex justify-center items-center rounded-full  h-[14.7px] w-[14px] bg-secondary text-[0.625rem] text-white"
-                                   id="notification-icon-badge">5</span>
-                           </span>
+                           @if (getNotification()->where('is_seen', 0)->count() > 0)
+                               <span class="flex absolute h-5 w-5 -top-[0.25rem] end-0  -me-[0.6rem]">
+                                   <span
+                                       class="animate-slow-ping absolute inline-flex -top-[2px] -start-[2px] h-full w-full rounded-full bg-secondary/40 opacity-75"></span>
+                                   <span
+                                       class="relative inline-flex justify-center items-center rounded-full  h-[14.7px] w-[14px] bg-secondary text-[0.625rem] text-white"
+                                       id="notification-icon-badge">{{ getNotification()->where('is_seen', 0)->count() }}
+                                   </span>
+                           @endif
                        </button>
                        <div class="main-header-dropdown !-mt-3 !p-0 hs-dropdown-menu ti-dropdown-menu bg-white !w-[22rem] border-0 border-defaultborder hidden !m-0"
                            aria-labelledby="dropdown-notification">
@@ -62,149 +65,56 @@
                                <p
                                    class="mb-0 text-[1.0625rem] text-defaulttextcolor font-semibold dark:text-[#8c9097] dark:text-white/50">
                                    Notifications</p>
-                               <span
-                                   class="text-[0.75em] py-[0.25rem/2] px-[0.45rem] font-[600] rounded-sm bg-secondary/10 text-secondary"
-                                   id="notifiation-data">5 Unread</span>
+                               @if (getNotification()->where('is_seen', 0)->count() > 0)
+                                   <span
+                                       class="text-[0.75em] py-[0.25rem/2] px-[0.45rem] font-[600] rounded-sm bg-secondary/10 text-secondary"
+                                       id="notifiation-data">{{ getNotification()->where('is_seen', 0)->count() }}
+                                       Unread</span>
+                               @endif
                            </div>
                            <div class="dropdown-divider"></div>
                            <ul class="list-none !m-0 !p-0 end-0" id="header-notification-scroll">
-                               <li class="ti-dropdown-item dropdown-item !block">
-                                   <div class="flex items-start">
-                                       <div class="pe-2">
-                                           <span
-                                               class="inline-flex text-primary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem] !bg-primary/10 !rounded-[50%]"><i
-                                                   class="ti ti-gift text-[1.125rem]"></i></span>
-                                       </div>
-                                       <div class="grow flex items-center justify-between">
-                                           <div>
-                                               <p
-                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem] font-semibold">
-                                                   <a href="notifications.html">Your Order Has Been Shipped</a>
-                                               </p>
+                               @foreach (getNotification(limit: 5) as $notification)
+                                   <li
+                                       class="ti-dropdown-item dropdown-item !block  {{ $notification->is_seen == 0 ? 'bg-gray-200' : 'bg-transparent' }}">
+                                       <div class="flex items-start">
+                                           <div class="pe-2">
                                                <span
-                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order
-                                                   No: 123456
-                                                   Has Shipped To Your Delivery Address</span>
+                                                   class="inline-flex text-pinkmain justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-pinkmain/10 rounded-[50%]">
+                                                   <i class="ti ti-bell text-[1.125rem]"></i></span>
                                            </div>
-                                           <div>
-                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
-                                                   aria-label="anchor" href="javascript:void(0);"><i
-                                                       class="ti ti-x text-[1rem]"></i></a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </li>
-                               <li class="ti-dropdown-item dropdown-item !block">
-                                   <div class="flex items-start">
-                                       <div class="pe-2">
-                                           <span
-                                               class="inline-flex text-secondary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-secondary/10 rounded-[50%]"><i
-                                                   class="ti ti-discount-2 text-[1.125rem]"></i></span>
-                                       </div>
-                                       <div class="grow flex items-center justify-between">
-                                           <div>
-                                               <p
-                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem]  font-semibold">
-                                                   <a href="notifications.html">Discount Available</a>
-                                               </p>
-                                               <span
-                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Discount
-                                                   Available On Selected Products</span>
-                                           </div>
-                                           <div>
-                                               <a class="min-w-fit  text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
-                                                   aria-label="anchor" href="javascript:void(0);"><i
-                                                       class="ti ti-x text-[1rem]"></i></a>
+                                           <div class="grow flex items-center justify-between">
+                                               <div>
+                                                   <p
+                                                       class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem] font-semibold">
+                                                       <a
+                                                           href="{{ $notification->type == 'Attendance'
+                                                               ? route('attendance.request.edit', $notification->entity_id) . '?notification_id=' . $notification->id
+                                                               : route('leaves.edit', $notification->entity_id) . '?notification_id=' . $notification->id }}">
+                                                           {{ $notification->message ?? '' }}
+                                                       </a>
+                                                   </p>
+                                                   <span
+                                                       class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">{{ $notification->created_at ? $notification->created_at->diffForHumans() : '' }}</span>
+                                               </div>
+                                               <div>
+                                                   <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
+                                                       aria-label="anchor"
+                                                       href="{{ $notification->type == 'Attendance'
+                                                           ? route('attendance.request.edit', $notification->entity_id) . '?notification_id=' . $notification->id
+                                                           : route('leaves.edit', $notification->entity_id) . '?notification_id=' . $notification->id }}"></a>
+                                               </div>
                                            </div>
                                        </div>
-                                   </div>
-                               </li>
-                               <li class="ti-dropdown-item dropdown-item !block">
-                                   <div class="flex items-start">
-                                       <div class="pe-2">
-                                           <span
-                                               class="inline-flex text-pinkmain justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-pinkmain/10 rounded-[50%]"><i
-                                                   class="ti ti-user-check text-[1.125rem]"></i></span>
-                                       </div>
-                                       <div class="grow flex items-center justify-between">
-                                           <div>
-                                               <p
-                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem]  font-semibold">
-                                                   <a href="notifications.html">Account Has Been Verified</a>
-                                               </p>
-                                               <span
-                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Your
-                                                   Account Has
-                                                   Been Verified Sucessfully</span>
-                                           </div>
-                                           <div>
-                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
-                                                   aria-label="anchor" href="javascript:void(0);"><i
-                                                       class="ti ti-x text-[1rem]"></i></a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </li>
-                               <li class="ti-dropdown-item dropdown-item !block">
-                                   <div class="flex items-start">
-                                       <div class="pe-2">
-                                           <span
-                                               class="inline-flex text-warning justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-warning/10 rounded-[50%]"><i
-                                                   class="ti ti-circle-check text-[1.125rem]"></i></span>
-                                       </div>
-                                       <div class="grow flex items-center justify-between">
-                                           <div>
-                                               <p
-                                                   class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem]  font-semibold">
-                                                   <a href="notifications.html">Order Placed <span
-                                                           class="text-warning">ID: #1116773</span></a>
-                                               </p>
-                                               <span
-                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order
-                                                   Placed
-                                                   Successfully</span>
-                                           </div>
-                                           <div>
-                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
-                                                   aria-label="anchor" href="javascript:void(0);"><i
-                                                       class="ti ti-x text-[1rem]"></i></a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </li>
-                               <li class="ti-dropdown-item dropdown-item !block">
-                                   <div class="flex items-start">
-                                       <div class="pe-2">
-                                           <span
-                                               class="inline-flex text-success justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-success/10 rounded-[50%]"><i
-                                                   class="ti ti-clock text-[1.125rem]"></i></span>
-                                       </div>
-                                       <div class="grow flex items-center justify-between">
-                                           <div>
-                                               <p
-                                                   class="mb-0 text-defaulttextcolor dark:text-white  text-[0.8125rem]  font-semibold">
-                                                   <a href="notifications.html">Order Delayed <span
-                                                           class="text-success">ID: 7731116</span></a>
-                                               </p>
-                                               <span
-                                                   class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order
-                                                   Delayed
-                                                   Unfortunately</span>
-                                           </div>
-                                           <div>
-                                               <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
-                                                   aria-label="anchor" href="javascript:void(0);"><i
-                                                       class="ti ti-x text-[1rem]"></i></a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </li>
+                                   </li>
+                               @endforeach
                            </ul>
 
                            <div class="p-4 empty-header-item1 border-t mt-2">
                                <div class="grid">
                                    <a class="ti-btn ti-btn-primary-full !m-0 w-full p-2"
-                                       href="notifications.html">View All</a>
+                                       href="{{ route('notification.index') }}">View
+                                       All</a>
                                </div>
                            </div>
                            <div class="p-[3rem] empty-item1 hidden">
@@ -228,7 +138,7 @@
                        <button
                            class="hs-dropdown-toggle ti-dropdown-toggle !gap-2 !p-0 flex-shrink-0 sm:me-2 me-0 !rounded-full !shadow-none text-xs align-middle !border-0 !shadow-transparent "
                            id="dropdown-profile" type="button">
-                           <img class="inline-block rounded-full " src="{{ asset('assets/images/faces/9.jpg') }}"
+                           <img class="inline-block rounded-full" src="{{ asset('assets/images/faces/9.jpg') }}"
                                width="32" height="32" alt="Image Description">
                        </button>
                        <div class="md:block hidden dropdown-profile">

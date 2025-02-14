@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
@@ -92,5 +93,30 @@ if (!function_exists('formatMinutesToHours')) {
 
         // Return the formatted string
         return "{$hours}h" . ($minutes > 0 ? " {$minutes}m" : "");
+    }
+}
+
+if (!function_exists('sendNotificationToAdmin')) {
+    function sendNotificationToAdmin($userID, $messsage, $type, $entity_id)
+    {
+        Notification::create([
+            'user_id' => $userID ?? NULL,
+            'message' => $messsage ?? NULL,
+            'type' => $type ?? NULL,
+            'entity_id' => $entity_id ?? NULL
+        ]);
+    }
+}
+
+if (!function_exists('getNotification')) {
+    function getNotification($limit = null)
+    {
+        $query = Notification::latest();
+
+        if ($limit) {
+            $query->limit($limit);
+        }
+
+        return $query->get();
     }
 }

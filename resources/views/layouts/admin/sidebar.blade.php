@@ -93,8 +93,8 @@
                     <li class="slide">
                         <a class="side-menu__item {{ Request::segment(1) == 'notices' ? 'active' : '' }}"
                             href="{{ route('notices.index') }}">
-                            <i class="bx bx-bell side-menu__icon"></i>
-                            <span class="side-menu__label">Notices </span>
+                            <i class="ti ti-bell-ringing side-menu__icon"></i>
+                            <span class="side-menu__label">App Notices </span>
                         </a>
                     </li>
 
@@ -111,6 +111,14 @@
                             href="{{ route('leaves') }}">
                             <i class="bx bx-calendar-minus side-menu__icon"></i>
                             <span class="side-menu__label">Leave Request</span>
+                        </a>
+                    </li>
+
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(1) == 'notifications' ? 'active' : '' }}"
+                            href="{{ route('notification.index') }}">
+                            <i class="bx bx-bell side-menu__icon"></i>
+                            <span class="side-menu__label">Notifications </span>
                         </a>
                     </li>
 
