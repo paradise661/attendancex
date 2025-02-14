@@ -38,6 +38,7 @@ class User extends Authenticatable
         'shift_id',
         'user_type',
         'expo_token',
+        'otp',
         'order'
     ];
 
