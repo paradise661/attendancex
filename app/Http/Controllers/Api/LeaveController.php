@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Leave;
 use App\Models\LeaveType;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -110,7 +111,7 @@ class LeaveController extends Controller
                 return response()->json(['error' => 'You already have a leave applied for this date range.'], 422);
             }
 
-            Leave::create([
+            $leave =  Leave::create([
                 'user_id' => $request->user()->id,
                 'leavetype_id' => $request->leavetype_id ?? NULL,
                 'from_date' => $fromDate,
@@ -119,6 +120,10 @@ class LeaveController extends Controller
                 'reason' => $request->reason ?? NULL,
                 'status' => 'Pending',
             ]);
+
+            //notification
+            $userDetail = User::find($request->user()->id);
+            sendNotificationToAdmin($request->user()->id, $userDetail->first_name . ' has submitted a leave request.', 'Leave', $leave->id);
 
             return response()->json([
                 'message' => 'Your leave request has been submitted successfully. Please wait for admin approval.',

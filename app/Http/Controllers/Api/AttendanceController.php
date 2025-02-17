@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\AttendanceRequest;
+use App\Models\User;
 use App\Services\AttendanceService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -367,7 +368,7 @@ class AttendanceController extends Controller
                 ], 400);
             }
 
-            AttendanceRequest::create([
+            $attendanceRequest =  AttendanceRequest::create([
                 'user_id' => $request->user()->id ?? NULL,
                 'date' => $request->date ?? NULL,
                 'checkin' => $request->checkin ?? NULL,
@@ -375,6 +376,10 @@ class AttendanceController extends Controller
                 'reason' => $request->reason ?? NULL,
                 'status' => 'Pending'
             ]);
+
+            //notification
+            $userDetail = User::find($request->user()->id);
+            sendNotificationToAdmin($request->user()->id, $userDetail->first_name . ' has submitted an attendance request.', 'Attendance', $attendanceRequest->id);
 
             return response()->json([
                 'message' => 'Your request has been submitted successfully. Please wait for admin approval.',

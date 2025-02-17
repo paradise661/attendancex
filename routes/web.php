@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\LeavetypeController;
 use App\Http\Controllers\Admin\NoticeController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Auth\Authcontroller;
@@ -54,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('leaves/{leave}', [LeaveController::class, 'update'])
         ->name('leaves.update');
 
+    Route::get('notifications', [NotificationController::class, 'index'])
+        ->name('notification.index');
 
     Route::get('site-setting', [SiteSettingController::class, 'siteSettings'])
         ->name('site.setting');

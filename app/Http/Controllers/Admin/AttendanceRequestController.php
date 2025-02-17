@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\AttendanceRequest;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -16,8 +17,16 @@ class AttendanceRequestController extends Controller
         return view('admin.attendancerequest.index');
     }
 
-    public function edit(AttendanceRequest $attendancerequest)
+    public function edit(AttendanceRequest $attendancerequest, Request $request)
     {
+        if ($notificationID = $request->query('notification_id')) {
+            Notification::where('id', $notificationID)
+                ->update([
+                    'is_seen' => 1,
+                    'seen_by' => Auth::id(),
+                ]);
+        }
+
         return view('admin.attendancerequest.edit', compact('attendancerequest'));
     }
 

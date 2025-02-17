@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ['app_logo', Null],
             ['company_information', 'We always wanted to be recognized as a global brand so, we based our headquarter at Germany'],
             ['phone', '9800000000'],
+            ['smtp_email', 'durgesh.upadhyaya7@gmail.com'],
             ['email', 'info@attendancex.com']
         ];
 

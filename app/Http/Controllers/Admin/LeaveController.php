@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LeaveRequest;
 use App\Models\Leave;
 use App\Models\LeaveApproval;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,16 @@ class LeaveController extends Controller
         return view('admin.leave.index');
     }
 
-    public function edit(Leave $leave)
+    public function edit(Leave $leave, Request $request)
     {
+        if ($notificationID = $request->query('notification_id')) {
+            Notification::where('id', $notificationID)
+                ->update([
+                    'is_seen' => 1,
+                    'seen_by' => Auth::id(),
+                ]);
+        }
+
         return view('admin.leave.edit', compact('leave'));
     }
 
