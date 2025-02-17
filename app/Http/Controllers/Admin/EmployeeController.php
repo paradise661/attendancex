@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EmployeeRequest;
+use App\Mail\EmployeeRegister;
 use App\Models\Branch;
 use App\Models\Department;
 use App\Models\Designation;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Exception;
 use File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class EmployeeController extends Controller
 {
@@ -44,10 +46,19 @@ class EmployeeController extends Controller
         try {
             $input = $request->all();
             $input['image'] = $this->fileUpload($request, 'image');
-            $input['password'] = Hash::make('password');
+            $plainPassword = 'password';
+
+            $input['password'] = Hash::make($plainPassword);
             $input['status'] = 'Active';
 
-            User::create($input);
+            $userDetail =   User::create($input);
+            $userDetail->plain_password = $plainPassword;
+
+            //mail
+            Mail::to('durgesh.upadhyaya7@gmail.com')->send(
+                new EmployeeRegister($userDetail)
+            );
+
             return redirect()->route('employees.index')->with('message', 'Employee Created Successfully.');
         } catch (Exception $e) {
             return redirect()->route('employees.index')->with('warning', $e->getMessage())->withInput();
