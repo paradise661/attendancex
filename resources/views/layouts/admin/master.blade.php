@@ -680,29 +680,15 @@
 
      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-     <script src="{{ asset('assets/js/switch.js') }}"></script>
-
      <script src="{{ asset('assets/libs/preline/preline.js') }}"></script>
 
      <script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
 
-     <script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
-
      <script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
-
-     <script src="{{ asset('assets/js/sticky.js') }}"></script>
-
-     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-
-     <script src="{{ asset('assets\libs\jsvectormap\js\jsvectormap.min.js') }}"></script>
-
-     <script src="{{ asset('assets\libs\jsvectormap\maps\world-merc.js') }}"></script>
 
      <script src="{{ asset('assets\libs\apexcharts\apexcharts.min.js') }}"></script>
 
      <script src="{{ asset('assets\libs\chart.js\chart.min.js') }}"></script>
-
-     <script src="{{ asset('assets/js/crm-dashboard.js') }}"></script>
 
      <script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
 

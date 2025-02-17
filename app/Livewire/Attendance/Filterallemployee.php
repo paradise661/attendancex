@@ -69,7 +69,7 @@ class Filterallemployee extends Component
         $attendances = [];
         foreach ($employees as $employee) {
             $attendance = $attendanceList->firstWhere('user_id', $employee->id);
-            $weekends = json_decode($employee->department->holidays ?? '');
+            $weekends = json_decode($employee->department->holidays ?? '') ?? [];
             $type = 'Absent';
             if (in_array($employee->id, $leaveTaken)) {
                 $type = 'Leave';
