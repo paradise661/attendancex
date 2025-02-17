@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminNotify;
 
 class LeaveController extends Controller
 {
@@ -124,6 +125,11 @@ class LeaveController extends Controller
             //notification
             $userDetail = User::find($request->user()->id);
             sendNotificationToAdmin($request->user()->id, $userDetail->first_name . ' has submitted a leave request.', 'Leave', $leave->id);
+
+            //mail
+            Mail::to('durgesh.upadhyaya7@gmail.com')->send(
+                new AdminNotify($userDetail, 'leaveRequest')
+            );
 
             return response()->json([
                 'message' => 'Your leave request has been submitted successfully. Please wait for admin approval.',

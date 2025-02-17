@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminNotify;
 
 class AttendanceController extends Controller
 {
@@ -380,6 +382,11 @@ class AttendanceController extends Controller
             //notification
             $userDetail = User::find($request->user()->id);
             sendNotificationToAdmin($request->user()->id, $userDetail->first_name . ' has submitted an attendance request.', 'Attendance', $attendanceRequest->id);
+
+            //mail
+            Mail::to('durgesh.upadhyaya7@gmail.com')->send(
+                new AdminNotify($userDetail, 'attendanceRequest')
+            );
 
             return response()->json([
                 'message' => 'Your request has been submitted successfully. Please wait for admin approval.',
