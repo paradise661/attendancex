@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\LeavetypeController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\PublicHolidayController;
 use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Auth\Authcontroller;
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('notices', NoticeController::class);
     Route::resource('leavetypes', LeavetypeController::class);
+    Route::resource('publicholidays', PublicHolidayController::class);
     Route::get('attendances', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('attendance/individual', [AttendanceController::class, 'individualAttendance'])->name('attendance.individual');
 
