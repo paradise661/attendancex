@@ -272,6 +272,7 @@ function switcherClick() {
     let lightMenuVar = lightMenuBtn.addEventListener('click', () => {
         html.setAttribute('data-menu-styles', 'light');
         localStorage.setItem("ynexMenu", 'light');
+        $('.company_name').addClass('text-dark').removeClass('text-white');
     });
     /* Light Menu End */
 

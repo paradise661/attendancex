@@ -12,7 +12,7 @@
                     style="height: 80px">
                 <img class="toggle-white" src="{{ asset('assets/images/logo.png') }}" alt="logo"
                     style="height: 80px"> --}}
-                <span class="fw-bold text-white" style="font-size: 17px;">SAJILO ATTENDANCE</span>
+                <span class="fw-bold company_name text-white" style="font-size: 17px;">SAJILO ATTENDANCE</span>
             </a>
         </div>
 
