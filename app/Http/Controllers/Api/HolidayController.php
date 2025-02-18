@@ -13,7 +13,12 @@ class HolidayController extends Controller
         try {
             $user = $request->user();
 
-            $holidays = $user->department->publicHolidays;
+            $holidays = $user->department->publicHolidays()
+                ->where(function ($query) use ($user) {
+                    $query->where('gender', $user->gender)
+                        ->orWhere('gender', 'Both');
+                })
+                ->get();
             $weekends = json_decode($user->department->holidays ?? '') ?? [];
 
             $holidayDates = [];

@@ -30,6 +30,29 @@ class AttendanceService
             $leavesTakenDates = $leaves->pluck('date')->toArray();
 
             $weekends = json_decode($user->department->holidays ?? '') ?? [];
+            $holidays = $user->department->publicHolidays()
+                ->where(function ($query) use ($user) {
+                    $query->where('gender', $user->gender)
+                        ->orWhere('gender', 'Both');
+                })
+                ->get();
+            $holidayDates = [];
+
+            foreach ($holidays as $holiday) {
+                $start = Carbon::parse($holiday->start_date);
+                $end = Carbon::parse($holiday->end_date);
+
+                $overlapStartDate = $start->max($startDate);
+                $overlapEndDate = $end->min($endDate);
+
+                if ($overlapStartDate <= $overlapEndDate) {
+                    while ($overlapStartDate <= $overlapEndDate) {
+                        $holidayDates[] = $overlapStartDate->toDateString();
+                        $overlapStartDate->addDay();
+                    }
+                }
+            }
+            // dd($holidayDates);
 
             // Append absent dates to $attendances
             foreach ($absentDates as $absentDate) {
@@ -38,6 +61,9 @@ class AttendanceService
                     $type = 'Leave';
                 }
                 if (in_array(date('l', strtotime($absentDate)), $weekends)) {
+                    $type = 'Holiday';
+                }
+                if (in_array($absentDate->format('Y-m-d'), $holidayDates)) {
                     $type = 'Holiday';
                 }
                 $attendances->push((object)[
