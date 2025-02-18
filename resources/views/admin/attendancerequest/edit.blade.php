@@ -64,10 +64,11 @@
                     </div>
                 </div>
                 <!-- Admin Response Form -->
-                @if ($attendancerequest->status == 'Approved')
+                @if ($attendancerequest->status == 'Approved' || $attendancerequest->status == 'Rejected')
                     <div class="md:col-span-12 col-span-12">
                         <div class="text-red-500 dark:text-red-400 font-semibold inline-flex items-center">
-                            <i class="mr-1">Note: You cannot process this request once it has been approved.</i>
+                            <i class="mr-1">Note: You cannot process this request once it has been approved or
+                                rejected.</i>
                         </div>
                     </div>
                 @else
@@ -107,7 +108,11 @@
 
                         <!-- Submit Button -->
                         <div class="col-span-12">
-                            <button class="ti-btn ti-btn-primary-full" type="submit">Submit</button>
+                            <button class="ti-btn ti-btn-primary-full submitbtn" type="submit">
+                                Submit
+                                <span class="ti-spinner text-white !w-[1rem] !h-[1rem]" role="status"
+                                    aria-label="loading"></span>
+                            </button>
                         </div>
                     </form>
                 @endif
@@ -118,6 +123,18 @@
 
 @section('scripts')
     <script>
+        $(document).ready(function() {
+            $('.ti-spinner').hide();
+
+            $('form').on('submit', function() {
+                let button = $(this).find('.submitbtn');
+                let spinner = button.find('.ti-spinner');
+
+                button.prop('disabled', true);
+                spinner.show();
+            });
+        });
+
         $(document).ready(function() {
             const toggleRejectionReason = () => {
                 const isRejected = $("#status-select").val() === "Rejected";

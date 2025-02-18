@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EmployeeNotifyRequest;
 use App\Models\Attendance;
 use App\Models\AttendanceRequest;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Facades\Mail;
+
 
 class AttendanceRequestController extends Controller
 {
@@ -74,6 +77,12 @@ class AttendanceRequestController extends Controller
                 }
             }
             $attendancerequest->update($input);
+
+            //send mail to employee
+            Mail::to($attendancerequest->employee->email ?? '')->send(
+                new EmployeeNotifyRequest($attendancerequest, 'attendanceRequest')
+            );
+
             return redirect()->route('attendance.request')->with('message', 'Update Successful');
         } catch (Exception $e) {
             return redirect()->route('attendance.request')->with('warning', $e->getMessage())->withInput();

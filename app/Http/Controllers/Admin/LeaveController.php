@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LeaveRequest;
+use App\Mail\EmployeeNotifyRequest;
 use App\Models\Leave;
 use App\Models\LeaveApproval;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 
 class LeaveController extends Controller
 {
@@ -56,6 +57,11 @@ class LeaveController extends Controller
                     $startDate->modify('+1 day');
                 }
             }
+
+            //send mail to employee
+            Mail::to($leave->employee->email ?? "")->send(
+                new EmployeeNotifyRequest($leave, 'leaveRequest')
+            );
 
             return redirect()->route('leaves')->with('message', 'Leave request updated successfully.');
         } catch (Exception $e) {

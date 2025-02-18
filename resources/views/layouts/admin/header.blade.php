@@ -73,60 +73,63 @@
                                @endif
                            </div>
                            <div class="dropdown-divider"></div>
-                           <ul class="list-none !m-0 !p-0 end-0" id="header-notification-scroll">
-                               @foreach (getNotification(limit: 5) as $notification)
-                                   <li
-                                       class="ti-dropdown-item dropdown-item !block  {{ $notification->is_seen == 0 ? 'bg-gray-200' : 'bg-transparent' }}">
-                                       <div class="flex items-start">
-                                           <div class="pe-2">
-                                               <span
-                                                   class="inline-flex text-pinkmain justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-pinkmain/10 rounded-[50%]">
-                                                   <i class="ti ti-bell text-[1.125rem]"></i></span>
-                                           </div>
-                                           <div class="grow flex items-center justify-between">
-                                               <div>
-                                                   <p
-                                                       class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem] font-semibold">
-                                                       <a
+                           @if (getNotification()->count() > 0)
+                               <ul class="list-none !m-0 !p-0 end-0" id="header-notification-scroll">
+                                   @foreach (getNotification(limit: 5) as $notification)
+                                       <li
+                                           class="ti-dropdown-item dropdown-item !block  {{ $notification->is_seen == 0 ? 'bg-gray-200' : 'bg-transparent' }}">
+                                           <div class="flex items-start">
+                                               <div class="pe-2">
+                                                   <span
+                                                       class="inline-flex text-pinkmain justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-pinkmain/10 rounded-[50%]">
+                                                       <i class="ti ti-bell text-[1.125rem]"></i></span>
+                                               </div>
+                                               <div class="grow flex items-center justify-between">
+                                                   <div>
+                                                       <p
+                                                           class="mb-0 text-defaulttextcolor dark:text-white text-[0.8125rem] font-semibold">
+                                                           <a
+                                                               href="{{ $notification->type == 'Attendance'
+                                                                   ? route('attendance.request.edit', $notification->entity_id) . '?notification_id=' . $notification->id
+                                                                   : route('leaves.edit', $notification->entity_id) . '?notification_id=' . $notification->id }}">
+                                                               {{ $notification->message ?? '' }}
+                                                           </a>
+                                                       </p>
+                                                       <span
+                                                           class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">{{ $notification->created_at ? $notification->created_at->diffForHumans() : '' }}</span>
+                                                   </div>
+                                                   <div>
+                                                       <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
+                                                           aria-label="anchor"
                                                            href="{{ $notification->type == 'Attendance'
                                                                ? route('attendance.request.edit', $notification->entity_id) . '?notification_id=' . $notification->id
-                                                               : route('leaves.edit', $notification->entity_id) . '?notification_id=' . $notification->id }}">
-                                                           {{ $notification->message ?? '' }}
-                                                       </a>
-                                                   </p>
-                                                   <span
-                                                       class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">{{ $notification->created_at ? $notification->created_at->diffForHumans() : '' }}</span>
-                                               </div>
-                                               <div>
-                                                   <a class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"
-                                                       aria-label="anchor"
-                                                       href="{{ $notification->type == 'Attendance'
-                                                           ? route('attendance.request.edit', $notification->entity_id) . '?notification_id=' . $notification->id
-                                                           : route('leaves.edit', $notification->entity_id) . '?notification_id=' . $notification->id }}"></a>
+                                                               : route('leaves.edit', $notification->entity_id) . '?notification_id=' . $notification->id }}"></a>
+                                                   </div>
                                                </div>
                                            </div>
-                                       </div>
-                                   </li>
-                               @endforeach
-                           </ul>
+                                       </li>
+                                   @endforeach
+                               </ul>
 
-                           <div class="p-4 empty-header-item1 border-t mt-2">
-                               <div class="grid">
-                                   <a class="ti-btn ti-btn-primary-full !m-0 w-full p-2"
-                                       href="{{ route('notification.index') }}">View
-                                       All</a>
+                               <div class="p-4 empty-header-item1 border-t mt-2">
+                                   <div class="grid">
+                                       <a class="ti-btn ti-btn-primary-full !m-0 w-full p-2"
+                                           href="{{ route('notification.index') }}">View
+                                           All</a>
+                                   </div>
                                </div>
-                           </div>
-                           <div class="p-[3rem] empty-item1 hidden">
-                               <div class="text-center">
-                                   <span
-                                       class="!h-[4rem]  !w-[4rem] avatar !leading-[4rem] !rounded-full !bg-secondary/10 !text-secondary">
-                                       <i class="ri-notification-off-line text-[2rem]  "></i>
-                                   </span>
-                                   <h6 class="font-semibold mt-3 text-defaulttextcolor dark:text-white text-[1rem]">
-                                       No New Notifications</h6>
+                           @else
+                               <div class="p-[3rem] empty-item1">
+                                   <div class="text-center">
+                                       <span
+                                           class="!h-[4rem]  !w-[4rem] avatar !leading-[4rem] !rounded-full !bg-secondary/10 !text-secondary">
+                                           <i class="ri-notification-off-line text-[2rem]  "></i>
+                                       </span>
+                                       <h6 class="font-semibold mt-3 text-defaulttextcolor dark:text-white text-[1rem]">
+                                           No New Notifications</h6>
+                                   </div>
                                </div>
-                           </div>
+                           @endif
                        </div>
                    </div>
                    <!--End Header Notifictaion -->
@@ -144,8 +147,6 @@
                        <div class="md:block hidden dropdown-profile">
                            <p class="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">Super Admin
                            </p>
-                           {{-- <span class="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">
-                               Admin</span> --}}
                        </div>
                        <div class="hs-dropdown-menu ti-dropdown-menu !-mt-3 border-0 w-[11rem] !p-0 border-defaultborder hidden main-header-dropdown  pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
                            aria-labelledby="dropdown-profile">

@@ -344,7 +344,11 @@
                     </div>
 
                     <div class="col-span-12">
-                        <button class="ti-btn ti-btn-primary-full" type="submit">Submit</button>
+                        <button class="ti-btn ti-btn-primary-full submitbtn" type="submit">
+                            Submit
+                            <span class="ti-spinner text-white !w-[1rem] !h-[1rem]" role="status"
+                                aria-label="loading"></span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -354,6 +358,19 @@
 
 @section('scripts')
     <script>
+        $(document).ready(function() {
+            $('.ti-spinner').hide();
+
+            $('form').on('submit', function() {
+                let button = $(this).find('.submitbtn');
+                let spinner = button.find('.ti-spinner');
+
+                button.prop('disabled', true);
+                spinner.show();
+            });
+        });
+
+
         $(document).ready(function() {
             $('#branch').on('change', function() {
                 let branch_id = $(this).val();

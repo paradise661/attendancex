@@ -9,19 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AdminNotify extends Mailable
+class SendOTPToEmployee extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
-    public $requestType;
-
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $requestType)
+    public function __construct($user)
     {
         $this->user = $user;
-        $this->requestType = $requestType;
     }
 
     /**
@@ -30,7 +27,7 @@ class AdminNotify extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Admin Notify',
+            subject: 'Send OTP To Employee',
         );
     }
 
@@ -40,11 +37,11 @@ class AdminNotify extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.admin.notify',
+            view: 'mail.user.otp',
             with: [
                 'user' => $this->user,
-                'requestType' => $this->requestType,
             ],
+
         );
     }
 

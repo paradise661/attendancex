@@ -126,7 +126,7 @@ class LeaveController extends Controller
             $userDetail = User::find($request->user()->id);
             sendNotificationToAdmin($request->user()->id, $userDetail->first_name . ' has submitted a leave request.', 'Leave', $leave->id);
 
-            //mail
+            //send mail to admin
             Mail::to('durgesh.upadhyaya7@gmail.com')->send(
                 new AdminNotify($userDetail, 'leaveRequest')
             );

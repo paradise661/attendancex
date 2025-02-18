@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendOTPToEmployee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use File;
+use Illuminate\Support\Facades\Mail;
 
 class UserAuthController extends Controller
 {
@@ -177,9 +179,11 @@ class UserAuthController extends Controller
 
         $otp = rand(10000, 99999);
         $user->update(['otp' => $otp]);
-        //send otp in mail
 
-
+        //send mail to employee
+        Mail::to($request->email ?? "")->send(
+            new SendOTPToEmployee($user)
+        );
 
         return response()->json([
             'success' => true,
