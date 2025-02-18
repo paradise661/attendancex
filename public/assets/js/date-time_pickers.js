@@ -6,6 +6,9 @@
          maxDate: "today"
     });
 
+    flatpickr("#fulldate", {
+   });
+
     /* To choose date and time */
     flatpickr("#datetime", {
         enableTime: true,
