@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\HolidayController;
 use App\Http\Controllers\Api\LeaveController;
 use App\Http\Controllers\Api\UserAuthController;
 use Illuminate\Http\Request;
@@ -39,4 +40,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('leaves', [LeaveController::class, 'getLeaves']);
     Route::post('leave/request', [LeaveController::class, 'leaveRequest']);
     Route::post('leave/cancel', [LeaveController::class, 'leaveCancelRequest']);
+    Route::get('publicholidays', [HolidayController::class, 'publicHolidays']);
 });
