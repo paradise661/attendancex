@@ -41343,16 +41343,16 @@ h6 {
   border-radius: 0.5rem;
 }
 .crm-lead-legend.mobile:before {
-  background-color: rgb(var(--primary));
+  background-color: green;
 }
 .crm-lead-legend.desktop:before {
-  background-color: rgb(var(--secondary));
+  background-color: red;
 }
 .crm-lead-legend.laptop:before {
   background-color: rgb(var(--warning));
 }
 .crm-lead-legend.tablet:before {
-  background-color: rgb(var(--success));
+  background-color: yellow;
 }
 .crm-leadsinprogress {
   margin-bottom: 0px;

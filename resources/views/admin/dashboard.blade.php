@@ -12,7 +12,7 @@
     <!-- End::page-header -->
 
     <div class="grid grid-cols-12 gap-x-6">
-        <div class="xxl:col-span-9 xl:col-span-12  col-span-12">
+        <div class="xxl:col-span-12 xl:col-span-12  col-span-12">
             <div class="grid grid-cols-12 gap-x-6">
                 <div class="xxl:col-span-4 xl:col-span-4  col-span-12">
                     <div class="xxl:col-span-12 xl:col-span-12 col-span-12">
@@ -85,7 +85,7 @@
                                         <div class="flex items-top justify-between">
                                             <div>
                                                 <span
-                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-primary">
+                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-green-500">
                                                     <i class="ti ti-user text-[1rem] text-white"></i>
                                                 </span>
                                             </div>
@@ -116,7 +116,7 @@
                                         <div class="flex items-top justify-between">
                                             <div>
                                                 <span
-                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-secondary">
+                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-red-500">
                                                     <i class="ti ti-user-x text-[1rem] text-white"></i>
                                                 </span>
                                             </div>
@@ -147,10 +147,8 @@
                                         <div class="flex items-top justify-between">
                                             <div>
                                                 <span
-                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-success">
+                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-yellow-500">
                                                     <i class="ti ti-user-exclamation text-[1rem] text-white"></i>
-
-
                                                 </span>
                                             </div>
                                             <div class="flex-grow ms-4">
@@ -225,7 +223,6 @@
         </div>
 
     </div>
-
 @endsection
 
 @section('scripts')
@@ -282,10 +279,9 @@
                     label: 'My First Dataset',
                     data: ["{{ $todayPresent }}", "{{ $todayAbsent }}", "{{ $todayLeave }}"],
                     backgroundColor: [
-                        'rgb(132, 90, 223)',
-                        'rgb(35, 183, 229)',
-                        'rgb(38, 191, 148)',
-                        'rgb(245, 184, 73)',
+                        'green',
+                        'red',
+                        'yellow',
                     ]
                 }]
             },
