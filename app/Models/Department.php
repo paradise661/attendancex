@@ -23,4 +23,9 @@ class Department extends Model
     {
         return $this->belongsToMany(Notice::class, 'department_notices')->withTimestamps();
     }
+
+    public function publicHolidays()
+    {
+        return $this->belongsToMany(PublicHoliday::class, 'department_public_holidays', 'department_id', 'public_holiday_id');
+    }
 }

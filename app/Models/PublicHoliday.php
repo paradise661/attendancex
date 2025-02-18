@@ -14,4 +14,9 @@ class PublicHoliday extends Model
         'gender',
         'status',
     ];
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'department_public_holidays', 'public_holiday_id', 'department_id');
+    }
 }
