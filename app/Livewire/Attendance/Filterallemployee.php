@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\Attendance;
 use App\Models\Branch;
 use App\Models\LeaveApproval;
+use App\Models\PublicHoliday;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -70,11 +71,26 @@ class Filterallemployee extends Component
         foreach ($employees as $employee) {
             $attendance = $attendanceList->firstWhere('user_id', $employee->id);
             $weekends = json_decode($employee->department->holidays ?? '') ?? [];
+
+            $publicHoliday = $employee->department->publicHolidays()
+                ->where(function ($query) use ($employee) {
+                    $query->where('gender', $employee->gender)
+                        ->orWhere('gender', 'Both');
+                })
+                ->where(function ($query) {
+                    $query->whereDate('start_date', '<=', $this->searchTerms)
+                        ->whereDate('end_date', '>=', $this->searchTerms);
+                })
+                ->first();
+
             $type = 'Absent';
             if (in_array($employee->id, $leaveTaken)) {
                 $type = 'Leave';
             }
             if (in_array(date('l', strtotime($this->searchTerms)), $weekends)) {
+                $type = 'Holiday';
+            }
+            if ($publicHoliday) {
                 $type = 'Holiday';
             }
 
