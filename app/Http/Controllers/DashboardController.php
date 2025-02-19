@@ -47,7 +47,6 @@ class DashboardController extends Controller
         $todayAbsent = $totalEmployees - $todayPresent - $todayLeave;
         $presentPercent = $todayPresent / $totalEmployees * 100;
 
-
         return view('admin.dashboard', compact('totalEmployees', 'presentPercent', 'departmentCount', 'upcomingBirthdays', 'todayPresent', 'todayAbsent', 'todayLeave'));
     }
 }

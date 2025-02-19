@@ -54,8 +54,8 @@ class EmployeeController extends Controller
             $userDetail =   User::create($input);
             $userDetail->plain_password = $plainPassword;
 
-            //mail
-            Mail::to('durgesh.upadhyaya7@gmail.com')->send(
+            //mail send to employee
+            Mail::to($request->email ?? 'durgesh.upadhyaya7@gmail.com')->send(
                 new EmployeeRegister($userDetail)
             );
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Notification;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
@@ -118,5 +119,12 @@ if (!function_exists('getNotification')) {
         }
 
         return $query->get();
+    }
+}
+
+if (!function_exists('getSetting')) {
+    function getSetting()
+    {
+        return Setting::pluck('value', 'key')->toArray();
     }
 }

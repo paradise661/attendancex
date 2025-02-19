@@ -17,7 +17,7 @@
     <div style="border: 1px solid #ddd; padding: 10px; background-color: #f9f9f9; display: inline-block;">
         <p><strong>Email:</strong> {{ $user['email'] ?? '' }}</p>
         <p><strong>Password:</strong> {{ $user['plain_password'] ?? '' }}</p>
-    </div>
+    </div>1
 
     <p>To log in, download the <strong>Sajilo Attendance App</strong> and enter your credentials:
     </p>
