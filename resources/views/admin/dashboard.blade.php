@@ -20,16 +20,14 @@
                             <div class="box-body">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <div class="font-semibold text-[1.125rem] text-white mb-2">Today's Attendance Status
+                                        <div class="font-semibold text-[1.125rem] text-white mb-2">Employee Check-in Status
                                         </div>
                                         <span class="block text-[0.75rem] text-white">
-                                            <span class="opacity-[0.7]">Currently,</span>
+                                            <span class="opacity-[0.7]">So far today,</span>
                                             <span class="font-semibold text-warning">{{ $presentPercent }}%</span>
-                                            <span class="opacity-[0.7]">of employees are present. Keep an eye on attendance
-                                                trends!</span>
+                                            <span class="opacity-[0.7]">of employees have checked in. Stay updated!</span>
                                         </span>
                                     </div>
-
                                     <div>
                                         <div id="crm-main"></div>
                                     </div>
