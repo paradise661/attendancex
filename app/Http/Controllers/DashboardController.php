@@ -45,7 +45,7 @@ class DashboardController extends Controller
         $todayPresent = Attendance::where('date', date('Y-m-d'))->get()->count();
         $todayLeave = LeaveApproval::where('date', date('Y-m-d'))->get()->count();
         $todayAbsent = $totalEmployees - $todayPresent - $todayLeave;
-        $presentPercent = $todayPresent / $totalEmployees * 100;
+        $presentPercent = intval($todayPresent / $totalEmployees * 100);
 
         return view('admin.dashboard', compact('totalEmployees', 'presentPercent', 'departmentCount', 'upcomingBirthdays', 'todayPresent', 'todayAbsent', 'todayLeave'));
     }
