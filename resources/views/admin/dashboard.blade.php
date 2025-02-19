@@ -5,8 +5,8 @@
         <div>
             <p class="font-semibold text-[1.125rem] text-defaulttextcolor dark:text-defaulttextcolor/70 !mb-0 ">
                 Welcome back, Sajilo Attendance Admin !</p>
-            <p class="font-normal text-[#8c9097] dark:text-white/50 text-[0.813rem]">Track your attendance
-                activity here.</p>
+            <p class="font-normal text-[#8c9097] dark:text-white/50 text-[0.813rem]">
+                Keep your workforce on track—monitor attendance, analyze trends, and boost productivity.</p>
         </div>
     </div>
     <!-- End::page-header -->
@@ -20,13 +20,16 @@
                             <div class="box-body">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <div class="font-semibold text-[1.125rem] text-white mb-2">Todays present record
+                                        <div class="font-semibold text-[1.125rem] text-white mb-2">Today's Attendance Status
                                         </div>
-                                        <span class="block text-[0.75rem] text-white"><span
-                                                class="opacity-[0.7]">Today</span>
-                                            <span class="font-semibold text-warning">{{ $presentPercent }}%</span> <span
-                                                class="opacity-[0.7]">of the total employees are present</span>.</span>
+                                        <span class="block text-[0.75rem] text-white">
+                                            <span class="opacity-[0.7]">Currently,</span>
+                                            <span class="font-semibold text-warning">{{ $presentPercent }}%</span>
+                                            <span class="opacity-[0.7]">of employees are present. Keep an eye on attendance
+                                                trends!</span>
+                                        </span>
                                     </div>
+
                                     <div>
                                         <div id="crm-main"></div>
                                     </div>
