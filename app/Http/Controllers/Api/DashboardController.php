@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DateTime;
 
 class DashboardController extends Controller
 {
@@ -50,6 +51,19 @@ class DashboardController extends Controller
 
             $todayAttendance = Attendance::where('user_id', $request->user()->id)->whereDate('date', $today)->first();
 
+
+            $start_month = date('Y-m-01');
+            $end_month = date('Y-m-t');
+
+            // Get the user attendance for the current month
+            $attendanceRecords = Attendance::where('user_id', $request->user()->id)
+            ->whereBetween('date', [$start_month, $end_month]) // Filter by the current month
+            ->get();
+
+            $totalDaysInMonth = date('t');
+            $presentDays = $attendanceRecords->count();
+            $presentPercentage = ($presentDays / $totalDaysInMonth) * 100;
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Dashboard data retrieved successfully.',
@@ -57,6 +71,7 @@ class DashboardController extends Controller
                     'today_attendance' => $todayAttendance,
                     'upcoming_birthday' => $upcomingBirthday,
                     'latest_notice' => $latestNotice,
+                    'presentPercentage' => round($presentPercentage, 0),
                 ],
             ]);
         } catch (\Exception $e) {
@@ -171,10 +186,23 @@ class DashboardController extends Controller
 
             $myteam = User::with('department')->where('user_type', 'Employee')->where('branch_id', $branchId)->oldest('order')->get();
 
+            $teamData = $myteam->groupBy(function ($user) {
+                return $user->department->name;
+            });
+
+            $formattedTeamData = $teamData->map(function ($members, $department) {
+                return [
+                    'name' => $department,
+                    'members' => $members->map(function ($member) {
+                        return $member;
+                    }),
+                ];
+            })->values();
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Team retrieved successfully.',
-                'data' => $myteam,
+                'data' => $formattedTeamData,
             ]);
         } catch (\Exception $e) {
             return response()->json([
