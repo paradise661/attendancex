@@ -17,11 +17,12 @@
                 <form class="grid grid-cols-12 gap-4 mt-0" action="{{ route('notices.store') }}" method="POST">
                     @csrf
                     <div class="md:col-span-6 col-span-12">
-                        <label class="form-label">Title<span class="text-red-500"> *</span></label>
+                        <label class="form-label">Title<span class="text-red-500">*</span></label>
                         <div class="relative">
                             <input
                                 class="form-control @error('title') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                type="text" aria-label="Title" name="title" value="{{ old('title') }}">
+                                type="text" aria-label="Title" name="title" value="{{ old('title') }}" maxlength="35">
+                            <p class="mt-2"><i>(Note: Max 35 Characters)</i></p>
                             @error('title')
                                 <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
                                     <svg class="h-5 w-5 text-danger" width="16" height="16" fill="currentColor"
