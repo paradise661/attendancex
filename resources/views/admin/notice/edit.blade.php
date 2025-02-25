@@ -102,7 +102,7 @@
                                     <div class="input-group-text text-[#8c9097] dark:text-white/50"> <i
                                             class="ri-calendar-line"></i> </div> <input
                                         class="form-control flatpickr-input active @error('date') ti-form-input !border-danger focus:border-danger focus:ring-danger @enderror"
-                                        id="date" type="text" name="date" placeholder="Choose date"
+                                        id="fulldate" type="text" name="date" placeholder="Choose date"
                                         readonly="readonly" value="{{ old('date', $notice->date) }}">
                                     @error('date')
                                         <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
