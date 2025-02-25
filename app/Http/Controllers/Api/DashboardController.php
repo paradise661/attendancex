@@ -17,26 +17,6 @@ class DashboardController extends Controller
     {
         try {
             $today = Carbon::today();
-            $currentYear = $today->year;
-
-            $upcomingBirthday = User::select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
-                ->whereNotNull('date_of_birth')
-                ->get()
-                ->map(function ($user) use ($today, $currentYear) {
-                    $birthDate = Carbon::parse($user->date_of_birth);
-                    $birthDate->year = ($birthDate->month < $today->month ||
-                        ($birthDate->month == $today->month && $birthDate->day < $today->day))
-                        ? $currentYear + 1 : $currentYear;
-
-                    $daysLeft = $today->diffInDays($birthDate, false);
-
-                    $user->upcoming_birthday_message = $this->formatBirthdayMessage($daysLeft);
-                    $user->remaining_days = $daysLeft;
-                    $user->full_name = "{$user->first_name} {$user->last_name}";
-                    return $user;
-                })
-                ->sortBy('remaining_days')->first();
-
             $departmentId = $request->user()->department_id;
 
             $latestNotice = null;
@@ -57,8 +37,8 @@ class DashboardController extends Controller
 
             // Get the user attendance for the current month
             $attendanceRecords = Attendance::where('user_id', $request->user()->id)
-            ->whereBetween('date', [$start_month, $end_month]) // Filter by the current month
-            ->get();
+                ->whereBetween('date', [$start_month, $end_month]) // Filter by the current month
+                ->get();
 
             $totalDaysInMonth = date('t');
             $presentDays = $attendanceRecords->count();
@@ -69,7 +49,6 @@ class DashboardController extends Controller
                 'message' => 'Dashboard data retrieved successfully.',
                 'data' => [
                     'today_attendance' => $todayAttendance,
-                    'upcoming_birthday' => $upcomingBirthday,
                     'latest_notice' => $latestNotice,
                     'presentPercentage' => round($presentPercentage, 0),
                 ],

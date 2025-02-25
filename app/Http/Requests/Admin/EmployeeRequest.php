@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -24,7 +25,10 @@ class EmployeeRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => [
+                'required',
+                Rule::unique('users', 'email')->ignore($this->route('employee')->id ?? null),
+            ],
             'phone' => 'required',
             'date_of_birth' => 'required|date',
             'join_date' => 'required|date',
