@@ -43,12 +43,6 @@
                             alt="logo">
                     </div>
 
-                    <!-- Sign-In Heading -->
-                    <p class="text-2xl font-semibold text-center text-gray-800 dark:text-white mb-2">Sign In</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 text-center mb-6">
-                        Welcome back, Admin!
-                    </p>
-
                     @if (session('error'))
                         <div
                             class="alert alert-danger flex items-center p-4 mb-4 rounded-lg bg-red-100 text-red-700 border border-red-400">
