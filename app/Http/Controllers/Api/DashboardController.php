@@ -70,8 +70,8 @@ class DashboardController extends Controller
             $currentYear = $today->year;
 
             $users = User::select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
-                ->whereHas('departments', callback: function ($query) use ($request) {
-                    $query->where('departments.id', $request->user()->department_id);
+                ->whereHas('branch', callback: function ($query) use ($request) {
+                    $query->where('branches.id', $request->user()->branch_id);
                 })
                 ->whereNotNull('date_of_birth')
                 ->get()
