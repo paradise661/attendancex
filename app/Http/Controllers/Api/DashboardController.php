@@ -63,13 +63,16 @@ class DashboardController extends Controller
         }
     }
 
-    public function getUpcomingBirthdays()
+    public function getUpcomingBirthdays(Request $request)
     {
         try {
             $today = Carbon::today();
             $currentYear = $today->year;
 
             $users = User::select('id', 'first_name', 'last_name', 'date_of_birth', 'image', 'designation')
+                ->whereHas('departments', callback: function ($query) use ($request) {
+                    $query->where('departments.id', $request->user()->department_id);
+                })
                 ->whereNotNull('date_of_birth')
                 ->get()
                 ->map(function ($user) use ($today, $currentYear) {
