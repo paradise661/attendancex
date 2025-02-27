@@ -13,7 +13,7 @@
         content="Paradise Infotech, Sajilo Attendance system, attendance management, employee attendance software, time tracking, admin dashboard, responsive system, attendance solutions, Paradise attendance system, AttendanceX">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/brand-logos/fav.jpg') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/brand-logos/fav.png') }}">
     <!-- Main Theme Js -->
     <script src="{{ asset('assets/js/authentication-main.js') }}"></script>
 
@@ -39,7 +39,7 @@
                     @csrf
                     <!-- Logo Section -->
                     <div class="flex justify-center mb-6">
-                        <img class="desktop-logo h-16 w-auto" src="{{ asset('assets/images/logo.png') }}"
+                        <img class="desktop-logo h-24 w-auto" src="{{ asset('assets/images/logo.png') }}"
                             alt="logo">
                     </div>
 
