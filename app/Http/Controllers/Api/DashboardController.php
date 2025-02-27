@@ -33,14 +33,14 @@ class DashboardController extends Controller
 
 
             $start_month = date('Y-m-01');
-            $end_month = date('Y-m-t');
+            $end_month = date('Y-m-d');
 
             // Get the user attendance for the current month
             $attendanceRecords = Attendance::where('user_id', $request->user()->id)
                 ->whereBetween('date', [$start_month, $end_month]) // Filter by the current month
                 ->get();
 
-            $totalDaysInMonth = date('t');
+            $totalDaysInMonth = date('d');
             $presentDays = $attendanceRecords->count();
             $presentPercentage = ($presentDays / $totalDaysInMonth) * 100;
 
