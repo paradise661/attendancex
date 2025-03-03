@@ -11,17 +11,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Gate;
 
 
 class AttendanceRequestController extends Controller
 {
     public function index()
     {
+        abort_unless(Gate::allows('view attendancerequest'), 403);
+
         return view('admin.attendancerequest.index');
     }
 
     public function edit(AttendanceRequest $attendancerequest, Request $request)
     {
+        abort_unless(Gate::allows('manage attendancerequest'), 403);
+
         if ($notificationID = $request->query('notification_id')) {
             Notification::where('id', $notificationID)
                 ->update([
@@ -35,6 +40,8 @@ class AttendanceRequestController extends Controller
 
     public function update(Request $request, AttendanceRequest $attendancerequest)
     {
+        abort_unless(Gate::allows('manage attendancerequest'), 403);
+
         try {
             $input = $request->all();
             $input['action_by'] = Auth::id();

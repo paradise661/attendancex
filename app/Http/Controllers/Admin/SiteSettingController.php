@@ -6,17 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use File;
+use Illuminate\Support\Facades\Gate;
 
 class SiteSettingController extends Controller
 {
     public function siteSettings()
     {
+        abort_unless(Gate::allows('view setting'), 403);
+
         $setting = Setting::pluck('value', 'key');
         return view('admin.setting.edit', compact('setting'));
     }
 
     public function updateSiteSettings(Request $request, Setting $setting)
     {
+        abort_unless(Gate::allows('update setting'), 403);
+
         $siteSettings = Setting::pluck('value', 'key');
 
         $old_company_logo = $siteSettings['company_logo'];

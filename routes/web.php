@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\LeavetypeController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PublicHolidayController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Auth\Authcontroller;
@@ -66,7 +67,13 @@ Route::middleware(['auth'])->group(function () {
         ->name('site.setting.update');
     Route::get('site-setting/removefile/{filename}/{type}', [SiteSettingController::class, 'removefileFromSite'])
         ->name('site.setting.remove.file');
+
+    Route::resource('roles', RoleController::class);
 });
 
 Route::get('get-departments/{branch_id}', [EmployeeController::class, 'getDepartments']);
 Route::get('get-shifts/{department_id}', [EmployeeController::class, 'getShifts']);
+
+//permission
+Route::get('insert/permission', [RoleController::class, 'insertPermission']);
+Route::get('insert/role', [RoleController::class, 'insertRole']);

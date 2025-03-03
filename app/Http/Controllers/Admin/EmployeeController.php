@@ -15,6 +15,9 @@ use Exception;
 use File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Gate;
+
 
 class EmployeeController extends Controller
 {
@@ -23,6 +26,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        abort_unless(Gate::allows('view employee'), 403);
+
         return view('admin.employee.index');
     }
 
@@ -31,11 +36,14 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        abort_unless(Gate::allows('create employee'), 403);
+
         $branches = Branch::where('status', 1)->oldest('order')->get();
         $departments = Department::where('status', 1)->oldest('order')->get();
         $shifts = Shift::where('status', 1)->oldest('order')->get();
         $designations = Designation::where('status', 1)->oldest('order')->get();
-        return view('admin.employee.create', compact('branches', 'departments', 'shifts', 'designations'));
+        $roles = Role::whereNotIn('name', ['SUPER-ADMIN'])->get();
+        return view('admin.employee.create', compact('branches', 'departments', 'shifts', 'designations', 'roles'));
     }
 
     /**
@@ -43,8 +51,10 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
+        abort_unless(Gate::allows('create employee'), 403);
+
         try {
-            $input = $request->all();
+            $input = $request->except('roles');
             $input['image'] = $this->fileUpload($request, 'image');
             $plainPassword = 'password';
 
@@ -53,6 +63,7 @@ class EmployeeController extends Controller
 
             $userDetail =   User::create($input);
             $userDetail->plain_password = $plainPassword;
+            $userDetail->assignRole($request->roles);
 
             //mail send to employee
             Mail::to($request->email ?? 'durgesh.upadhyaya7@gmail.com')->send(
@@ -78,12 +89,15 @@ class EmployeeController extends Controller
      */
     public function edit(User $employee)
     {
+        abort_unless(Gate::allows('edit employee'), 403);
+
         $branches = Branch::where('status', 1)->oldest('order')->get();
         $departments = Department::where('status', 1)->oldest('order')->get();
         $shifts = Shift::where('status', 1)->oldest('order')->get();
         $designations = Designation::where('status', 1)->oldest('order')->get();
-
-        return view('admin.employee.edit', compact('employee', 'branches', 'departments', 'shifts', 'designations'));
+        $roles = Role::whereNotIn('name', ['SUPER-ADMIN'])->get();
+        $assignedRoles = $employee->roles->pluck('name')->toArray();
+        return view('admin.employee.edit', compact('employee', 'branches', 'departments', 'shifts', 'designations', 'roles', 'assignedRoles'));
     }
 
     /**
@@ -91,6 +105,8 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeRequest $request, User $employee)
     {
+        abort_unless(Gate::allows('edit employee'), 403);
+
         $validated = $request->validate([
             'password' => 'nullable|min:8',  // Ensure password is at least 8 characters if provided
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  // Validate image if provided
@@ -99,7 +115,7 @@ class EmployeeController extends Controller
         try {
 
             $old_image = $employee->image;
-            $input = $request->except('password');
+            $input = $request->except('password', 'roles');
             if ($request->password) {
                 $input['password'] = Hash::make($request->password);
             }
@@ -114,6 +130,8 @@ class EmployeeController extends Controller
             }
 
             $employee->update($input);
+            $employee->roles()->detach();
+            $employee->assignRole($request->roles);
 
             return redirect()->route('employees.index')->with('message', 'Updated Successfully.');
         } catch (Exception $e) {
@@ -126,7 +144,10 @@ class EmployeeController extends Controller
      */
     public function destroy(User $employee)
     {
+        abort_unless(Gate::allows('delete employee'), 403);
+
         $this->removeFile($employee->image);
+        $employee->roles()->detach();
         $employee->delete();
         return redirect()->route('employees.index')->with('message', 'Delete Successfully');
     }

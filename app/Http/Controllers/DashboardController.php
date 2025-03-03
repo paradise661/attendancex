@@ -8,12 +8,14 @@ use App\Models\LeaveApproval;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        abort_unless(Gate::allows('view dashboard'), 403);
+
         // return 1;
         $totalEmployees = User::where('user_type', 'Employee')->where('status', 'Active')->get()->count();
         $departmentCount = Department::count();

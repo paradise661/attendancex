@@ -25,7 +25,8 @@ class Authcontroller extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if ($user->user_type !== 'Admin') {
+
+            if ($user->roles->isEmpty()) {
                 Auth::logout();
                 return redirect("login")->withError('You are not authorized to access this system.');
             }

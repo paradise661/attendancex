@@ -12,16 +12,21 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Gate;
 
 class LeaveController extends Controller
 {
     public function index()
     {
+        abort_unless(Gate::allows('view leaverequest'), 403);
+
         return view('admin.leave.index');
     }
 
     public function edit(Leave $leave, Request $request)
     {
+        abort_unless(Gate::allows('manage leaverequest'), 403);
+
         if ($notificationID = $request->query('notification_id')) {
             Notification::where('id', $notificationID)
                 ->update([
@@ -35,6 +40,8 @@ class LeaveController extends Controller
 
     public function update(LeaveRequest $request, Leave $leave)
     {
+        abort_unless(Gate::allows('manage leaverequest'), 403);
+
         try {
             $leave->update([
                 'status' => $request->status,

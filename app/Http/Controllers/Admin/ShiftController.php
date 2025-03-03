@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Models\Shift;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Gate;
 
 class ShiftController extends Controller
 {
@@ -16,6 +17,8 @@ class ShiftController extends Controller
      */
     public function index()
     {
+        abort_unless(Gate::allows('view shift'), 403);
+
         $shifts = Shift::latest()->paginate(perPage: 20);
         return view('admin.shift.index', compact('shifts'));
     }
@@ -25,6 +28,8 @@ class ShiftController extends Controller
      */
     public function create()
     {
+        abort_unless(Gate::allows('create shift'), 403);
+
         $departments = Department::where('status', 1)->latest()->get();
         return view('admin.shift.create', compact('departments'));
     }
@@ -34,6 +39,8 @@ class ShiftController extends Controller
      */
     public function store(ShiftRequest $request)
     {
+        abort_unless(Gate::allows('create shift'), 403);
+
         try {
             Shift::create($request->all());
             return redirect()->route('shifts.index')->with('message', 'Shift Created Successfully');
@@ -55,6 +62,8 @@ class ShiftController extends Controller
      */
     public function edit(Shift $shift)
     {
+        abort_unless(Gate::allows('edit shift'), 403);
+
         $departments = Department::where('status', 1)->latest()->get();
         return view('admin.shift.edit', compact('shift', 'departments'));
     }
@@ -64,6 +73,8 @@ class ShiftController extends Controller
      */
     public function update(ShiftRequest $request, Shift $shift)
     {
+        abort_unless(Gate::allows('edit shift'), 403);
+
         try {
             $shift->update($request->all());
             return redirect()->route('shifts.index')->with('message', 'Update Successfully');
@@ -77,6 +88,8 @@ class ShiftController extends Controller
      */
     public function destroy(Shift $shift)
     {
+        abort_unless(Gate::allows('delete shift'), 403);
+
         $shift->delete();
         return redirect()->route('shifts.index')->with('message', 'Delete Successfully');
     }

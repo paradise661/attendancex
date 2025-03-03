@@ -9,6 +9,8 @@ use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Gate;
+
 
 class NoticeController extends Controller
 {
@@ -17,6 +19,8 @@ class NoticeController extends Controller
      */
     public function index()
     {
+        abort_unless(Gate::allows('view appnotice'), 403);
+
         $notices = Notice::latest()->paginate(perPage: 20);
         return view('admin.notice.index', compact('notices'));
     }
@@ -26,6 +30,8 @@ class NoticeController extends Controller
      */
     public function create()
     {
+        abort_unless(Gate::allows('create appnotice'), 403);
+
         $departments = Department::where('status', 1)->oldest('order')->get();
         return view('admin.notice.create', compact('departments'));
     }
@@ -35,6 +41,8 @@ class NoticeController extends Controller
      */
     public function store(NoticeRequest $request)
     {
+        abort_unless(Gate::allows('create appnotice'), 403);
+
         try {
             $notice =  Notice::create($request->all());
             $notice->departments()->attach($request->departments);
@@ -61,6 +69,8 @@ class NoticeController extends Controller
      */
     public function edit(Notice $notice)
     {
+        abort_unless(Gate::allows('edit appnotice'), 403);
+
         $departments = Department::where('status', 1)->oldest('order')->get();
         return view('admin.notice.edit', compact('notice', 'departments'));
     }
@@ -70,6 +80,8 @@ class NoticeController extends Controller
      */
     public function update(NoticeRequest $request, Notice $notice)
     {
+        abort_unless(Gate::allows('edit appnotice'), 403);
+
         try {
             $notice->update($request->all());
             $notice->departments()->sync($request->departments);
@@ -85,8 +97,9 @@ class NoticeController extends Controller
      */
     public function destroy(Notice $notice)
     {
-        $notice->departments()->detach();
+        abort_unless(Gate::allows('delete appnotice'), 403);
 
+        $notice->departments()->detach();
         $notice->delete();
         return redirect()->route('notices.index')->with('message', 'Delete Successfully');
     }

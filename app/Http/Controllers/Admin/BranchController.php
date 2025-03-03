@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\BranchRequest;
 use App\Models\Branch;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Gate;
 
 class BranchController extends Controller
 {
@@ -15,6 +16,8 @@ class BranchController extends Controller
      */
     public function index()
     {
+        abort_unless(Gate::allows('view branch'), 403);
+
         $branches = Branch::latest()->paginate(perPage: 20);
         return view('admin.branch.index', compact('branches'));
     }
@@ -24,6 +27,8 @@ class BranchController extends Controller
      */
     public function create()
     {
+        abort_unless(Gate::allows('create branch'), 403);
+
         return view('admin.branch.create');
     }
 
@@ -32,6 +37,8 @@ class BranchController extends Controller
      */
     public function store(BranchRequest $request)
     {
+        abort_unless(Gate::allows('create branch'), 403);
+
         try {
             Branch::create($request->all());
             return redirect()->route('branches.index')->with('message', 'Branch Created Successfully');
@@ -53,6 +60,8 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch)
     {
+        abort_unless(Gate::allows('edit branch'), 403);
+
         return view('admin.branch.edit', compact('branch'));
     }
 
@@ -61,6 +70,8 @@ class BranchController extends Controller
      */
     public function update(BranchRequest $request, Branch $branch)
     {
+        abort_unless(Gate::allows('edit branch'), 403);
+
         try {
             $branch->update($request->all());
             return redirect()->route('branches.index')->with('message', 'Update Successfully');
@@ -74,6 +85,8 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
+        abort_unless(Gate::allows('delete branch'), 403);
+
         $branch->delete();
         return redirect()->route('branches.index')->with('message', 'Delete Successfully');
     }

@@ -31,6 +31,11 @@
      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
      @livewireStyles
 
+     <style>
+         .select2-selection {
+             height: 45px !important;
+         }
+     </style>
  </head>
 
  <body>
@@ -719,6 +724,11 @@
          });
 
          $(function() {
+             $('.select2').select2({
+                 placeholder: " Please Select",
+                 allowClear: false
+             });
+
              $(".image").on("change", function() {
                  var nthis = $(this);
                  if (nthis.siblings('.old-image').length) {

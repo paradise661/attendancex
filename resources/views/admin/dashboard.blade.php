@@ -10,208 +10,209 @@
         </div>
     </div>
     <!-- End::page-header -->
-
-    <div class="grid grid-cols-12 gap-x-6">
-        <div class="xxl:col-span-12 xl:col-span-12  col-span-12">
-            <div class="grid grid-cols-12 gap-x-6">
-                <div class="xxl:col-span-4 xl:col-span-4  col-span-12">
-                    <div class="xxl:col-span-12 xl:col-span-12 col-span-12">
-                        <div class="box crm-highlight-card">
-                            <div class="box-body">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <div class="font-semibold text-[1.125rem] text-white mb-2">Employee Check-in Status
+    @can('view dashboard')
+        <div class="grid grid-cols-12 gap-x-6">
+            <div class="xxl:col-span-12 xl:col-span-12  col-span-12">
+                <div class="grid grid-cols-12 gap-x-6">
+                    <div class="xxl:col-span-4 xl:col-span-4  col-span-12">
+                        <div class="xxl:col-span-12 xl:col-span-12 col-span-12">
+                            <div class="box crm-highlight-card">
+                                <div class="box-body">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="font-semibold text-[1.125rem] text-white mb-2">Employee Check-in Status
+                                            </div>
+                                            <span class="block text-[0.75rem] text-white">
+                                                <span class="opacity-[0.7]">So far today,</span>
+                                                <span class="font-semibold text-warning">{{ $presentPercent }}%</span>
+                                                <span class="opacity-[0.7]">of employees have checked in. Stay updated!</span>
+                                            </span>
                                         </div>
-                                        <span class="block text-[0.75rem] text-white">
-                                            <span class="opacity-[0.7]">So far today,</span>
-                                            <span class="font-semibold text-warning">{{ $presentPercent }}%</span>
-                                            <span class="opacity-[0.7]">of employees have checked in. Stay updated!</span>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <div id="crm-main"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="xxl:col-span-12 xl:col-span-12 col-span-12">
-                        <div class="box">
-                            <div class="box-header flex justify-between">
-                                <div class="box-title">
-                                    Upcoming Birthdays
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                @if ($upcomingBirthdays->count())
-                                    <ul class="list-none crm-top-deals mb-0">
-                                        @foreach ($upcomingBirthdays as $birthday)
-                                            <li class="mb-4">
-                                                <div class="flex items-start flex-wrap">
-                                                    <div class="me-2">
-                                                        <span class=" inline-flex items-center justify-center">
-                                                            <img class="w-[1.75rem] h-[1.75rem] leading-[1.75rem] text-[0.65rem]  rounded-full"
-                                                                src="{{ $birthday->image }}" alt="">
-                                                        </span>
-                                                    </div>
-                                                    <div class="flex-grow">
-                                                        <p class="font-semibold mb-[1.4px]  text-[0.813rem]">
-                                                            {{ $birthday->full_name }}
-                                                        </p>
-                                                        <p class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-0">
-                                                            {{ $birthday->email }}</p>
-                                                    </div>
-                                                    <div class=" text-xs ">
-                                                        {{ date('M d', strtotime($birthday->date_of_birth)) }}</div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <p>No Employees Added Yet</p>
-                                @endif
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="xxl:col-span-8 xl:col-span-8 col-span-12">
-                    <div class="grid grid-cols-12 gap-x-6">
-                        <!-- First Column -->
-                        <div class="xxl:col-span-6 xl:col-span-6 col-span-12">
-                            <div class="grid grid-cols-1">
-                                <!-- Total Present Box -->
-                                <div class="box overflow-hidden">
-                                    <div class="box-body">
-                                        <div class="flex items-top justify-between">
-                                            <div>
-                                                <span
-                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-green-500">
-                                                    <i class="ti ti-user text-[1rem] text-white"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow ms-4">
-                                                <div class="flex items-center justify-between flex-wrap">
-                                                    <div>
-                                                        <p class="text-[#8c9097] dark:text-white/50 text-[0.813rem] mb-0">
-                                                            Total Present</p>
-                                                        <h4 class="font-semibold text-[1.5rem] !mb-2 ">{{ $todayPresent }}
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center justify-between !mt-1">
-                                                    <div>
-                                                        <a class="text-primary text-[0.813rem]"
-                                                            href="{{ route('attendance.index') }}">View All<i
-                                                                class="ti ti-arrow-narrow-right ms-2 font-semibold inline-block"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Total Absent Box -->
-                                <div class="box overflow-hidden">
-                                    <div class="box-body">
-                                        <div class="flex items-top justify-between">
-                                            <div>
-                                                <span
-                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-red-500">
-                                                    <i class="ti ti-user-x text-[1rem] text-white"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow ms-4">
-                                                <div class="flex items-center justify-between flex-wrap">
-                                                    <div>
-                                                        <p class="text-[#8c9097] dark:text-white/50 text-[0.813rem] mb-0">
-                                                            Total Absent</p>
-                                                        <h4 class="font-semibold text-[1.5rem] !mb-2 ">{{ $todayAbsent }}
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center justify-between mt-1">
-                                                    <div>
-                                                        <a class="text-secondary text-[0.813rem]"
-                                                            href="{{ route('attendance.index') }}">View All<i
-                                                                class="ti ti-arrow-narrow-right ms-2 font-semibold inline-block"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Today Leave Box -->
-                                <div class="box overflow-hidden">
-                                    <div class="box-body">
-                                        <div class="flex items-top justify-between">
-                                            <div>
-                                                <span
-                                                    class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-yellow-500">
-                                                    <i class="ti ti-user-exclamation text-[1rem] text-white"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow ms-4">
-                                                <div class="flex items-center justify-between flex-wrap">
-                                                    <div>
-                                                        <p class="text-[#8c9097] dark:text-white/50 text-[0.813rem] mb-0">
-                                                            Today Leave</p>
-                                                        <h4 class="font-semibold text-[1.5rem] !mb-2 ">{{ $todayLeave }}
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center justify-between mt-1">
-                                                    <div>
-                                                        <a class="text-success text-[0.813rem]"
-                                                            href="{{ route('attendance.index') }}">View All<i
-                                                                class="ti ti-arrow-narrow-right ms-2 font-semibold inline-block"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div>
+                                            <div id="crm-main"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Second Column -->
-                        <div class="xxl:col-span-6 xl:col-span-6 col-span-12">
+                        <div class="xxl:col-span-12 xl:col-span-12 col-span-12">
                             <div class="box">
-                                <div class="box-header justify-between">
-                                    <div class="box-title">Today's Attendance Record</div>
-                                </div>
-                                <div class="box-body overflow-hidden">
-                                    <div class="leads-source-chart flex items-center justify-center">
-                                        <canvas class="chartjs-chart w-full" id="leads-source"></canvas>
-                                        <div class="lead-source-value">
-                                            <span class="block text-[0.875rem]">Total Employees</span>
-                                            <span class="block text-[1.5625rem] font-bold">{{ $totalEmployees }}</span>
-                                        </div>
+                                <div class="box-header flex justify-between">
+                                    <div class="box-title">
+                                        Upcoming Birthdays
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-3 border-t border-dashed dark:border-defaultborder/10">
-                                    <div class="col !p-0">
-                                        <div
-                                            class="!ps-4 p-[0.95rem] text-center border-e border-dashed dark:border-defaultborder/10">
-                                            <span
-                                                class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-1 crm-lead-legend mobile inline-block">Present</span>
-                                            <div><span class="text-[1rem] font-semibold">{{ $todayPresent }}</span></div>
+                                <div class="box-body">
+                                    @if ($upcomingBirthdays->count())
+                                        <ul class="list-none crm-top-deals mb-0">
+                                            @foreach ($upcomingBirthdays as $birthday)
+                                                <li class="mb-4">
+                                                    <div class="flex items-start flex-wrap">
+                                                        <div class="me-2">
+                                                            <span class=" inline-flex items-center justify-center">
+                                                                <img class="w-[1.75rem] h-[1.75rem] leading-[1.75rem] text-[0.65rem]  rounded-full"
+                                                                    src="{{ $birthday->image }}" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-grow">
+                                                            <p class="font-semibold mb-[1.4px]  text-[0.813rem]">
+                                                                {{ $birthday->full_name }}
+                                                            </p>
+                                                            <p class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-0">
+                                                                {{ $birthday->email }}</p>
+                                                        </div>
+                                                        <div class=" text-xs ">
+                                                            {{ date('M d', strtotime($birthday->date_of_birth)) }}</div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p>No Employees Added Yet</p>
+                                    @endif
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xxl:col-span-8 xl:col-span-8 col-span-12">
+                        <div class="grid grid-cols-12 gap-x-6">
+                            <!-- First Column -->
+                            <div class="xxl:col-span-6 xl:col-span-6 col-span-12">
+                                <div class="grid grid-cols-1">
+                                    <!-- Total Present Box -->
+                                    <div class="box overflow-hidden">
+                                        <div class="box-body">
+                                            <div class="flex items-top justify-between">
+                                                <div>
+                                                    <span
+                                                        class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-green-500">
+                                                        <i class="ti ti-user text-[1rem] text-white"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="flex-grow ms-4">
+                                                    <div class="flex items-center justify-between flex-wrap">
+                                                        <div>
+                                                            <p class="text-[#8c9097] dark:text-white/50 text-[0.813rem] mb-0">
+                                                                Total Present</p>
+                                                            <h4 class="font-semibold text-[1.5rem] !mb-2 ">{{ $todayPresent }}
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center justify-between !mt-1">
+                                                        <div>
+                                                            <a class="text-primary text-[0.813rem]"
+                                                                href="{{ route('attendance.index') }}">View All<i
+                                                                    class="ti ti-arrow-narrow-right ms-2 font-semibold inline-block"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col !p-0">
-                                        <div
-                                            class="p-[0.95rem] text-center border-e border-dashed dark:border-defaultborder/10">
-                                            <span
-                                                class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-1 crm-lead-legend desktop inline-block">Absent</span>
-                                            <div><span class="text-[1rem] font-semibold">{{ $todayAbsent }}</span></div>
+
+                                    <!-- Total Absent Box -->
+                                    <div class="box overflow-hidden">
+                                        <div class="box-body">
+                                            <div class="flex items-top justify-between">
+                                                <div>
+                                                    <span
+                                                        class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-red-500">
+                                                        <i class="ti ti-user-x text-[1rem] text-white"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="flex-grow ms-4">
+                                                    <div class="flex items-center justify-between flex-wrap">
+                                                        <div>
+                                                            <p class="text-[#8c9097] dark:text-white/50 text-[0.813rem] mb-0">
+                                                                Total Absent</p>
+                                                            <h4 class="font-semibold text-[1.5rem] !mb-2 ">{{ $todayAbsent }}
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center justify-between mt-1">
+                                                        <div>
+                                                            <a class="text-secondary text-[0.813rem]"
+                                                                href="{{ route('attendance.index') }}">View All<i
+                                                                    class="ti ti-arrow-narrow-right ms-2 font-semibold inline-block"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col !p-0">
-                                        <div class="!pe-4 p-[0.95rem] text-center">
-                                            <span
-                                                class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-1 crm-lead-legend tablet inline-block">Leave</span>
-                                            <div><span class="text-[1rem] font-semibold">{{ $todayLeave }}</span></div>
+
+                                    <!-- Today Leave Box -->
+                                    <div class="box overflow-hidden">
+                                        <div class="box-body">
+                                            <div class="flex items-top justify-between">
+                                                <div>
+                                                    <span
+                                                        class="!text-[0.8rem] !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !rounded-full inline-flex items-center justify-center bg-yellow-500">
+                                                        <i class="ti ti-user-exclamation text-[1rem] text-white"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="flex-grow ms-4">
+                                                    <div class="flex items-center justify-between flex-wrap">
+                                                        <div>
+                                                            <p class="text-[#8c9097] dark:text-white/50 text-[0.813rem] mb-0">
+                                                                Today Leave</p>
+                                                            <h4 class="font-semibold text-[1.5rem] !mb-2 ">{{ $todayLeave }}
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center justify-between mt-1">
+                                                        <div>
+                                                            <a class="text-success text-[0.813rem]"
+                                                                href="{{ route('attendance.index') }}">View All<i
+                                                                    class="ti ti-arrow-narrow-right ms-2 font-semibold inline-block"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second Column -->
+                            <div class="xxl:col-span-6 xl:col-span-6 col-span-12">
+                                <div class="box">
+                                    <div class="box-header justify-between">
+                                        <div class="box-title">Today's Attendance Record</div>
+                                    </div>
+                                    <div class="box-body overflow-hidden">
+                                        <div class="leads-source-chart flex items-center justify-center">
+                                            <canvas class="chartjs-chart w-full" id="leads-source"></canvas>
+                                            <div class="lead-source-value">
+                                                <span class="block text-[0.875rem]">Total Employees</span>
+                                                <span class="block text-[1.5625rem] font-bold">{{ $totalEmployees }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3 border-t border-dashed dark:border-defaultborder/10">
+                                        <div class="col !p-0">
+                                            <div
+                                                class="!ps-4 p-[0.95rem] text-center border-e border-dashed dark:border-defaultborder/10">
+                                                <span
+                                                    class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-1 crm-lead-legend mobile inline-block">Present</span>
+                                                <div><span class="text-[1rem] font-semibold">{{ $todayPresent }}</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col !p-0">
+                                            <div
+                                                class="p-[0.95rem] text-center border-e border-dashed dark:border-defaultborder/10">
+                                                <span
+                                                    class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-1 crm-lead-legend desktop inline-block">Absent</span>
+                                                <div><span class="text-[1rem] font-semibold">{{ $todayAbsent }}</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col !p-0">
+                                            <div class="!pe-4 p-[0.95rem] text-center">
+                                                <span
+                                                    class="text-[#8c9097] dark:text-white/50 text-[0.75rem] mb-1 crm-lead-legend tablet inline-block">Leave</span>
+                                                <div><span class="text-[1rem] font-semibold">{{ $todayLeave }}</span></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +222,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    @endcan
 @endsection
 
 @section('scripts')
