@@ -47,16 +47,18 @@
                                                         <i class="ri-pencil-line"></i> Edit
                                                     </a>
 
-                                                    <form class="delete-form"
-                                                        action="{{ route('roles.destroy', $role->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button
-                                                            class="ti-btn ti-btn-danger-full !py-1 !px-3 ti-btn-wave delete_button"
-                                                            id="" data-type="confirm" type="submit"
-                                                            title="Delete"><i class="ri-delete-bin-line"></i>
-                                                            Delete</button>
-                                                    </form>
+                                                    @if (!$role->name == 'SUPER-ADMIN')
+                                                        <form class="delete-form"
+                                                            action="{{ route('roles.destroy', $role->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button
+                                                                class="ti-btn ti-btn-danger-full !py-1 !px-3 ti-btn-wave delete_button"
+                                                                id="" data-type="confirm" type="submit"
+                                                                title="Delete"><i class="ri-delete-bin-line"></i>
+                                                                Delete</button>
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
