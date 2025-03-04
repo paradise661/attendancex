@@ -47,7 +47,7 @@
                                                         <i class="ri-pencil-line"></i> Edit
                                                     </a>
 
-                                                    @if (!$role->name == 'SUPER-ADMIN')
+                                                    @if ($role->name != 'SUPER-ADMIN')
                                                         <form class="delete-form"
                                                             action="{{ route('roles.destroy', $role->id) }}" method="POST">
                                                             @csrf
