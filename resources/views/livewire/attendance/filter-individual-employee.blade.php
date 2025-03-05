@@ -1,26 +1,28 @@
 <div>
     <!-- Filter Section -->
-    <div class="flex items-center justify-end mb-4">
-        <div class="flex items-center w-full max-w-xl gap-4">
-            <select class="form-control w-80 !px-3 !py-2 !text-sm !rounded-md" aria-label="Filter by branch"
-                wire:model.live="employee">
-                @foreach ($employees as $e)
-                    <option value="{{ $e->id }}">{{ $e->full_name ?? '' }}</option>
-                @endforeach
-            </select>
+    @can('filter allemployeesattendance')
+        <div class="flex items-center justify-end mb-4">
+            <div class="flex items-center w-full max-w-xl gap-4">
+                <select class="form-control w-80 !px-3 !py-2 !text-sm !rounded-md" aria-label="Filter by branch"
+                    wire:model.live="employee">
+                    @foreach ($employees as $e)
+                        <option value="{{ $e->id }}">{{ $e->full_name ?? '' }}</option>
+                    @endforeach
+                </select>
 
-            <input class="form-control w-80 !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="daterange" type="text"
-                wire:model.live="dateRange" aria-label="Search by date" autocomplete="off"
-                placeholder="Filter by Date Range">
+                <input class="form-control w-80 !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="daterange" type="text"
+                    wire:model.live="dateRange" aria-label="Search by date" autocomplete="off"
+                    placeholder="Filter by Date Range">
 
-            @if ($dateRange || $employee)
-                <button class="ti-btn !mb-0 ti-btn-danger-full !rounded-r-md !px-4" wire:click="clearFilters"
-                    type="button" aria-label="Clear Filter">
-                    Clear <i class="ri-close-line"></i>
-                </button>
-            @endif
+                @if ($dateRange || $employee)
+                    <button class="ti-btn !mb-0 ti-btn-danger-full !rounded-r-md !px-4" wire:click="clearFilters"
+                        type="button" aria-label="Clear Filter">
+                        Clear <i class="ri-close-line"></i>
+                    </button>
+                @endif
+            </div>
         </div>
-    </div>
+    @endcan
 
     <div class="box custom-box">
         <div class="box-header justify-between">
@@ -54,7 +56,8 @@
                             @foreach ($attendances as $key => $attendance)
                                 <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
                                     <td class="px-4 py-2">{{ $attendance->date ?? '-' }}
-                                        ({{ date('l', strtotime($attendance->date)) }})</td>
+                                        ({{ date('l', strtotime($attendance->date)) }})
+                                    </td>
                                     <td class="px-4 py-2">{{ $attendance->checkin ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $attendance->checkout ?? '-' }}</td>
                                     <td class="px-4 py-2">{{ $attendance->break_start ?? '-' }}</td>

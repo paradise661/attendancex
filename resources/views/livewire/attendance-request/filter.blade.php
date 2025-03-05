@@ -1,19 +1,21 @@
 <div>
     <!-- Filter Section -->
-    <div class="flex items-center justify-end mb-4">
-        <div class="flex items-center w-full max-w-md gap-2">
+    @can('filter attendancerequest')
+        <div class="flex items-center justify-end mb-4">
+            <div class="flex items-center w-full max-w-md gap-2">
 
-            <input class="form-control w-full !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="daterange" type="text"
-                wire:model.live="dateRange" aria-label="Search by date" autocomplete="off" placeholder="Search by date">
+                <input class="form-control w-full !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="daterange" type="text"
+                    wire:model.live="dateRange" aria-label="Search by date" autocomplete="off" placeholder="Search by date">
 
-            @if ($dateRange)
-                <button class="ti-btn !mb-0 ti-btn-danger-full !rounded-r-md !px-4" wire:click="clearFilters"
-                    type="button" aria-label="Clear Filter">
-                    Clear <i class="ri-close-line"></i>
-                </button>
-            @endif
+                @if ($dateRange)
+                    <button class="ti-btn !mb-0 ti-btn-danger-full !rounded-r-md !px-4" wire:click="clearFilters"
+                        type="button" aria-label="Clear Filter">
+                        Clear <i class="ri-close-line"></i>
+                    </button>
+                @endif
+            </div>
         </div>
-    </div>
+    @endcan
 
     <div class="box custom-box">
         <div class="box-header justify-between">

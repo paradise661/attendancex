@@ -1,31 +1,33 @@
 <div>
     <!-- Filter Section -->
-    <div class="flex items-center justify-end mb-4">
-        <div class="flex items-center w-full max-w-md gap-2">
+    @can('filter allemployeesattendance')
+        <div class="flex items-center justify-end mb-4">
+            <div class="flex items-center w-full max-w-md gap-2">
 
-            <!-- Branch Dropdown -->
-            <select class="form-control w-full !px-3 !py-2 !text-sm !rounded-md" aria-label="Filter by branch"
-                wire:model.live="branch">
-                <option value="">All Branches</option>
-                @foreach ($branches as $b)
-                    <option value="{{ $b->id }}">{{ $b->name ?? '' }}</option>
-                @endforeach
-            </select>
+                <!-- Branch Dropdown -->
+                <select class="form-control w-full !px-3 !py-2 !text-sm !rounded-md" aria-label="Filter by branch"
+                    wire:model.live="branch">
+                    <option value="">All Branches</option>
+                    @foreach ($branches as $b)
+                        <option value="{{ $b->id }}">{{ $b->name ?? '' }}</option>
+                    @endforeach
+                </select>
 
-            <input class="form-control w-full !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="date" type="text"
-                wire:model.live="searchTerms" aria-label="Search by date" autocomplete="off"
-                placeholder="Search by date">
+                <input class="form-control w-full !px-3 !py-2 !text-sm !rounded-l-md !border-r-0" id="date" type="text"
+                    wire:model.live="searchTerms" aria-label="Search by date" autocomplete="off"
+                    placeholder="Search by date">
 
-            <!-- Clear Button -->
-            @if ($searchTerms || $branch)
-                <button class="ti-btn !mb-0 ti-btn-danger-full !rounded-r-md !px-4" wire:click="clearFilters"
-                    type="button" aria-label="Clear Filter">
-                    Clear <i class="ri-close-line"></i>
-                </button>
-            @endif
+                <!-- Clear Button -->
+                @if ($searchTerms || $branch)
+                    <button class="ti-btn !mb-0 ti-btn-danger-full !rounded-r-md !px-4" wire:click="clearFilters"
+                        type="button" aria-label="Clear Filter">
+                        Clear <i class="ri-close-line"></i>
+                    </button>
+                @endif
+            </div>
         </div>
-    </div>
-    
+    @endcan
+
     <div class="box custom-box">
         <div class="box-header justify-between">
             <div class="box-title">
@@ -58,7 +60,7 @@
                         @if ($attendances->isNotEmpty())
                             @foreach ($attendances as $key => $attendance)
                                 <tr class="{{ $loop->last ? '' : 'border-b border-defaultborder' }}">
-                                    <th class="px-4 py-2" scope="row">{{ $loop->iteration  }}</th>
+                                    <th class="px-4 py-2" scope="row">{{ $loop->iteration }}</th>
                                     <td>
                                         <div class="flex items-center">
                                             <span class="avatar avatar-xs me-2 online avatar-rounded">
