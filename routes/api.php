@@ -13,6 +13,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('login', [UserAuthController::class, 'login']);
+Route::post('biometric/login', [UserAuthController::class, 'biometricLogin']);
 Route::get('settings', [DashboardController::class, 'settings']);
 Route::post('forgotpassword/sendotp', [UserAuthController::class, 'forgotPasswordOtp']);
 Route::post('forgotpassword/checkotp', [UserAuthController::class, 'forgotPasswordCheckOtp']);

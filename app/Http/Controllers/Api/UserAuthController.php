@@ -79,6 +79,46 @@ class UserAuthController extends Controller
         ]);
     }
 
+    public function biometricLogin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'expo_token' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError('Validation failed', $validator->errors(), 422);
+        }
+
+        $user = User::with(['department', 'branch', 'shift'])->where('email', $request->email)->first();
+
+        if (!$user) {
+            return $this->respondWithError('The provided credentials are incorrect.', [
+                'email' => ['The provided credentials are incorrect.']
+            ], 401);
+        }
+
+        // Check if user status is active
+        if ($user->status !== 'Active') {
+            $message = 'Your account is ' . strtolower($user->status) . '. Please contact the administrator for further assistance.';
+            return $this->respondWithError($message, [], 403);
+        }
+
+        // Update expo_token only if provided and different
+        if ($request->has('expo_token') && $request->expo_token !== $user->expo_token) {
+            $user->expo_token = $request->expo_token;
+            $user->save();
+        }
+
+        $token = $user->createToken('MyAppToken')->plainTextToken;
+        $user->profile_name = strtoupper(string: ucfirst($user->first_name[0] ?? '')) . strtoupper(ucfirst($user->last_name[0] ?? ''));
+
+        return $this->respondWithSuccess('Login successful', [
+            'access_token' => $token,
+            'user' => $user,
+        ]);
+    }
+
     public function changePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
