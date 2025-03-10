@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Artisan;
 
 class DashboardController extends Controller
 {
@@ -50,5 +51,31 @@ class DashboardController extends Controller
         $presentPercent = intval($todayPresent / $totalEmployees * 100);
 
         return view('admin.dashboard', compact('totalEmployees', 'presentPercent', 'departmentCount', 'upcomingBirthdays', 'todayPresent', 'todayAbsent', 'todayLeave'));
+    }
+
+    public function systemUpdate()
+    {
+        // Clear application cache
+        Artisan::call('cache:clear');
+
+        // Clear configuration cache
+        Artisan::call('config:clear');
+
+        // Clear route cache
+        Artisan::call('route:clear');
+
+        // Clear compiled views
+        Artisan::call('view:clear');
+
+        // Clear event cache
+        Artisan::call('event:clear');
+
+        // Clear compiled classes
+        Artisan::call('clear-compiled');
+
+        // Run migrations
+        Artisan::call('migrate', ['--force' => true]);
+
+        return redirect()->back()->with('message', 'All caches cleared successfully!');
     }
 }

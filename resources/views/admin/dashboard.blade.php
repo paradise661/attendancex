@@ -1,5 +1,6 @@
 @extends('layouts.admin.master')
 @section('content')
+    @include('admin.includes.message')
     <!-- Start::page-header -->
     <div class="md:flex block items-center justify-between my-[1.5rem] page-header-breadcrumb">
         <div>

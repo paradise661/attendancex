@@ -77,3 +77,6 @@ Route::get('get-shifts/{department_id}', [EmployeeController::class, 'getShifts'
 //permission
 Route::get('insert/permission', [RoleController::class, 'insertPermission']);
 Route::get('insert/role', [RoleController::class, 'insertRole']);
+
+//configure update
+Route::get('system/update', [DashboardController::class, 'systemUpdate'])->name('system.update');

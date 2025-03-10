@@ -168,6 +168,14 @@
                                        href="javascript:void(0)"><i
                                            class="ti ti-headset text-[1.125rem] me-2 opacity-[0.7]"></i>Support</a>
                                </li>
+
+                               <li>
+                                   <a class="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex"
+                                       href="{{ route('system.update') }}"><i
+                                           class="bx bx-revision text-[1.125rem] me-2 opacity-[0.7]"></i>Update
+                                       System</a>
+                               </li>
+
                                <li>
                                    <a class="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex"
                                        href="{{ route('logout') }}"
