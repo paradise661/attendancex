@@ -3,22 +3,46 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - master
+      - master  # Ensure the correct branch is specified (use 'master' if needed)
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Step 2: Set up SSH key for the VPS
+      - name: Set up SSH key for deployment
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Step 3: Deploy to VPS
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
-          mkdir -p ${{ secrets.DEPLOY_PATH }}
+          # Navigate to the deployment directory
           cd ${{ secrets.DEPLOY_PATH }}
-          git pull
-          # Add any deployment commands here
+
+          # If it's not a Git repo, initialize and pull the code
+          if [ ! -d ".git" ]; then
+            git init
+            git remote add origin https://github.com/your_username/your_repository.git
+          fi
+
+          # Pull the latest code from GitHub
+          git pull origin main  # Replace 'main' with 'master' if you're using that branch
+
+          # Add any deployment commands here, such as installing dependencies or restarting services
+          # Example (for Node.js apps):
+          # npm install
+
+          # Restart web server if needed
+          sudo systemctl restart apache2   # For Apache
+          sudo systemctl restart nginx     # For Nginx
           EOF
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
