@@ -30,7 +30,7 @@ jobs:
           # If it's not a Git repo, initialize and pull the code
           if [ ! -d ".git" ]; then
             git init
-            git remote add origin https://github.com/your_username/your_repository.git
+            git remote add origin https://github.com/paradise661/attendancex.git
           fi
 
           # Pull the latest code from GitHub
