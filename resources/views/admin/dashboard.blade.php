@@ -4,8 +4,11 @@
     <!-- Start::page-header -->
     <div class="md:flex block items-center justify-between my-[1.5rem] page-header-breadcrumb">
         <div>
+            @php
+                $subdomain = explode('.', Request::getHost())[0] ?? 'Sajilo';
+            @endphp
             <p class="font-semibold text-[1.125rem] text-defaulttextcolor dark:text-defaulttextcolor/70 !mb-0 ">
-                Welcome back, Sajilo Attendance Admin !</p>
+                Welcome back, {{ ucfirst($subdomain) }} Attendance Panel !</p>
             <p class="font-normal text-[#8c9097] dark:text-white/50 text-[0.813rem]">
                 Keep your workforce on track—monitor attendance, analyze trends, and boost productivity.</p>
         </div>
