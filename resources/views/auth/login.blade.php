@@ -42,6 +42,7 @@
                         <img class="desktop-logo h-24 w-auto" src="{{ asset('assets/images/logo.png') }}"
                             alt="logo">
                     </div>
+                    <p>This is for test</p>
 
                     @if (session('error'))
                         <div

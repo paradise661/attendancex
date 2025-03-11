@@ -12,7 +12,6 @@ class Authcontroller extends Controller
 {
     public function showLoginForm()
     {
-        dd("success");
         return view('auth.login');
     }
 
