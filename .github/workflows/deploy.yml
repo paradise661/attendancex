@@ -22,8 +22,6 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@202.51.83.81 << 'EOF'
             cd /var/www/html
-            git fetch --all
-            git reset --hard origin/master  # This forces the repository to match the remote branch
             git pull origin master          # Pull the latest changes from master
             composer install --no-interaction
             php artisan migrate --force
