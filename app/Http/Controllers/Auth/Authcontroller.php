@@ -31,8 +31,7 @@ class Authcontroller extends Controller
                 return redirect("login")->withError('You are not authorized to access this system.');
             }
 
-            return redirect()->intended('dashboard')
-                ->withSuccess('You have Successfully logged In');
+            return redirect()->intended('dashboard');
         }
 
         return redirect("login")->withError('Oppes! You have entered invalid credentials');
