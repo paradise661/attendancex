@@ -62,11 +62,17 @@ class SetDatabaseConnection
             try {
                 DB::connection()->getPdo();
             } catch (\Exception $e) {
-                echo "Authentication Failed";
-                die;
+                return response()->json(
+                    'Database Authentication Failed',
+                    500
+                );
             }
         } else {
-            return redirect('https://paradiseit.com.np');
+            return response()->json(
+                'Database Authentication Failed',
+                500
+            );
+            // return redirect('https://paradiseit.com.np')->setStatusCode(500, 'Database Connection Failed');
         }
 
         return $next($request);
