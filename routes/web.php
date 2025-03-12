@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 
 
 Route::get('/', function () {
@@ -84,6 +85,9 @@ Route::get('insert/role', [RoleController::class, 'insertRole']);
 Route::get('system/update', [DashboardController::class, 'systemUpdate'])->name('system.update');
 
 Route::get('migrate/database', function () {
-    Artisan::call('migrate:fresh', ['--force' => true]);
+    if (!Schema::connection('mysql')->hasTable('sessions')) {
+        Artisan::call('session:table');
+        Artisan::call('migrate', ['--force' => true]);
+    }
     return 'migrate';
 });
