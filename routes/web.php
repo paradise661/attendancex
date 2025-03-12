@@ -85,7 +85,7 @@ Route::get('system/update', [DashboardController::class, 'systemUpdate'])->name(
 
 Route::get('migrate/database', function () {
     Artisan::call('session:table');
-    Artisan::call('migrate', ['--force' => true]);
+    Artisan::call('migrate:fresh', ['--force' => true]);
     Artisan::call('config:clear');
     Artisan::call('session:clear');
     return 'migrate';
