@@ -80,6 +80,6 @@ class DashboardController extends Controller
         $output = Artisan::output();
         Artisan::call('migrate', ['--force' => true]);
 
-        return redirect()->back()->with('message', 'All caches cleared successfully!');
+        return redirect()->back()->with('message', 'Migrations run successfully! Output: ' . nl2br($output));
     }
 }
