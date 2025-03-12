@@ -84,9 +84,6 @@ Route::get('insert/role', [RoleController::class, 'insertRole']);
 Route::get('system/update', [DashboardController::class, 'systemUpdate'])->name('system.update');
 
 Route::get('migrate/database', function () {
-    Artisan::call('session:table');
     Artisan::call('migrate:fresh', ['--force' => true]);
-    Artisan::call('config:clear');
-    Artisan::call('session:clear');
     return 'migrate';
 });
