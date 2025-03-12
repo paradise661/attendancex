@@ -75,6 +75,9 @@ class DashboardController extends Controller
 
         // Run migrations
         Artisan::call('session:table');
+
+        // Run migrations and capture output
+        $output = Artisan::output();
         Artisan::call('migrate', ['--force' => true]);
 
         return redirect()->back()->with('message', 'All caches cleared successfully!');
