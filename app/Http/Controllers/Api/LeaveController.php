@@ -105,7 +105,7 @@ class LeaveController extends Controller
                             $q->where('from_date', '<=', $fromDate)
                                 ->where('to_date', '>=', $toDate);
                         });
-                })
+                })->where('status', '!=', 'Cancelled')
                 ->first();
 
             if ($alreadyLeave) {
