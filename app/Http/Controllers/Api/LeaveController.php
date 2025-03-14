@@ -28,6 +28,7 @@ class LeaveController extends Controller
 
             // Get total leave taken by the user per leave type
             $leaveTaken = Leave::where('user_id', $userId)
+                ->where('status', '!=', 'Cancelled')
                 ->groupBy('leavetype_id')
                 ->selectRaw('leavetype_id, SUM(no_of_days) as total_taken')
                 ->pluck('total_taken', 'leavetype_id');
