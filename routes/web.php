@@ -16,10 +16,8 @@ use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Schema;
-
 
 Route::get('/', function () {
     return view('auth.login');
@@ -83,11 +81,3 @@ Route::get('insert/role', [RoleController::class, 'insertRole']);
 
 //configure update
 Route::get('system/update', [DashboardController::class, 'systemUpdate'])->name('system.update');
-
-Route::get('migrate/database', function () {
-    if (!Schema::connection('mysql')->hasTable('sessions')) {
-        Artisan::call('session:table');
-        Artisan::call('migrate', ['--force' => true]);
-    }
-    return 'migrate';
-});
