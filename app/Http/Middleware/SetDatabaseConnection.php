@@ -25,7 +25,7 @@ class SetDatabaseConnection
             $hostParts = explode('.', $host) ?? [];
             $subdomain = $hostParts[0] ?? ''; // Fallback to 'default' if no subdomain
 
-            $cacheKey = 'db_config_' . $subdomain;
+            $cacheKey = 'db_sajilo_' . $subdomain;
 
             $dbConfig = Cache::remember($cacheKey, 60, function () use ($subdomain) {
                 $response = Http::get('https://attendance.paradiseit.com.np/api/getdatabase', [
