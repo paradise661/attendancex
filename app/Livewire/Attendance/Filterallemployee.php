@@ -95,6 +95,11 @@ class Filterallemployee extends Component
             }
 
             if ($attendance) {
+                $type = 'Present';
+                if($this->searchTerms < date('Y-m-d')){
+                    $type = $attendance->checkout ? $attendance->type : 'Absent';
+                }
+
                 $attendances[$employee->id] = (object) [
                     'user_id' => $employee->id,
                     'image' =>  $employee->image,
@@ -106,7 +111,7 @@ class Filterallemployee extends Component
                     'break_start' => $attendance->break_start,
                     'break_end' => $attendance->break_end,
                     'worked_hours' => $attendance->worked_hours,
-                    'type' => $attendance->type
+                    'type' => $type
                 ];
             } else {
                 $attendances[$employee->id] = (object) [
