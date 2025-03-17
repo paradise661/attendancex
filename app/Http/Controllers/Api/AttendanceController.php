@@ -256,11 +256,32 @@ class AttendanceController extends Controller
             $checkoutTime = now();
 
             $workedHours = calculateWorkedHours($checkinTime, $checkoutTime);
+
+
+            // calculation for overtime
+            $start_time = $request->user()->shift->start_time;
+            $end_time = $request->user()->shift->end_time;
+
+            // Parse the start and end times to Carbon instances
+            $start = Carbon::parse($start_time);
+            $end = Carbon::parse($end_time);
+
+            // Calculate the difference in hours as a float (including fractions of an hour)
+            $totalHours = $start->diffInRealSeconds($end) / 3600;
+
+            $overtime_minute = 0;
+            if ($workedHours > $totalHours) {
+                $hoursDifference = $workedHours - $totalHours;
+                $overtime_minute = $hoursDifference * 60;
+            }
+            // overtime calculation ends
+
             $attendance->update([
                 'checkout' => $checkoutTime->format('H:i:s'),
                 'worked_hours' => $workedHours,
                 'latitude' => $request->latitude ?? $attendance->latitude,
                 'longitude' => $request->longitude ?? $attendance->longitude,
+                'overtime_minute' => $overtime_minute
             ]);
 
             return response()->json([

@@ -41,14 +41,14 @@ class SetDatabaseConnection
             });
             // dd($dbConfig);
 
-            if (isset($dbConfig['data']) && isset($dbConfig['data']['database'], $dbConfig['data']['username'], $dbConfig['data']['password'])) {
+            if (isset($dbConfig['data']) && isset($dbConfig['data']['database'])) {
                 Config::set('database.connections.mysql', [
                     'driver' => 'mysql',
                     'host' => env('DB_HOST', '127.0.0.1'),
                     'port' => env('DB_PORT', '3306'),
                     'database' => $dbConfig['data']['database'],
-                    'username' => $dbConfig['data']['username'],
-                    'password' => $dbConfig['data']['password'],
+                    'username' => 'root',
+                    'password' => 'Paradise@098',
                     'charset' => 'utf8mb4',
                     'collation' => 'utf8mb4_unicode_ci',
                     'prefix' => '',

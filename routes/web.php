@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use phpseclib3\Net\SSH2;
 
 
 Route::get('/', function () {
@@ -82,3 +83,44 @@ Route::get('insert/role', [RoleController::class, 'insertRole']);
 
 //configure update
 Route::get('system/update', [DashboardController::class, 'systemUpdate'])->name('system.update');
+
+Route::get('vps/test', function (Request $request) {
+    $databaseName = 'flightsgynai1';
+    $username = 'flightsgynai';
+    $password = 'flightsgynai@123';
+    $rootPassword = 'Paradise@098'; // Set the root password
+
+    // VPS SSH Details
+    $host = '202.51.83.81';
+    $sshUser = 'ubuntu'; // VPS SSH Username
+    $sshPassword = 'rTEVOp6wOSMp8KfJ'; // VPS SSH Password or use SSH Key
+    $mysqlUser = 'root'; // MySQL Username
+    $mysqlPassword = 'Paradise@098'; // MySQL Password
+    // Create a new SSH connection
+    $ssh = new SSH2($host);
+
+    if (!$ssh->login($sshUser, $sshPassword)) {
+        exit('Login Failed');
+    }
+
+    $ssh->exec("ssh -L 3306:localhost:3306 -f -N");
+
+    // MySQL command to create a new database
+    $mysqlCommand = "mysql -u {$mysqlUser} -p{$mysqlPassword} -e 'CREATE DATABASE {$databaseName};'";
+
+    // Execute the MySQL command
+    $output = null;
+    $resultCode = null;
+    exec($mysqlCommand, $output, $resultCode);
+
+    // Check if the MySQL command executed successfully
+    if ($resultCode !== 0) {
+        dd($output);
+    } else {
+        echo "Database '{$databaseName}' created successfully.\n";
+        print_r($output);
+    }
+
+    // Disconnect the SSH session
+    $ssh->disconnect();
+});
