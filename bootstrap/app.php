@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(SetDatabaseConnection::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        // $exceptions->render(function (Throwable $exception) {
-        //     return response()->view('errors.database', ['message' => $exception->getMessage()], 500);
-        // });
+        $exceptions->render(function (Throwable $exception) {
+            return response()->view('errors.database', ['message' => $exception->getMessage()], 500);
+        });
     })->create();
