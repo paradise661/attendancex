@@ -163,7 +163,7 @@ if (!function_exists('getHolidaysCount')) {
 
         $count = 0;
         foreach ($period as $dt) {
-            if (in_array($dt->format('l'), $holidays) || in_array($dt->format('l'), $publicHolidayDates)) {
+            if (in_array($dt->format('l'), $holidays) || in_array($dt->format('Y-m-d'), $publicHolidayDates)) {
                 $count++;
             }
         }
