@@ -37,8 +37,9 @@ class DashboardController extends Controller
             $end_month = date('Y-m-d');
 
             // Get the user attendance for the current month
-            $attendanceRecords = Attendance::select('*', DB::raw("IF(date < CURDATE() AND checkout IS NULL, 'Absent', 'Present') as type"))->where('user_id', $request->user()->id)
+            $attendanceRecords = Attendance::where('user_id', $request->user()->id)
                 ->whereBetween('date', [$start_month, $end_month]) // Filter by the current month
+                ->whereNotNull('checkout')
                 ->get();
 
             $totalDaysInMonth = date('d');
