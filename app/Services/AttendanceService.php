@@ -7,6 +7,9 @@ use App\Models\Department;
 use App\Models\LeaveApproval;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+use const Adminer\DB;
 
 class AttendanceService
 {
@@ -14,7 +17,7 @@ class AttendanceService
     {
         $user = User::where('id', $userId)->first();
         if ($user) {
-            $attendances = Attendance::where('user_id', $userId)
+            $attendances = Attendance::select('*', DB::raw("IF(date < CURDATE() AND checkout IS NULL, 'Absent', 'Present') as type"))->where('user_id', $userId)
                 ->whereBetween('date', [$startDate, $endDate]);
             $totalWorkedHour = $attendances->sum('worked_hours');
             $totalBreakTaken = $attendances->sum('total_break');
