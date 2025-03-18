@@ -41,11 +41,17 @@ class DashboardController extends Controller
                 ->whereBetween('date', [$start_month, $end_month]) // Filter by the current month
                 ->whereNotNull('checkout')
                 ->get();
+            $todayAttn = Attendance::where('user_id', $request->user()->id)
+                ->where('date', date('Y-m-d'))
+                ->first();
 
             $totalDaysInMonth = date('d');
             $holidaysCount = getHolidaysCount($start_month, $end_month, $request->user()->id);
             $totalBusinessDays = $totalDaysInMonth - $holidaysCount;
             $presentDays = $attendanceRecords->count();
+            if ($todayAttn) {
+                $presentDays = $presentDays + 1;
+            }
 
             $presentPercentage = ($presentDays / $totalBusinessDays) * 100;
 
