@@ -2,7 +2,9 @@
 
 use App\Models\Notification;
 use App\Models\Setting;
+use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Http;
 
 
@@ -126,5 +128,45 @@ if (!function_exists('getSetting')) {
     function getSetting()
     {
         return Setting::pluck('value', 'key')->toArray();
+    }
+}
+
+if (!function_exists('getHolidaysCount')) {
+    function getHolidaysCount($start_date, $end_date, $user_id)
+    {
+        $user = User::find($user_id);
+        $holidays = json_decode($user->department->holidays) ?? [];
+        $period = CarbonPeriod::create(Carbon::parse($start_date), Carbon::parse($end_date))->toArray();
+
+        $publicHolidays = $user->department->publicHolidays()
+            ->where(function ($query) use ($user) {
+                $query->where('gender', $user->gender)
+                    ->orWhere('gender', 'Both');
+            })
+            ->get();
+        $publicHolidayDates = [];
+
+        foreach ($publicHolidays as $holiday) {
+            $start = Carbon::parse($holiday->start_date);
+            $end = Carbon::parse($holiday->end_date);
+
+            $overlapStartDate = $start->max($start_date);
+            $overlapEndDate = $end->min($end_date);
+
+            if ($overlapStartDate <= $overlapEndDate) {
+                while ($overlapStartDate <= $overlapEndDate) {
+                    $publicHolidayDates[] = $overlapStartDate->toDateString();
+                    $overlapStartDate->addDay();
+                }
+            }
+        }
+
+        $count = 0;
+        foreach ($period as $dt) {
+            if (in_array($dt->format('l'), $holidays) || in_array($dt->format('l'), $publicHolidayDates)) {
+                $count++;
+            }
+        }
+        return $count;
     }
 }

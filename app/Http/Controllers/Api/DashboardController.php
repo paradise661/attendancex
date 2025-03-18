@@ -41,8 +41,11 @@ class DashboardController extends Controller
                 ->get();
 
             $totalDaysInMonth = date('d');
+            $holidaysCount = getHolidaysCount($start_month, $end_month, $request->user()->id);
+            $totalBusinessDays = $totalDaysInMonth - $holidaysCount;
             $presentDays = $attendanceRecords->count();
-            $presentPercentage = ($presentDays / $totalDaysInMonth) * 100;
+
+            $presentPercentage = ($presentDays / $totalBusinessDays) * 100;
 
             return response()->json([
                 'status' => 'success',
