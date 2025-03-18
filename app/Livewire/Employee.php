@@ -10,7 +10,7 @@ class Employee extends Component
 {
     use WithPagination;
     public $searchTerms = '';
-    public $limit = 10;
+    public $limit = 1;
 
     public function updatingSearchTerms()
     {
@@ -25,7 +25,7 @@ class Employee extends Component
     public function clearFilters()
     {
         $this->searchTerms = '';
-        $this->limit = 10;
+        $this->limit = 1;
         $this->resetPage();
     }
 

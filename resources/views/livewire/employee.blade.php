@@ -111,6 +111,6 @@
             </div>
         </div>
 
-        {{ $employees->links('vendor.pagination.custom') }}
+        {{ $employees->links('vendor.livewire.tailwind') }}
     </div>
 </div>
