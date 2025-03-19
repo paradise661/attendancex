@@ -34,7 +34,7 @@ class DashboardController extends Controller
 
 
             $start_month = date('Y-m-01');
-            $end_month = date('Y-m-d');
+            $end_month = date('Y-m-d', strtotime('-1 day'));
 
             // Get the user attendance for the current month
             $attendanceRecords = Attendance::where('user_id', $request->user()->id)
