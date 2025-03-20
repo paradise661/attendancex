@@ -21,6 +21,7 @@ jobs:
       - name: Copy files to VPS
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@202.51.83.81 << 'EOF'
+            git config --global --add safe.directory /var/www/html/webapp
             cd /var/www/html/webapp
             git pull origin master          # Pull the latest changes from master
             composer install --no-interaction
