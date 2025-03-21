@@ -25,18 +25,16 @@ class SetDatabaseConnection
             $hostParts = explode('.', $host) ?? [];
             $subdomain = $hostParts[0] ?? ''; // Fallback to 'default' if no subdomain
 
-            $cacheKey = 'db_sajilo_' . $subdomain;
+            $cacheKey = 'db_sajiloattendance_' . $subdomain;
 
             $dbConfig = Cache::remember($cacheKey, 60, function () use ($subdomain) {
-                $response = Http::get('https://attendance.paradiseit.com.np/api/getdatabase', [
+                $response = Http::get('https://sajiloattendance.com/api/getdatabase', [
                     'subdomain' => $subdomain,
                 ]);
 
                 if ($response->successful()) {
                     return $response->json();
                 }
-
-                Log::error('Failed to fetch database configuration for subdomain: ' . $subdomain);
                 return null;
             });
             // dd($dbConfig);
