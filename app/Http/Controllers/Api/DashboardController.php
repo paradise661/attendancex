@@ -62,7 +62,7 @@ class DashboardController extends Controller
                     'today_attendance' => $todayAttendance,
                     'latest_notice' => $latestNotice,
                     'presentPercentage' => round($presentPercentage, 0),
-                    'ads' => asset('uploads/ads/dashboard.jpeg'),
+                    'ads' => asset('uploads/ads/main.jpeg'),
                 ],
             ]);
         } catch (\Exception $e) {
