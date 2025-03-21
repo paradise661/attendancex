@@ -394,8 +394,8 @@ class AttendanceController extends Controller
             $attendanceRequest =  AttendanceRequest::create([
                 'user_id' => $request->user()->id ?? NULL,
                 'date' => $request->date ?? NULL,
-                'checkin' => $request->checkin ?? NULL,
-                'checkout' => $request->checkout ?? NULL,
+                'checkin' => $request->checkin ? date('H:i:s', strtotime($request->checkin)) : NULL,
+                'checkout' => $request->checkout ? date('H:i:s', strtotime($request->checkout)) : NULL,
                 'reason' => $request->reason ?? NULL,
                 'status' => 'Pending'
             ]);
