@@ -9,10 +9,10 @@
                 <img class="toggle-dark" src="{{ asset('assets/images/logo.png') }}" alt="logo"
                     style="height: 80px">
                 <img class="desktop-white" src="{{ asset('assets/images/logo.png') }}" alt="logo"
-                    style="height: 80px">
-                <img class="toggle-white" src="{{ asset('assets/images/logo.png') }}" alt="logo"
                     style="height: 80px"> --}}
-                <span class="fw-bold company_name text-white" style="font-size: 17px;">SAJILO ATTENDANCE</span>
+                <img class="" src="{{ asset('assets/images/logo.png') }}" alt="logo"
+                    style="height: 60px">
+                {{-- <span class="fw-bold company_name text-white" style="font-size: 17px;">SAJILO ATTENDANCE</span> --}}
             </a>
         </div>
 
