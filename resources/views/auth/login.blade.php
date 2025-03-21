@@ -42,6 +42,7 @@
                         <img class="desktop-logo h-24 w-auto" src="{{ asset('assets/images/logo.png') }}"
                             alt="logo">
                     </div>
+                    <p>Login Form</p>
                     @if (session('error'))
                         <div
                             class="alert alert-danger flex items-center p-4 mb-4 rounded-lg bg-red-100 text-red-700 border border-red-400">
