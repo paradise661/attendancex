@@ -415,7 +415,7 @@ class AttendanceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to submit request.',
+                'message' => $e->getMessage(),
                 'error' => $e->getMessage(),
             ], 500);
         }
